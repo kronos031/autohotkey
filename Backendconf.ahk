@@ -37,7 +37,7 @@ Xbutton2::Send("+{Xbutton2}")
 ; =======================
 ;       MENÚ FLOTANTE
 ; =======================
-;$-::MostrarMenu  ; 🔥 Siempre activo, incluso si los hotkeys están desactivados
+$-::MostrarMenu  ; 🔥 Siempre activo, incluso si los hotkeys están desactivados
 Xbutton1::MostrarMenu
 
 MostrarMenu(*) {
@@ -45,11 +45,16 @@ MostrarMenu(*) {
     static SubMenuUsuario := Menu()  
 	static SubMenuLuis := Menu()  
 	static SubMenuBastion := Menu()  
+	static SubMenuEntitysCodes := Menu()  
+	static SubMenuEntitys := Menu()  
 	
 	MenuFlotante.Delete()
 	SubMenuUsuario.Delete()	; Limpia el menú antes de mostrarlo
 	SubMenuBastion.Delete()
 	SubMenuLuis.Delete()
+	SubMenuEntitysCodes.Delete()
+	SubMenuEntitys.Delete()
+	
 	
     ; 🔥 Cambia el estilo visual del ítem
     menuItem := hotkeysEnabled ? "🟥 Desactivar Hotkeys" : "🟩 Activar Hotkeys"
@@ -61,6 +66,9 @@ MostrarMenu(*) {
 	MenuFlotante.Add("👤 Miguel Cbit", SubMenuUsuario)  ; 
 	MenuFlotante.Add("👤 Luis", SubMenuLuis)  ; 
 	MenuFlotante.Add("🌐 Bastion 88", SubMenuBastion)  ; 
+	MenuFlotante.Add()
+	MenuFlotante.Add("🌐 Entitys", SubMenuEntitys)  ; 
+	MenuFlotante.Add("🌐 EntityCodes", SubMenuEntitysCodes)  ; 
 ; =======================
     ; Configuración del submenú "usuario"
     ; =======================
@@ -81,6 +89,18 @@ MostrarMenu(*) {
 	SubMenuLuis.Add("🔒 Actualizar contraseña CBIT ", ActualizarContrasenaLuisCbit)
 	SubMenuLuis.Add("🔑 Credenciales", (*) => MsgBox("Correo ATH: " usuariol "`nContraseña: " contrasenal "`n`nCorreo CBIT: " usuariolcbit "`nContraseña CBIT: " contrasenalcbit ))
 	MenuFlotante.Add()  ; S
+	SubMenuEntitysCodes.Add("BBOG", (*) => Send("0001"))
+	SubMenuEntitysCodes.Add("BPOP", (*) => Send("0002"))
+	SubMenuEntitysCodes.Add("BOCC", (*) => Send("0023"))
+	SubMenuEntitysCodes.Add("BAVV", (*) => Send("0052"))
+	SubMenuEntitysCodes.Add("DALE", (*) => Send("0097"))
+	
+	SubMenuEntitys.Add("BBOG", (*) => Send("BBOG"))
+	SubMenuEntitys.Add("BPOP", (*) => Send("BPOP"))
+	SubMenuEntitys.Add("BOCC", (*) => Send("BOCC"))
+	SubMenuEntitys.Add("BAVV", (*) => Send("BAVV"))
+	SubMenuEntitys.Add("DALE", (*) => Send("DALE"))
+	
 	MenuFlotante.Add("↻ Reload ",(*) => Reload())  ; S
 	MenuFlotante.Add("❌ Salir", (*) =>   MenuFlotante.Delete())
 
@@ -187,7 +207,7 @@ CheckWindow() {
 ; =======================
 CambiarHotkey(*) {
     global
-    Run("C:\Users\miguelrobles\Desktop\AHKSCRIPT\MultiClipboard.ahk")  ; Ejecuta el nuevo script
+    Run("C:\Users\miguelrobles\Desktop\autohotkey\MultiClipboard.ahk")  ; Ejecuta el nuevo script
     ExitApp()  ; Cierra el script actual
 }
 

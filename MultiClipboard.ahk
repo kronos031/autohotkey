@@ -295,7 +295,7 @@ if (A_ScriptName = "MultiClipboard.ahk") {
 ; =======================
 CambiarHotkey(*) {
     global
-    Run("C:\Users\miguelrobles\Desktop\AHKSCRIPT\Backendconf.ahk")  ; Ejecuta el nuevo script
+    Run("C:\Users\miguelrobles\Desktop\autohotkey\Backendconf.ahk")  ; Ejecuta el nuevo script
     ExitApp()  ; Cierra el script actual
 }
 
