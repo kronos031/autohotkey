@@ -1,0 +1,268 @@
+#SingleInstance Force
+#Requires AutoHotkey v2
+InstallKeybdHook
+
+; =======================
+;       VARIABLES
+; =======================
+global usuario := "miguelrobles@cbit-online.com"
+global contrasena := "Emily@2033"
+global usuariol := "prv_lherreno@ath.com.co"
+global usuariolcbit := "luisherreno@cbit-online.com"
+global contrasenal := "Periferia2054*"
+global contrasenalcbit := "Periferia2054*"
+global hotkeysEnabled := true  ; Estado inicial: activados
+global hotkeysForced := false  ; Controla si la desactivación fue manual o automática
+global valorActual := 1
+
+; =======================
+;       HOTKEYS
+; =======================
+|::Send("!{Tab}")
+AppsKey::Send("{AppsKey}")
+::qmr::Miguel Angel Robles
+::qmc::miguelrobles@cbit-online.com
+
+; Recargar el script con Shift + F1
++F1::Reload
+
+; Hotkeys para Ctrl+A, Ctrl+C, Ctrl+V
+$1::Send("^a")
+$2::Send("^c")
+$3::Send("^v")
+Xbutton2::Send("+{Xbutton2}")
+;Send("^")
+;Xbutton2
+
+; =======================
+;       MENÚ FLOTANTE
+; =======================
+;$-::MostrarMenu  ; 🔥 Siempre activo, incluso si los hotkeys están desactivados
+Xbutton1::MostrarMenu
+
+MostrarMenu(*) {
+    static MenuFlotante := Menu()
+    static SubMenuUsuario := Menu()  
+	static SubMenuLuis := Menu()  
+	static SubMenuBastion := Menu()  
+	
+	MenuFlotante.Delete()
+	SubMenuUsuario.Delete()	; Limpia el menú antes de mostrarlo
+	SubMenuBastion.Delete()
+	SubMenuLuis.Delete()
+	
+    ; 🔥 Cambia el estilo visual del ítem
+    menuItem := hotkeysEnabled ? "🟥 Desactivar Hotkeys" : "🟩 Activar Hotkeys"
+	
+    MenuFlotante.Add(menuItem, ToggleHotkeysMenu)
+	MenuFlotante.Add()  ; Separador
+    MenuFlotante.Add("🔄 Cambiar a Multiclip", CambiarHotkey)  ; Nueva opción para cambiar el script
+    MenuFlotante.Add()  ; Separador
+	MenuFlotante.Add("👤 Miguel Cbit", SubMenuUsuario)  ; 
+	MenuFlotante.Add("👤 Luis", SubMenuLuis)  ; 
+	MenuFlotante.Add("🌐 Bastion 88", SubMenuBastion)  ; 
+; =======================
+    ; Configuración del submenú "usuario"
+    ; =======================
+	SubMenuUsuario.Add("📧 Correo", (*) => Send(usuario))
+	SubMenuUsuario.Add("🔒 Contraseña", (*) => Send(contrasena))
+	SubMenuUsuario.Add("🔒 Actualizar contraseña ", ActualizarContrasenaMiguel)
+	SubMenuUsuario.Add("🔑 Credenciales", (*) => MsgBox("Usuario: " usuario "`nContraseña: " contrasena))
+	    
+	SubMenuBastion.Add("🖥️ IP", (*) => MsgBox("Bastion 10.130.3.88, Acceder a PT "))
+	SubMenuBastion.Add("👤 Usuario", (*) => MsgBox("Ppaglogic"))
+	SubMenuBastion.Add("🔒 Contraseña", (*) => Send("Zaq12wsx."))
+	
+	SubMenuLuis.Add("📧 Correo ATH", (*) => Send(usuariol))
+	SubMenuLuis.Add("📧 Correo CBIT", (*) => Send(usuariolcbit))
+	SubMenuLuis.Add("🔒 Contraseña ATH", (*) => Send(contrasenal))
+	SubMenuLuis.Add("🔒 Contraseña CBIT", (*) => Send(contrasenalcbit))
+	SubMenuLuis.Add("🔒 Actualizar contraseña ATH ", ActualizarContrasenaLuis)
+	SubMenuLuis.Add("🔒 Actualizar contraseña CBIT ", ActualizarContrasenaLuisCbit)
+	SubMenuLuis.Add("🔑 Credenciales", (*) => MsgBox("Correo ATH: " usuariol "`nContraseña: " contrasenal "`n`nCorreo CBIT: " usuariolcbit "`nContraseña CBIT: " contrasenalcbit ))
+	MenuFlotante.Add()  ; S
+	MenuFlotante.Add("↻ Reload ",(*) => Reload())  ; S
+	MenuFlotante.Add("❌ Salir", (*) =>   MenuFlotante.Delete())
+
+    MouseGetPos(&x, &y)  ; Obtiene la posición actual del mouse
+    MenuFlotante.Show(x, y)  ; Muestra el menú flotante en la posición del cursor
+}
+
+
+
+ToggleHotkeys(enable := unset, forced := false) {
+    global hotkeysEnabled, hotkeysForced
+
+    if !IsSet(enable) {
+        enable := !hotkeysEnabled
+    }
+
+    hotkeysEnabled := enable
+
+    if (forced) {
+        hotkeysForced := true  ; Se marca como una desactivación manual
+        MostrarToolTip(enable) ; 🔥 Solo muestra el ToolTip si el cambio es manual
+    } else {
+        hotkeysForced := false  ; Se restablece si es una activación automática
+    }
+
+    ; 🔥 Mantenemos Ctrl + Shift + M siempre activo
+    HotkeyList := ["1", "2", "3", "|", "qmr", "qmc"]
+
+    for key in HotkeyList {
+        try {
+            Hotkey(key, enable ? "On" : "Off")
+        } catch {
+            ; Ignorar errores en hotkeys inexistentes
+        }
+    }
+
+    ; 🔥 Cambia el icono de la bandeja según el estado
+    CambiarIcono()
+}
+
+ToggleHotkeysMenu(*) {
+    ToggleHotkeys(!hotkeysEnabled, true)  ; Forzar la desactivación manual
+}
+
+; =======================
+; CAMBIAR ICONO EN BANDEJA DEL SISTEMA
+; =======================
+CambiarIcono() {
+    if (hotkeysEnabled) {
+        TraySetIcon("shell32.dll", 301)  ; Ícono de acceso (verde o normal)
+    } else {
+        TraySetIcon("shell32.dll", 110)  ; Ícono de error (rojo)
+    }
+}
+
+; =======================
+; TOOLTIP SOLO SI EL CAMBIO FUE MANUAL
+; =======================
+MostrarToolTip(estado) {
+    ToolTip(estado ? "✅ Hotkeys ACTIVADOS" : "❌ Hotkeys DESACTIVADOS", 100, 100)
+    SetTimer(() => ToolTip(), -1000)  ; Oculta el ToolTip después de 1 segundo
+}
+
+; =======================
+; HOTKEY ESPECIAL PARA VPN
+; =======================
+#HotIf WinActive("Cisco Secure Client | vpn.periferia-it.com:4443") or WinActive("ahk_exe acwebhelper.exe")
+RButton::{
+    global valorActual  
+
+    if (valorActual == 1) {
+        Send(usuario)
+        Send("{Enter}")
+        valorActual := 2  
+    } else if (valorActual == 2) {
+        Send(contrasena)
+        Send("{Enter}")
+        valorActual := 3  
+    } else {
+        Send("^v")
+		Send("{Enter}")
+        valorActual := 1
+    }
+}
+#HotIf
+
+; =======================
+; MONITOREO DE VENTANA VPN
+; =======================
+SetTimer(CheckWindow, 1000)  
+
+CheckWindow() {
+    global hotkeysEnabled, hotkeysForced
+
+    if (WinActive("Cisco Secure Client | vpn.periferia-it.com:4443") || WinActive("ahk_exe acwebhelper.exe")) {
+        ToggleHotkeys(false)  ; Desactiva los hotkeys cuando la VPN está activa
+    } else if (!hotkeysForced) {  
+        ToggleHotkeys(true)  ; Solo reactiva si NO fueron desactivados manualmente
+    }
+}
+
+; =======================
+;     CAMBIAR HOTKEY
+; =======================
+CambiarHotkey(*) {
+    global
+    Run("C:\Users\miguelrobles\Desktop\AHKSCRIPT\MultiClipboard.ahk")  ; Ejecuta el nuevo script
+    ExitApp()  ; Cierra el script actual
+}
+
+; =======================
+;   UPDATE VARIABLES
+; =======================
+
+ActualizarContrasenaMiguel(*) {
+    nuevaContrasena := InputBox("Ingrese nueva contraseña:", "Actualizar contraseña Miguel", "w400 h100", contrasena)
+    if !nuevaContrasena.Result {
+        return
+    }
+	if ActualizarVariables("contrasena", nuevaContrasena.Value) {
+        ActualizarScriptFile("contrasena", nuevaContrasena.Value)
+    }
+    ActualizarVariables("contrasena", nuevaContrasena.Value)
+}
+ActualizarContrasenaLuis(*) {
+    nuevaContrasena := InputBox("Ingrese nueva contraseña:", "Actualizar contraseña Luis", "w400 h100 ", contrasenal)
+	 
+    if !nuevaContrasena.Result {
+        return
+    }
+    ActualizarVariables("contrasenal", nuevaContrasena.Value)
+}
+ActualizarContrasenaLuisCbit(*) {
+    nuevaContrasena := InputBox("Ingrese nueva contraseña:", "Actualizar contraseña Luis Cbit", "w400 h100 ", contrasenalcbit)
+	 
+    if !nuevaContrasena.Result {
+        return
+    }
+    ActualizarVariables("contrasenalcbit", nuevaContrasena.Value)
+}
+ActualizarVariables(nuevaVariable, nuevoValor) {
+    global usuario, contrasena, usuariol, contrasenal,contrasenalcbit
+    
+  
+     if (nuevaVariable = "contrasena") {
+        contrasena := nuevoValor
+        MostrarToolTip("Contraseña actualizada")
+        return true
+    }
+  
+     else if (nuevaVariable = "contrasenalcbit") {
+        contrasenalcbit := nuevoValor
+        MostrarToolTip("Contraseña Luis Cbit actualizada")
+        return true
+    }
+	 else if (nuevaVariable = "contrasenal") {
+        contrasenal := nuevoValor
+        MostrarToolTip("Contraseña Luis actualizada")
+        return true
+    }
+    else {
+        MostrarToolTip("Variable no reconocida")
+        return false
+    }
+}
+
+
+
+ActualizarScriptFile(variable, nuevoValor) {
+    scriptPath := A_ScriptFullPath
+    fileContent := FileRead(scriptPath)
+    
+    if (variable = "contrasena") {
+        newContent := RegExReplace(fileContent, "global contrasena := `".*`"", "global contrasena := `"" nuevoValor "`"")
+    } else if (variable = "contrasenal") {
+        newContent := RegExReplace(fileContent, "global contrasenal := `".*`"", "global contrasenal := `"" nuevoValor "`"")
+    } else {
+        return
+    }
+    
+    FileDelete(scriptPath)
+    FileAppend(newContent, scriptPath)
+    MostrarToolTip("Script actualizado")
+}
+ 
