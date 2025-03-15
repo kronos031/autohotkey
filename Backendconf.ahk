@@ -34,6 +34,16 @@ Xbutton2::Send("+{Xbutton2}")
 ;Send("^")
 ;Xbutton2
 
+
+; Suspendir/Reanudar el script con #F1
+#SuspendExempt
+#F1:: {
+   Suspend
+    SetTimer(() => ToolTip(), -800)  ; Oculta el ToolTip después de 800 ms
+   ToolTip(A_IsSuspended ? "AutoHotkey`nSuspendido" : "AutoHotkey`nHabilitado", 100, 100)
+}
+#SuspendExempt False
+
 ; =======================
 ;       MENÚ FLOTANTE
 ; =======================
@@ -68,9 +78,9 @@ MostrarMenu(*) {
 	MenuFlotante.Add("👤 Luis", SubMenuLuis)  ; 
 	MenuFlotante.Add("🌐 Bastion 88", SubMenuBastion)  ; 
 	MenuFlotante.Add()
-	MenuFlotante.Add("🌐 Entitys", SubMenuEntitys)  ; 
-	MenuFlotante.Add("🌐 EntityCodes", SubMenuEntitysCodes)  ; 
-	MenuFlotante.Add("🌐 SPI", SubMenuSpi)  ; 
+	MenuFlotante.Add("🏭 Entitys", SubMenuEntitys)  ; 
+	MenuFlotante.Add("🏭 EntityCodes", SubMenuEntitysCodes)  ; 
+	MenuFlotante.Add("🔒  SPI", SubMenuSpi)  ; 
 	
 ; =======================
     ; Configuración del submenú "usuario"
@@ -103,15 +113,15 @@ MostrarMenu(*) {
 	SubMenuEntitys.Add("BOCC", (*) => Send("bocc"))
 	SubMenuEntitys.Add("BAVV", (*) => Send("bavv"))
 	SubMenuEntitys.Add("DALE", (*) => Send("dale"))
-	SubMenuSpi.Add("Headers", Headers)
 	
+	SubMenuSpi.Add("Headers", Headers)
 	SubMenuSpi.Add("Creacion", 		Creacion)
 	SubMenuSpi.Add("Mod Producto", 	ModProducto)
 	SubMenuSpi.Add("Mod Llave", 	ModLLave)
 	SubMenuSpi.Add("Cancelacion", 	Cancelacion)
 	
 	MenuFlotante.Add("↻ Reload ",(*) => Reload())  ; S
-	MenuFlotante.Add("↻ Suspend ",(*) => Suspend()) 
+	MenuFlotante.Add("🌙 Suspend ",(*) => Suspend()) 
 	MenuFlotante.Add("❌ Salir", (*) =>   MenuFlotante.Delete())
 
     MouseGetPos(&x, &y)  ; Obtiene la posición actual del mouse
