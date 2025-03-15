@@ -47,6 +47,7 @@ MostrarMenu(*) {
 	static SubMenuBastion := Menu()  
 	static SubMenuEntitysCodes := Menu()  
 	static SubMenuEntitys := Menu()  
+	static SubMenuSpi := Menu()  
 	
 	MenuFlotante.Delete()
 	SubMenuUsuario.Delete()	; Limpia el menú antes de mostrarlo
@@ -54,7 +55,7 @@ MostrarMenu(*) {
 	SubMenuLuis.Delete()
 	SubMenuEntitysCodes.Delete()
 	SubMenuEntitys.Delete()
-	
+	SubMenuSpi.Delete()
 	
     ; 🔥 Cambia el estilo visual del ítem
     menuItem := hotkeysEnabled ? "🟥 Desactivar Hotkeys" : "🟩 Activar Hotkeys"
@@ -69,6 +70,8 @@ MostrarMenu(*) {
 	MenuFlotante.Add()
 	MenuFlotante.Add("🌐 Entitys", SubMenuEntitys)  ; 
 	MenuFlotante.Add("🌐 EntityCodes", SubMenuEntitysCodes)  ; 
+	MenuFlotante.Add("🌐 SPI", SubMenuSpi)  ; 
+	
 ; =======================
     ; Configuración del submenú "usuario"
     ; =======================
@@ -95,11 +98,18 @@ MostrarMenu(*) {
 	SubMenuEntitysCodes.Add("BAVV", (*) => Send("0052"))
 	SubMenuEntitysCodes.Add("DALE", (*) => Send("0097"))
 	
-	SubMenuEntitys.Add("BBOG", (*) => Send("BBOG"))
-	SubMenuEntitys.Add("BPOP", (*) => Send("BPOP"))
-	SubMenuEntitys.Add("BOCC", (*) => Send("BOCC"))
-	SubMenuEntitys.Add("BAVV", (*) => Send("BAVV"))
-	SubMenuEntitys.Add("DALE", (*) => Send("DALE"))
+	SubMenuEntitys.Add("BBOG", (*) => Send("bbog"))
+	SubMenuEntitys.Add("BPOP", (*) => Send("bpop"))
+	SubMenuEntitys.Add("BOCC", (*) => Send("bocc"))
+	SubMenuEntitys.Add("BAVV", (*) => Send("bavv"))
+	SubMenuEntitys.Add("DALE", (*) => Send("dale"))
+	SubMenuSpi.Add("Headers", Headers)
+	
+	SubMenuSpi.Add("Creacion", 		Creacion)
+	SubMenuSpi.Add("Mod Producto", 	ModProducto)
+	SubMenuSpi.Add("Mod Llave", 	ModLLave)
+	SubMenuSpi.Add("Cancelacion", 	Cancelacion)
+	SubMenuSpi.Add("Consulta", 		Consulta)
 	
 	MenuFlotante.Add("↻ Reload ",(*) => Reload())  ; S
 	MenuFlotante.Add("❌ Salir", (*) =>   MenuFlotante.Delete())
@@ -286,3 +296,172 @@ ActualizarScriptFile(variable, nuevoValor) {
     MostrarToolTip("Script actualizado")
 }
  
+; =======================
+; HEADERS SPI
+; =======================  
+ Headers(*) {
+    global jsonData := '
+    (
+X-RqUID:32123132432
+X-Channel:MB
+X-CompanyId:0001
+X-GovIssueIdentType:NIT
+X-IdentSerialNum:103698745
+X-IPAddr:10.132.7.241
+X-ClientDt:2024-08-27T15:58:00.792Z
+X-CustIdentType:CC
+X-CustIdentNum:1098606395
+    )'
+    A_Clipboard := jsonData
+    SendInput("^v")
+}  
+; =======================
+; BODYS SPI
+; ======================= 
+ Creacion(*) {
+    global jsonData := '
+    (
+    {
+        "RefInfo": [
+            {
+                "RefType": "4",
+                "RefId": "@AVEJB227"
+            },
+            {
+                "RefType": "1",
+                "RefId": "Almuerxo"
+            },
+            {
+                "RefType": "1",
+                "RefId": "REDEBAN"
+            }
+        ],
+        "PersonInfo": {
+            "PersonName": {
+                "LastName": "Julian",
+                "FirstName": "Esteban",
+                "SecondLastName": "Bustos",
+                "MiddleName": "Rubiano"
+            },
+            "PersonType": "PN"
+        },
+        "XferInfo": {
+            "CardAcctIdFrom": {
+                "CardAcctId": {
+                    "AcctId": "3026125134",
+                    "AcctType": "DBMO",
+                    "BankInfo": {
+                        "BankId": "0052"
+                    },
+                    "PreferredIndicator": "S"
+                }
+            }
+        },
+        "BankAcctStatus": {
+            "StatusDesc": "ACTIVA",
+            "EffDt": "2024-08-27T15:58:00.792Z"
+        }
+    }
+    )'
+    A_Clipboard := jsonData
+    SendInput("^v")
+}  
+
+
+ ModProducto(*) {
+    global jsonData := '
+    (
+     {
+    "RefInfo": [
+        {
+            "RefType": "4",
+            "RefId": "@AVJBR22222"
+        },
+        {
+            "RefType": "1",
+            "RefId": "Almuerxo"
+        },
+        {
+            "RefType": "1",
+            "RefId": "REDEBAN"
+        }
+    ],
+    "XferInfo": {
+        "CardAcctIdFrom": {
+            "CardAcctId": {
+                "AcctId": "9638527410",
+                "AcctType": "CCTE",
+                "BankInfo": {
+                    "BankId": "0052"
+                },
+                "PreferredIndicator": "S"
+            }
+        }
+    },
+    "BankAcctStatus": {
+        "StatusDesc": "ACTIVA",
+        "EffDt": "2024-08-27T15:58:00.792Z"
+    }
+}
+    )'
+    A_Clipboard := jsonData
+    SendInput("^v")
+}  
+
+ModLlave(*) {
+    global jsonData := '
+    (
+    {
+        "RefInfo": [
+            {
+                "RefType": "4",
+                "RefId": "@AVEJB22727"
+            },
+            {
+                "RefType": "1",
+                "RefId": "Almuerxo"
+            },
+            {
+                "RefType": "1",
+                "RefId": "REDEBAN"
+            },
+              {
+                "RefType": "4",
+                "RefId": "@AVEJB22728"
+            }
+        ],
+        "XferInfo": {
+            "CardAcctIdFrom": {
+                "CardAcctId": {
+                    "AcctId": "3026125134",
+                    "AcctType": "DBMO",
+                    "BankInfo": {
+                        "BankId": "0052" 
+                    },
+                    "PreferredIndicator": "S"
+                }
+            }
+        },
+        "BankAcctStatus": {
+            "StatusDesc": "ACTIVA",
+            "EffDt": "2024-08-27T15:58:00.792Z"
+        }
+    } 
+    )'
+    A_Clipboard := jsonData
+    SendInput("^v")
+}  
+
+ Cancelacion(*) {
+    global jsonData := '
+    (
+ {
+  "RefInfo": {
+    "RefType": "4",
+    "RefId": "@DLLBR542"
+  }
+}
+    )'
+    A_Clipboard := jsonData
+    SendInput("^v")
+}  
