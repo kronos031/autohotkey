@@ -109,9 +109,9 @@ MostrarMenu(*) {
 	SubMenuSpi.Add("Mod Producto", 	ModProducto)
 	SubMenuSpi.Add("Mod Llave", 	ModLLave)
 	SubMenuSpi.Add("Cancelacion", 	Cancelacion)
-	SubMenuSpi.Add("Consulta", 		Consulta)
 	
 	MenuFlotante.Add("↻ Reload ",(*) => Reload())  ; S
+	MenuFlotante.Add("↻ Suspend ",(*) => Suspend()) 
 	MenuFlotante.Add("❌ Salir", (*) =>   MenuFlotante.Delete())
 
     MouseGetPos(&x, &y)  ; Obtiene la posición actual del mouse
