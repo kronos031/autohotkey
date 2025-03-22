@@ -22,7 +22,17 @@ global valorActual := 1
 AppsKey::Send("{AppsKey}")
 ::qmr::Miguel Angel Robles
 ::qmc::miguelrobles@cbit-online.com
-
+::gco::
+{
+    GitCommit()
+    return
+}
+::gcl::
+{
+    GitClone()
+	
+    return
+}
 ; Recargar el script con Shift + F1
 +F1::Reload
 
@@ -30,6 +40,56 @@ AppsKey::Send("{AppsKey}")
 $1::Send("^a")
 $2::Send("^c")
 $3::Send("^v")
+
+; Nuevo hotkey para segundo portapapeles
+$4::CopiarSegundoPortapapeles
+$5::PegarSegundoPortapapeles
+
+
+; =======================
+;    FUNCIONES PORTAPAPELES
+; =======================
+CopiarSegundoPortapapeles(*) {
+    global segundoPortapapeles
+    
+    ; Guardar el portapapeles actual
+    clipboardBackup := A_Clipboard
+    
+    ; Copiar la selección actual
+    A_Clipboard := ""  ; Limpiar para verificar si la copia funciona
+    Send("^c")
+    ClipWait(1)
+    
+    if A_Clipboard {
+        segundoPortapapeles := A_Clipboard
+        ToolTip("✅ Copiado al segundo portapapeles", 100, 100)
+        SetTimer(() => ToolTip(), -800)  ; Oculta el ToolTip después de 800 ms
+    }
+    
+    ; Restaurar el portapapeles original
+    A_Clipboard := clipboardBackup
+}
+
+PegarSegundoPortapapeles(*) {
+    global segundoPortapapeles
+    
+    if segundoPortapapeles {
+        ; Guardar el portapapeles actual
+        clipboardBackup := A_Clipboard
+        
+        ; Usar el segundo portapapeles para pegar
+        A_Clipboard := segundoPortapapeles
+        Send("^v")
+        
+        ; Restaurar el portapapeles original
+        Sleep(100)  ; Pequeña pausa para asegurar que pegue correctamente
+        A_Clipboard := clipboardBackup
+    } else {
+        ToolTip("❌ Segundo portapapeles vacío", 100, 100)
+        SetTimer(() => ToolTip(), -800)  ; Oculta el ToolTip después de 800 ms
+    }
+}
+
 Xbutton2::Send("+{Xbutton2}")
 ;Send("^")
 ;Xbutton2
@@ -58,6 +118,7 @@ MostrarMenu(*) {
 	static SubMenuEntitysCodes := Menu()  
 	static SubMenuEntitys := Menu()  
 	static SubMenuSpi := Menu()  
+	static SubMenuGit := Menu()  
 	
 	MenuFlotante.Delete()
 	SubMenuUsuario.Delete()	; Limpia el menú antes de mostrarlo
@@ -66,6 +127,7 @@ MostrarMenu(*) {
 	SubMenuEntitysCodes.Delete()
 	SubMenuEntitys.Delete()
 	SubMenuSpi.Delete()
+	SubMenuGit.Delete()
 	
     ; 🔥 Cambia el estilo visual del ítem
     menuItem := hotkeysEnabled ? "🟥 Desactivar Hotkeys" : "🟩 Activar Hotkeys"
@@ -81,6 +143,8 @@ MostrarMenu(*) {
 	MenuFlotante.Add("🏭 Entitys", SubMenuEntitys)  ; 
 	MenuFlotante.Add("🏭 EntityCodes", SubMenuEntitysCodes)  ; 
 	MenuFlotante.Add("🔒  SPI", SubMenuSpi)  ; 
+	MenuFlotante.Add()
+	MenuFlotante.Add("🔒  Git", SubMenuGit)  ; 
 	
 ; =======================
     ; Configuración del submenú "usuario"
@@ -95,11 +159,11 @@ MostrarMenu(*) {
 	SubMenuBastion.Add("🔒 Contraseña", (*) => Send("Zaq12wsx."))
 	
 	SubMenuLuis.Add("📧 Correo ATH", (*) => Send(usuariol))
-	SubMenuLuis.Add("📧 Correo CBIT", (*) => Send(usuariolcbit))
 	SubMenuLuis.Add("🔒 Contraseña ATH", (*) => Send(contrasenal))
+	SubMenuLuis.Add("🔒 Actualizar ATH ", ActualizarContrasenaLuis)
+	SubMenuLuis.Add("📧 Correo CBIT", (*) => Send(usuariolcbit))
 	SubMenuLuis.Add("🔒 Contraseña CBIT", (*) => Send(contrasenalcbit))
-	SubMenuLuis.Add("🔒 Actualizar contraseña ATH ", ActualizarContrasenaLuis)
-	SubMenuLuis.Add("🔒 Actualizar contraseña CBIT ", ActualizarContrasenaLuisCbit)
+	SubMenuLuis.Add("🔒 Actualizar CBIT ", ActualizarContrasenaLuisCbit)
 	SubMenuLuis.Add("🔑 Credenciales", (*) => MsgBox("Correo ATH: " usuariol "`nContraseña: " contrasenal "`n`nCorreo CBIT: " usuariolcbit "`nContraseña CBIT: " contrasenalcbit ))
 	MenuFlotante.Add()  ; S
 	SubMenuEntitysCodes.Add("BBOG", (*) => Send("0001"))
@@ -117,8 +181,13 @@ MostrarMenu(*) {
 	SubMenuSpi.Add("Headers", Headers)
 	SubMenuSpi.Add("Creacion", 		Creacion)
 	SubMenuSpi.Add("Mod Producto", 	ModProducto)
-	SubMenuSpi.Add("Mod Llave", 	ModLLave)
+	SubMenuSpi.Add("Mod Llave", 	ModLLave) 
 	SubMenuSpi.Add("Cancelacion", 	Cancelacion)
+	
+	SubMenuGit.Add("Clone", GitClone)
+	SubMenuGit.Add("Commit",GitCommit)
+	SubMenuGit.Add("Fetch", (*) => Send("git fetch"))
+	SubMenuGit.Add("Pull", (*) => Send("git pull"))
 	
 	MenuFlotante.Add("↻ Reload ",(*) => Reload())  ; S
 	MenuFlotante.Add("🌙 Suspend ",(*) => Suspend()) 
@@ -187,7 +256,7 @@ MostrarToolTip(estado) {
 ; =======================
 ; HOTKEY ESPECIAL PARA VPN
 ; =======================
-#HotIf WinActive("Cisco Secure Client | vpn.periferia-it.com:4443") or WinActive("ahk_exe acwebhelper.exe")
+#HotIf WinActive("Cisco Secure Client - Login | vpn.periferia-it.com:4443") or WinActive("ahk_exe acwebhelper.exe")
 RButton::{
     global valorActual  
 
@@ -221,6 +290,21 @@ CheckWindow() {
         ToggleHotkeys(true)  ; Solo reactiva si NO fueron desactivados manualmente
     }
 }
+
+; =======================
+; GIT
+; =======================
+ GitClone(*) {
+     Send("git clone ")
+	 Send("+{INSERT}")
+	 Send("{Enter}")
+}
+GitCommit(*) {
+     Send('git commit -m ""')
+	 Send("{LEFT}")
+}
+
+
 
 ; =======================
 ;     CAMBIAR HOTKEY
