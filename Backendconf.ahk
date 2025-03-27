@@ -13,6 +13,7 @@ global contrasenal := "Periferia2054*"
 global contrasenalcbit := "Periferia2054*"
 global hotkeysEnabled := true  ; Estado inicial: activados
 global hotkeysForced := false  ; Controla si la desactivación fue manual o automática
+global dobleClikForzado := false
 global valorActual := 1
 
 ; =======================
@@ -145,6 +146,7 @@ MostrarMenu(*) {
 	MenuFlotante.Add("🔒  SPI", SubMenuSpi)  ; 
 	MenuFlotante.Add()
 	MenuFlotante.Add("🔒  Git", SubMenuGit)  ; 
+	MenuFlotante.Add("🖱️ Double-Click",  ForzarDobleClick)
 	
 ; =======================
     ; Configuración del submenú "usuario"
@@ -559,3 +561,18 @@ ModLlave(*) {
     A_Clipboard := jsonData
     SendInput("^v")
 }  
+
+
+ForzarDobleClick(*) {
+    global dobleClikForzado := !dobleClikForzado
+    
+    if (dobleClikForzado) {
+        Hotkey("LButton", (*) => Click(2), "On")
+        ToolTip("✅ Doble Clic ACTIVADO", 100, 100)
+    } else {
+        Hotkey("LButton", "Off")
+        ToolTip("❌ Doble Clic DESACTIVADO", 100, 100)
+    }
+    
+    SetTimer(() => ToolTip(), -1000)
+}
