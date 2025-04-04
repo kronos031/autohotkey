@@ -6,7 +6,7 @@ InstallKeybdHook
 ;       VARIABLES
 ; =======================
 global usuario := "miguelrobles@cbit-online.com"
-global contrasena := "Emily@2033"
+global contrasena := "Emily@2034"
 global usuariol := "prv_lherreno@ath.com.co"
 global usuariolcbit := "luisherreno@cbit-online.com"
 global contrasenal := "Periferia2054*"
@@ -417,47 +417,49 @@ X-CustIdentNum:1098606395
  Creacion(*) {
     global jsonData := '
     (
-    {
-        "RefInfo": [
-            {
-                "RefType": "4",
-                "RefId": "@AVEJB227"
-            },
-            {
-                "RefType": "1",
-                "RefId": "Almuerxo"
-            },
-            {
-                "RefType": "1",
-                "RefId": "REDEBAN"
-            }
-        ],
-        "PersonInfo": {
-            "PersonName": {
-                "LastName": "Julian",
-                "FirstName": "Esteban",
-                "SecondLastName": "Bustos",
-                "MiddleName": "Rubiano"
-            },
-            "PersonType": "PN"
+   {
+    "RefInfo": [
+        {
+            "RefType": "4",
+            "RefId": "@BACMS771"
         },
-        "XferInfo": {
-            "CardAcctIdFrom": {
-                "CardAcctId": {
-                    "AcctId": "3026125134",
-                    "AcctType": "DBMO",
-                    "BankInfo": {
-                        "BankId": "0052"
-                    },
-                    "PreferredIndicator": "S"
-                }
-            }
+        {
+            "RefType": "1",
+            "RefId": "BACMS771"
         },
-        "BankAcctStatus": {
-            "StatusDesc": "ACTIVA",
-            "EffDt": "2024-08-27T15:58:00.792Z"
+        {
+            "RefType": "1",
+            "RefId": "REDEBAN"
         }
+    ],
+    "PersonInfo": {
+        "PersonName": {
+            "LastName": "Molina",
+            "FirstName": "Camila",
+            "SecondLastName": "Sarmiento",
+            "MiddleName": "Carolina"
+        },
+        "PersonType": "PN"
+    },
+    "XferInfo": {
+        "CardAcctIdFrom": {
+            "CardAcctId": {
+                "AcctId": "075850230",
+                "AcctType": "CAHO",
+                "BankInfo": {
+                    "BankId": "0052"
+                },
+                "PreferredIndicator": "S"
+            }
+        }
+    },
+    "BankAcctStatus": {
+        "StatusDesc": "ACTIVA",
+        "EffDt": "2025-01-20T14:04:17.290Z",
+        "EffDtConsent" : "2025-01-20T14:04:17.290Z",
+        "Consent": "S"
     }
+}
     )'
     A_Clipboard := jsonData
     SendInput("^v")
@@ -576,3 +578,5 @@ ForzarDobleClick(*) {
     
     SetTimer(() => ToolTip(), -1000)
 }
+
+
