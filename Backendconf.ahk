@@ -6,7 +6,7 @@ InstallKeybdHook
 ;       VARIABLES
 ; =======================
 global usuario := "miguelrobles@cbit-online.com"
-global contrasena := "Emily@2034"
+global contrasena := "Emily@2035"
 global usuariol := "prv_lherreno@ath.com.co"
 global usuariolcbit := "luisherreno@cbit-online.com"
 global contrasenal := "Periferia2054*"
@@ -143,10 +143,14 @@ MostrarMenu(*) {
 	MenuFlotante.Add()
 	MenuFlotante.Add("🏭 Entitys", SubMenuEntitys)  ; 
 	MenuFlotante.Add("🏭 EntityCodes", SubMenuEntitysCodes)  ; 
+	MenuFlotante.Add("🏭 LogInsight", LogInsight)  ;  
 	MenuFlotante.Add("🔒  SPI", SubMenuSpi)  ; 
 	MenuFlotante.Add()
 	MenuFlotante.Add("🔒  Git", SubMenuGit)  ; 
 	MenuFlotante.Add("🖱️ Double-Click",  ForzarDobleClick)
+	MenuFlotante.Add("⏱️ Enter Automático", ToggleEnterTimer) 
+	MenuFlotante.Add("⏱️ Mouse Mov", ToggleMouseMovement) 
+	
 	
 ; =======================
     ; Configuración del submenú "usuario"
@@ -400,7 +404,7 @@ ActualizarScriptFile(variable, nuevoValor) {
     (
 X-RqUID:32123132432
 X-Channel:MB
-X-CompanyId:0001
+X-CompanyId:0052
 X-GovIssueIdentType:NIT
 X-IdentSerialNum:103698745
 X-IPAddr:10.132.7.241
@@ -580,3 +584,87 @@ ForzarDobleClick(*) {
 }
 
 
+; =======================
+;     ENTER AUTOMÁTICO
+; =======================
+global enterTimerActive := false
+
+ToggleEnterTimer(*) {
+    global enterTimerActive
+    
+    enterTimerActive := !enterTimerActive
+    
+    if (enterTimerActive) {
+        SetTimer(PresionarEnterAutomatico, 24000)  ; 4 minutos = 240000 ms
+        ToolTip("✅ Presionar Enter automático ACTIVADO", 100, 100)
+    } else {
+        SetTimer(PresionarEnterAutomatico, 0)  ; Detener el timer
+        ToolTip("❌ Presionar Enter automático DESACTIVADO", 100, 100)
+    }
+    
+    SetTimer(() => ToolTip(), -1000)  ; Ocultar el tooltip después de 1 segundo
+}
+
+PresionarEnterAutomatico() {
+    Send("{Enter}")
+    ToolTip("🔄 Enter presionado automáticamente", 100, 100)
+    SetTimer(() => ToolTip(), -800)  ; Ocultar el tooltip después de 0.8 segundos
+}
+
+
+; =======================
+;     MOVIMIENTO AUTOMÁTICO DEL MOUSE
+; =======================
+global mouseMovementActive := false
+global angle := 0
+
+ToggleMouseMovement(*) {
+    global mouseMovementActive
+    
+    mouseMovementActive := !mouseMovementActive
+    
+    if (mouseMovementActive) {
+        SetTimer(MoverMouseAutomatico, 24000)  ; Cada 24 segundos
+        ToolTip("✅ Movimiento automático del mouse ACTIVADO", 100, 100)
+    } else {
+        SetTimer(MoverMouseAutomatico, 0)  ; Detener el timer
+        ToolTip("❌ Movimiento automático del mouse DESACTIVADO", 100, 100)
+    }
+    
+    SetTimer(() => ToolTip(), -1000)  ; Ocultar el tooltip después de 1 segundo
+}
+
+MoverMouseAutomatico() {
+    global angle
+    
+    ; Obtener la posición actual del mouse
+    MouseGetPos(&currentX, &currentY)
+    
+    ; Calcular nueva posición en un pequeño círculo
+    radius := 10  ; Radio del círculo en píxeles
+    newX := currentX + radius * Cos(angle)
+    newY := currentY + radius * Sin(angle)
+    
+    ; Mover el mouse
+    MouseMove(newX, newY, 2)  ; Movimiento suave (velocidad 2)
+    
+    ; Incrementar el ángulo para el próximo movimiento
+    angle += 0.5
+    if (angle >= 6.28)  ; 2*PI
+        angle := 0
+        
+    ToolTip("🔄 Mouse movido automáticamente", 100, 100)
+    SetTimer(() => ToolTip(), -800)  ; Ocultar el tooltip después de 0.8 segundos
+}
+
+LogInsight(*) {
+    global jsonData := '
+    (
+     fields @timestamp, @requestId, @message, @logStream |
+filter @message like /4@JSS950/
+| sort @timestamp desc 
+| limit 20 
+    )'
+    A_Clipboard := jsonData
+    SendInput("^v")
+}  
