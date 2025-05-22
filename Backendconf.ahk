@@ -150,6 +150,8 @@ MostrarMenu(*) {
 	MenuFlotante.Add("🖱️ Double-Click",  ForzarDobleClick)
 	MenuFlotante.Add("⏱️ Enter Automático", ToggleEnterTimer) 
 	MenuFlotante.Add("⏱️ Mouse Mov", ToggleMouseMovement) 
+	MenuFlotante.Add("⚙️ Compile Scr", EjecutarBat)
+	
 	
 	
 ; =======================
@@ -395,7 +397,29 @@ ActualizarScriptFile(variable, nuevoValor) {
     FileAppend(newContent, scriptPath)
     MostrarToolTip("Script actualizado")
 }
- 
+
+;=======================
+;     EJECUTAR ARCHIVO BAT
+; =======================
+EjecutarBat(*) {
+    ; Permite seleccionar un archivo .bat para ejecutar
+    ;archivoSeleccionado := FileSelect(1, , "Seleccionar archivo BAT", "Archivos BAT (*.bat)")
+	archivoSeleccionado := "D:\Proyectos_Periferia\Proyecto SPI\Compile_SPI.bat"
+    
+    if (archivoSeleccionado) {
+        try {
+            Run(archivoSeleccionado)
+            ToolTip("✅ Ejecutando: " . archivoSeleccionado, 100, 100)
+        } catch Error as e {
+            ToolTip("❌ Error al ejecutar el archivo BAT: " . e.message, 100, 100)
+        }
+    } else {
+        ToolTip("❌ No se seleccionó ningún archivo", 100, 100)
+    }
+    
+    SetTimer(() => ToolTip(), -2000)  ; Ocultar el tooltip después de 2 segundos
+}
+
 ; =======================
 ; HEADERS SPI
 ; =======================  
@@ -653,7 +677,8 @@ MoverMouseAutomatico() {
     if (angle >= 6.28)  ; 2*PI
         angle := 0
         
-    ToolTip("🔄 Mouse movido automáticamente", 100, 100)
+    ;ToolTip("🔄 Mouse movido automáticamente", 100, 100)
+	
     SetTimer(() => ToolTip(), -800)  ; Ocultar el tooltip después de 0.8 segundos
 }
 
