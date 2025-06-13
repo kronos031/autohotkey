@@ -6,7 +6,7 @@ InstallKeybdHook
 ;       VARIABLES
 ; =======================
 global usuario := "miguelrobles@cbit-online.com"
-global contrasena := "Emily@2035"
+global contrasena := "Emily@2036"
 global usuariol := "prv_lherreno@ath.com.co"
 global usuariolcbit := "luisherreno@cbit-online.com"
 global contrasenal := "Periferia2054*"
@@ -91,7 +91,7 @@ PegarSegundoPortapapeles(*) {
     }
 }
 
-Xbutton2::Send("+{Xbutton2}")
+Xbutton2::Send("^v")
 ;Send("^")
 ;Xbutton2
 
@@ -191,6 +191,7 @@ MostrarMenu(*) {
 	SubMenuSpi.Add("Mod Producto", 	ModProducto)
 	SubMenuSpi.Add("Mod Llave", 	ModLLave) 
 	SubMenuSpi.Add("Cancelacion", 	Cancelacion)
+	SubMenuSpi.Add("Bloqueo", 	Bloqueo)
 	
 	SubMenuGit.Add("Clone", GitClone)
 	SubMenuGit.Add("Commit",GitCommit)
@@ -404,7 +405,7 @@ ActualizarScriptFile(variable, nuevoValor) {
 EjecutarBat(*) {
     ; Permite seleccionar un archivo .bat para ejecutar
     ;archivoSeleccionado := FileSelect(1, , "Seleccionar archivo BAT", "Archivos BAT (*.bat)")
-	archivoSeleccionado := "D:\Proyectos_Periferia\Proyecto SPI\Compile_SPI.bat"
+	archivoSeleccionado := "C:\Users\miguelrobles\Desktop\autohotkey\Compile_SPI.bat" 
     
     if (archivoSeleccionado) {
         try {
@@ -434,7 +435,7 @@ X-IdentSerialNum:103698745
 X-IPAddr:10.132.7.241
 X-ClientDt:2024-08-27T15:58:00.792Z
 X-CustIdentType:CC
-X-CustIdentNum:1098606395
+X-CustIdentNum:1098600300
     )'
     A_Clipboard := jsonData
     SendInput("^v")
@@ -449,11 +450,11 @@ X-CustIdentNum:1098606395
     "RefInfo": [
         {
             "RefType": "4",
-            "RefId": "@BACMS771"
+            "RefId": "@MAREMI002"
         },
         {
             "RefType": "1",
-            "RefId": "BACMS771"
+            "RefId": "MAREMI002"
         },
         {
             "RefType": "1",
@@ -501,7 +502,7 @@ X-CustIdentNum:1098606395
     "RefInfo": [
         {
             "RefType": "4",
-            "RefId": "@AVJBR22222"
+            "RefId": "@MAREMI002"
         },
         {
             "RefType": "1",
@@ -541,7 +542,7 @@ ModLlave(*) {
         "RefInfo": [
             {
                 "RefType": "4",
-                "RefId": "@AVEJB22727"
+                "RefId": "@MAREMI002"
             },
             {
                 "RefType": "1",
@@ -553,7 +554,7 @@ ModLlave(*) {
             },
               {
                 "RefType": "4",
-                "RefId": "@AVEJB22728"
+                "RefId": "@MAREMI002"
             }
         ],
         "XferInfo": {
@@ -584,13 +585,28 @@ ModLlave(*) {
  {
   "RefInfo": {
     "RefType": "4",
-    "RefId": "@DLLBR542"
+    "RefId": "@MAREMI002"
   }
 }
     )'
     A_Clipboard := jsonData
     SendInput("^v")
 }  
+
+ Bloqueo(*) {
+    global jsonData := '
+    (
+ {
+  "RefInfo": {
+    "RefType": "4",
+    "RefId": "@MAREMI002",
+	"KeyStatus":"BLOQUEADA_C"
+  }
+}
+    )'
+    A_Clipboard := jsonData
+    SendInput("^v")
+} 
 
 
 ForzarDobleClick(*) {
