@@ -151,6 +151,7 @@ MostrarMenu(*) {
 	MenuFlotante.Add("⏱️ Enter Automático", ToggleEnterTimer) 
 	MenuFlotante.Add("⏱️ Mouse Mov", ToggleMouseMovement) 
 	MenuFlotante.Add("⚙️ Compile Scr", EjecutarBat)
+	MenuFlotante.Add("⚙️ AWS Cred", Credaws)
 	
 	
 	
@@ -399,6 +400,50 @@ ActualizarScriptFile(variable, nuevoValor) {
     MostrarToolTip("Script actualizado")
 }
 
+;=======================
+;    ACTUALIZAR CREDENCIALES AWS 
+; =======================
+Credaws(*) {
+ global aws_account_id := ""
+global aws_access_key_id := ""
+global aws_secret_access_key := ""
+global aws_session_token := ""
+
+
+ ClipContent := A_Clipboard
+ 
+  if (RegExMatch(ClipContent, "\[(\d+)_", &match)) {
+        aws_account_id := match[1]
+    }
+    
+    ; Extraer aws_access_key_id
+    if (RegExMatch(ClipContent, "aws_access_key_id\s*=\s*([^\s\r\n]+)", &match)) {
+        aws_access_key_id := match[1]
+    }
+    
+    ; Extraer aws_secret_access_key
+    if (RegExMatch(ClipContent, "aws_secret_access_key\s*=\s*([^\s\r\n]+)", &match)) {
+        aws_secret_access_key := match[1]
+    }
+    
+    ; Extraer aws_session_token
+    if (RegExMatch(ClipContent, "aws_session_token\s*=\s*([^\s\r\n]+)", &match)) {
+        aws_session_token := match[1]
+    }
+    
+	 comando := 'cmd /c (echo [default] ' .
+               '& echo aws_access_key_id = ' . aws_access_key_id . ' ' .
+               '& echo aws_secret_access_key = ' . aws_secret_access_key . ' ' .
+               '& echo aws_session_token = ' . aws_session_token . ') ' .
+               '> "C:\Users\miguelrobles\.aws\credentials"'
+     
+    ; Ejecutar comando oculto
+    Run(comando, , "Hide")
+    
+				    
+   ToolTip("Credenciales Actualizadas"  )
+   SetTimer(() => ToolTip(), -3000)
+}
 ;=======================
 ;     EJECUTAR ARCHIVO BAT
 ; =======================
