@@ -6,7 +6,7 @@ InstallKeybdHook
 ;       VARIABLES
 ; =======================
 global usuario := "miguelrobles@cbit-online.com"
-global contrasena := "Emily@2036"
+global contrasena := "Emily@2038"
 global usuariol := "prv_lherreno@ath.com.co"
 global usuariolcbit := "luisherreno@cbit-online.com"
 global contrasenal := "Periferia2054*"
@@ -45,7 +45,7 @@ $3::Send("^v")
 ; Nuevo hotkey para segundo portapapeles
 $4::CopiarSegundoPortapapeles
 $5::PegarSegundoPortapapeles
-
+Xbutton2::Run("C:\Users\miguelrobles\Desktop\autohotkey\compishk.ahk")  ; Ejecuta el nuevo script
 
 ; =======================
 ;    FUNCIONES PORTAPAPELES
@@ -91,7 +91,7 @@ PegarSegundoPortapapeles(*) {
     }
 }
 
-Xbutton2::Send("^v")
+
 ;Send("^")
 ;Xbutton2
 
@@ -140,9 +140,7 @@ MostrarMenu(*) {
 	MenuFlotante.Add("👤 Miguel Cbit", SubMenuUsuario)  ; 
 	MenuFlotante.Add("👤 Luis", SubMenuLuis)  ; 
 	MenuFlotante.Add("🌐 Bastion 88", SubMenuBastion)  ; 
-	MenuFlotante.Add()
-	MenuFlotante.Add("🏭 Entitys", SubMenuEntitys)  ; 
-	MenuFlotante.Add("🏭 EntityCodes", SubMenuEntitysCodes)  ; 
+	MenuFlotante.Add() 
 	MenuFlotante.Add("🏭 LogInsight", LogInsight)  ;  
 	MenuFlotante.Add("🔒  SPI", SubMenuSpi)  ; 
 	MenuFlotante.Add()
@@ -163,9 +161,12 @@ MostrarMenu(*) {
 	SubMenuUsuario.Add("🔒 Actualizar contraseña ", ActualizarContrasenaMiguel)
 	SubMenuUsuario.Add("🔑 Credenciales", (*) => MsgBox("Usuario: " usuario "`nContraseña: " contrasena))
 	    
-	SubMenuBastion.Add("🖥️ IP", (*) => MsgBox("Bastion 10.130.3.88, Acceder a PT "))
-	SubMenuBastion.Add("👤 Usuario", (*) => MsgBox("Ppaglogic"))
-	SubMenuBastion.Add("🔒 Contraseña", (*) => Send("Zaq12wsx."))
+	SubMenuBastion.Add("🖥️ IP", (*) => MsgBox("Bastion 10.130.3.88, `nAcceder a PT "))
+	SubMenuBastion.Add("👤 UsuarioRem", (*) => A_Clipboard :="Ppaglogic" )
+	SubMenuBastion.Add("🔒 Contraseña", (*) => A_Clipboard :="Zaq12wsx.")
+    SubMenuBastion.Add("🔒 User spidev", (*) =>A_Clipboard := "spidev" )
+    SubMenuBastion.Add("🔒 PassSpi", (*) => A_Clipboard := "T3mp0r4l01*.")
+    SubMenuBastion.Add("🔒 DashBoard", (*) => A_Clipboard := "+O0A_kEpQ2AizU0x")
 	
 	SubMenuLuis.Add("📧 Correo ATH", (*) => Send(usuariol))
 	SubMenuLuis.Add("🔒 Contraseña ATH", (*) => Send(contrasenal))
@@ -174,18 +175,7 @@ MostrarMenu(*) {
 	SubMenuLuis.Add("🔒 Contraseña CBIT", (*) => Send(contrasenalcbit))
 	SubMenuLuis.Add("🔒 Actualizar CBIT ", ActualizarContrasenaLuisCbit)
 	SubMenuLuis.Add("🔑 Credenciales", (*) => MsgBox("Correo ATH: " usuariol "`nContraseña: " contrasenal "`n`nCorreo CBIT: " usuariolcbit "`nContraseña CBIT: " contrasenalcbit ))
-	MenuFlotante.Add()  ; S
-	SubMenuEntitysCodes.Add("BBOG", (*) => Send("0001"))
-	SubMenuEntitysCodes.Add("BPOP", (*) => Send("0002"))
-	SubMenuEntitysCodes.Add("BOCC", (*) => Send("0023"))
-	SubMenuEntitysCodes.Add("BAVV", (*) => Send("0052"))
-	SubMenuEntitysCodes.Add("DALE", (*) => Send("0097"))
-	
-	SubMenuEntitys.Add("BBOG", (*) => Send("bbog"))
-	SubMenuEntitys.Add("BPOP", (*) => Send("bpop"))
-	SubMenuEntitys.Add("BOCC", (*) => Send("bocc"))
-	SubMenuEntitys.Add("BAVV", (*) => Send("bavv"))
-	SubMenuEntitys.Add("DALE", (*) => Send("dale"))
+	MenuFlotante.Add()  ; 
 	
 	SubMenuSpi.Add("Headers", Headers)
 	SubMenuSpi.Add("Creacion", 		Creacion)

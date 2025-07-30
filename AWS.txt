@@ -1,0 +1,82 @@
+ 
+OPEN LOCAL
+(port=443, schema=https, keyword=+O0A_kEpQ2AizU0x, hostname=vpc-awue1athspi-pt-logsosearch-4vznz2eumrk4j7ghnuunp5zywe.us-east-1.es.amazonaws.com, username=athadmin)
+port=9, schema=https, keyword=EmiLandscape0#, hostname=localhost, username=admin)
+9200, "https", "admin", "127.0.0.1", "admin"
+
+ # Obtener el certificado (reemplaza la URL por la de tu OpenSearch)
+echo -n | openssl s_client -connect tu-opensearch-host:9200 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > opensearch.crt
+
+# Agregar al truststore de Java
+keytool -import -alias opensearch -keystore "%JAVA_HOME%/lib/security/cacerts" -file opensearch.crt -storepass changeit
+
+Para enviar un archivo con data al open
+curl -k -u admin:EmiLandscape0# -X POST -H "Content-Type: application/json" --data-binary "@datapr.json" "https://localhost:9200/mi_indice/_doc"
+
+ 
+Subir un archivo a s3 
+aws s3 cp archivo.txt s3://nombre-bucket/ruta/
+aws s3 cp D:\Repositorios\SPI\TRANSV\SISTEMA-PAGOS-INMEDIATOS-BACK-lambda-java-val-pgp\build\distributions\SISTEMA-PAGOS-INMEDIATOS-BACK-lambda-java-val-pgp.zip s3://awue1athspi-qa-s3-llaves-01/lambdas/TRANSV/
+
+#Buscar archivos que contengan una palabra específica
+aws s3 ls s3://awue1athspi-pt-s3-llaves-01 --recursive | Select-String "CON-BAVVCNS2025052710359999.txt"
+
+Descargar un archivo o carpeta de s3 
+aws s3 cp s3://awue1athspi-pt-s3-llaves-01/backups/opensearch/snap C:\Users\miguelrobles\Desktop\S3 --recursive `
+--exclude "*" --include "B*202506[1][9]*.txt.pgp" --include "B*202506[2][0-5]*.txt.pgp" 
+ 
+# Para un rango más específico (ejemplo: del 15 al 25 de enero)
+aws s3 cp s3://awue1athspi-prd-s3-llaves-01/archivos/mig/entrada/ C:\Users\miguelrobles\Desktop\ARCHIVOSPASO `
+--recursive `
+--exclude "*" --include "B*202506[1][9]*.txt.pgp" --include "B*202506[2][0-5]*.txt.pgp"
+
+Syncronizar bucket con directorio local 
+aws s3 sync s3://<nombre_del_bucket> <directorio_local> --exclude "*" --include "patron_de_archivo" 
+aws s3 sync s3://awue1athspi-pt-s3-llaves-01/backups/opensearch/snap/ C:\Users\miguelrobles\Desktop\S3 --exclude "*" --include "patron_de_archivo" 
+ 
+Actualizar lambda 
+ 
+aws lambda update-function-code `
+--function-name mi-funcion  `
+--s3-bucket mi-bucket   `
+--s3-key lambda/function.zip
+
+aws lambda update-function-code `
+--function-name AWUE1ATHSPI-PT-LAMBDA-TRANSV-01  `
+--s3-bucket awue1athspi-qa-s3-llaves-01   `
+--s3-key  s3://awue1athspi-qa-s3-llaves-01/lambdas/TRANSV/SISTEMA-PAGOS-INMEDIATOS-BACK-lambda-java-val-pgp.zip
+ 
+#Crear parametro 
+Cuando es Json toca cambiar las comillas doblres  del inicio por senciallas ej "admin" por 'admin'
+si se va sobrescribir colocar --overwrite al final 
+
+aws ssm put-parameter --name "/myapp/database/username" `
+--value "admin" --type "String" `
+--description "Database username for myapp"
+
+
+============= Obtener Parametro  ============= 
+ 
+aws ssm get-parameter --name "/myapp/database/username"
+
+
+# Ver todos los parámetros de una aplicación específica
+aws ssm get-parameters-by-path --path "/myapp/" --recursive --with-decryption
+
+# Contar cuántos parámetros tienes
+aws ssm describe-parameters --query 'length(Parameters)'
+
+ 
+#Filrar parametros por path
+aws ssm describe-parameters `
+--parameter-filters "Key=Name,Option=BeginsWith,Values=/SPI/AWUE1ATHSPI-LAMBDA-TRANSV/" `
+--query 'Parameters[].Name' --output text
+
+Consultar Registro en dymamo por llave primaria
+
+aws dynamodb get-item `
+--table-name AWUE1ATHSPI-PT-DYNAMODB-DIRAVAL-01 `
+--key '{"id": {"S": "4@VALEPT001"}, "sk": {"S": "4@VALEPT001"}}' `
+--output json `
+--query "Item" | jq 'to_entries | map({(.key): (.value | to_entries[0].value)}) | add'
+  

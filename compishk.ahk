@@ -1,0 +1,235 @@
+; MAPEO OPTIMIZADO - Versión mejorada
+CrearProyectoMap() {
+    proyectos := ["BAVV", "BBOG", "BOCC", "BPOP", "DALE"]
+    acciones := Map(
+        "Create", "CREATE_DIR",
+        "Modify", "MOD_DIR", 
+        "Cancel", "CANCEL_DIR",
+        "Inquiry", "INQUIRY_DIR"
+    ) 
+    proyectoMap := Map()
+    
+    for proyecto in proyectos {
+        proyectoMap[proyecto] := Map()
+        for accion, sufijo in acciones {
+            proyectoMap[proyecto][accion] := proyecto . "_" . sufijo
+        }
+    } 
+    return proyectoMap
+}
+
+; Inicializar el mapeo optimizado
+proyectoMap := CrearProyectoMap()
+ 
+entidades := ["BAVV", "BBOG", "BOCC", "BPOP", "DALE"]
+libs := ["Corner","Commons", "Sync", "Open", "Redeban", "Artefactos"]
+operaciones := ["Create", "Modify", "Cancel", "Inquiry"]
+acciones := ["compile", "update", "branch", "copyzip", "navigate"]
+
+; Crear GUI
+myGui := Gui("+AlwaysOnTop +Resize", "Menú SPI")
+myGui.Font := "s10 Segoe UI"
+myGui.BackColor := "0xF0F0F0"
+
+; Título
+myGui.AddText("x20 y15 w300 Center", "Sistema de Pagos Inmediatos - SPI").Font := "s12 Bold"
+
+; Sección de Entidades
+myGui.AddText("x20 y50", "Entidades:").Font := "s10 Bold"
+lbEntidades := myGui.AddListBox("x20 y70 w70 r5 Multi", entidades)
+
+; Sección de Operaciones
+myGui.AddText("x120 y50", "Operaciones:").Font := "s10 Bold"
+lbOperaciones := myGui.AddListBox("x120 y70 w70 r5 Multi", operaciones)
+
+; Sección de Librerías
+myGui.AddText("x220 y50", "Librerias:").Font := "s10 Bold"
+lbLibrerias := myGui.AddListBox("x220 y70 w70 r12 Multi", libs)
+
+
+; Sección de Acciones
+myGui.AddText("x20 y160", "Acción:").Font := "s10 Bold"
+cbAccion := myGui.AddListBox("x20 y180 w70 r5", acciones)
+ 
+; Botones
+btnEjecutar := myGui.AddButton("x120 y180 w75 h30 Default", "Ejecutar")
+btnEjecutar.OnEvent("Click", Ejecutar)
+
+btnLimpiar := myGui.AddButton("x120 y220 w75 h30", "Limpiar")
+btnLimpiar.OnEvent("Click", LimpiarSelecciones)
+ 
+; Área de estado
+myGui.AddText("x20 y270", "Estado:").Font := "s10 Bold"
+txtEstado := myGui.AddEdit("x20 y290 w330 r8 ReadOnly VScroll", "Listo para ejecutar comandos...")
+
+myGui.Show("x860 w360 h450") 
+
+; Función para limpiar selecciones
+LimpiarSelecciones(*) {
+    lbEntidades.Choose(0)
+    lbOperaciones.Choose(0)
+    lbLibrerias.Choose(0)
+    cbAccion.Choose(0) 
+    ActualizarEstado("Selecciones limpiadas")
+}
+
+; Función para actualizar el estado
+ActualizarEstado(mensaje) {
+    tiempo := FormatTime(, "HH:mm:ss")
+    txtEstado.Text := tiempo . " - " . mensaje . "`r`n" . txtEstado.Text
+}
+  
+; Función principal de ejecución - CORREGIDA
+Ejecutar(*) {
+    ; Validar selecciones - CORREGIR: Verificar si son arrays o strings
+    entidadesSeleccionadas := lbEntidades.Value
+    operacionesSeleccionadas := lbOperaciones.Value
+    libreriasSeleccionadas :=  lbLibrerias.Value  
+    accionSeleccionada := cbAccion.Text
+    
+    ; Convertir strings vacíos a arrays vacíos para consistencia
+    if (Type(entidadesSeleccionadas) = "String") {
+        entidadesSeleccionadas := []
+    }
+    if (Type(operacionesSeleccionadas) = "String") {
+        operacionesSeleccionadas := []
+    }
+    if (Type(libreriasSeleccionadas) = "String") {
+        libreriasSeleccionadas := []
+    }
+    
+    ; Si hay entidades seleccionadas, debe haber operaciones
+    if (entidadesSeleccionadas.Length > 0 && operacionesSeleccionadas.Length = 0) {
+        ActualizarEstado("ERROR: Las entidades requieren al menos una operación")
+        return
+    }
+    
+    ; Si hay librerías seleccionadas, no necesitan operaciones (solo acciones)
+    if (libreriasSeleccionadas.Length > 0 && operacionesSeleccionadas.Length > 0) {
+        ActualizarEstado("ADVERTENCIA: Las librerías no usan operaciones, solo acciones")
+    }
+    
+    if (!accionSeleccionada) {
+        ActualizarEstado("ERROR: Selecciona una acción")
+        return
+    } 
+
+    ; Construir lista de proyectos
+    proyectosStr := ConstruirListaProyectos(entidadesSeleccionadas, operacionesSeleccionadas, libreriasSeleccionadas)
+    
+    if (!proyectosStr) {
+        ActualizarEstado("ERROR: No se pudieron mapear los proyectos seleccionados")
+        return
+    }
+
+    ; Ejecutar comando
+    ActualizarEstado("Iniciando ejecución...")
+    
+    try {
+        psCommand := ConstruirComandoPowerShell(accionSeleccionada, proyectosStr)
+        ActualizarEstado("Comando: " . psCommand)
+        
+        ; Ejecutar comando de PowerShell
+        RunWait(psCommand,,)
+        
+        ActualizarEstado("Ejecución completada exitosamente") 
+        
+    } catch Error as e {
+        ActualizarEstado("Error: " . e.Message)
+        MsgBox("Error al ejecutar: " . e.Message, "Error", "Icon!")
+    }
+}
+ ;Construir lista de proyectos
+ConstruirListaProyectos(entidadesSeleccionadas, operacionesSeleccionadas, libreriasSeleccionadas) {
+    proyectos := []
+    
+    ; Convertir índices a nombres
+    entidadesNombres := []
+    for indice in entidadesSeleccionadas {
+        entidadesNombres.Push(entidades[indice])
+    }
+    
+    operacionesNombres := []
+    for indice in operacionesSeleccionadas {
+        operacionesNombres.Push(operaciones[indice])
+    }
+    
+    ; Construir combinaciones usando el mapeo optimizado
+    for entidad in entidadesNombres {
+        for operacion in operacionesNombres {
+            if (proyectoMap.Has(entidad) && proyectoMap[entidad].Has(operacion)) {
+                proyectos.Push(entidad . "-" . operacion)
+            } else {
+                ; Log de advertencia para debugging
+                ActualizarEstado("Advertencia: Mapeo no encontrado para " . entidad . "-" . operacion)
+            }
+        }
+    }
+    
+ ; Procesar LIBRERÍAS (NO requieren operaciones, solo acciones)
+    if (libreriasSeleccionadas.Length > 0) {
+        ; Convertir índices a nombres de librerías
+        libreriasNombres := []
+        for indice in libreriasSeleccionadas {
+            libreriaNombre := libs[indice]
+             libreriasNombres.Push("LIBS-" . libreriaNombre)
+        }
+        
+        ; Agregar librerías directamente (sin operaciones)
+        for libreria in libreriasNombres {
+            proyectos.Push(libreria)
+        }
+    }
+     
+
+    if (proyectos.Length = 0) {
+        return ""
+    }
+    
+    return StrJoin(proyectos, ",")
+}
+
+; Función para construir el comando PowerShell
+ConstruirComandoPowerShell(accion, proyectosStr) {
+    ps1Path := "C:\Users\miguelrobles\Desktop\autohotkey\compile_script.ps1"
+    
+    args := Format("-Accion '{1}' -Proyectos '{2}'", accion, proyectosStr)
+      
+    return Format("pwsh.exe -File `"{1}`" {2}", ps1Path, args)
+}
+
+; Función auxiliar para unir array con delimitador
+StrJoin(arr, delim := ",") {
+    if (arr.Length = 0) {
+        return ""
+    }
+    
+    result := arr[1]
+    if (arr.Length > 1) {
+        for i in Range(2, arr.Length) {
+            result .= delim . arr[i]
+        }
+    }
+    
+    return result
+}
+
+; Función para crear un rango de números
+Range(start, end) {
+    arr := []
+    Loop end - start + 1 {
+        arr.Push(start + A_Index - 1)
+    }
+    return arr
+}
+
+; Función auxiliar para verificar si un valor existe en un array
+HasValue(arr, valor) {
+    for item in arr {
+        if (item = valor) {
+            return true
+        }
+    }
+    return false
+}
+ 
