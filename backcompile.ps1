@@ -12,96 +12,6 @@ $INQUIRY
 $SPI = "SISTEMA-PAGOS-INMEDIATOS-"
 $GRAD = ""
 
-# Hashtables que se inicializan después de seleccionar versión
-$script:MAPEO_PROYECTOS = @{}
-$script:NOMBRES_PROYECTOS = @{}
-$script:LISTAS_PROYECTOS = @{}
-
-function InicializarConfiguracionRutas {
-    $basePath = "C:\Users\miguelrobles\Desktop\SPI\$VERSION"
-    $libsPath = "$basePath\LIBS"
-    
-    # Crear rutas dinámicamente
-    $bancos = @("BAVV", "BBOG", "BOCC", "BPOP", "DALE")
-    $operaciones = @("CREATE", "MODIFY", "CANCEL", "INQUIRY")
-    
-    # Limpiar hashtables
-    $script:MAPEO_PROYECTOS.Clear()
-    $script:NOMBRES_PROYECTOS.Clear()
-    $script:LISTAS_PROYECTOS.Clear()
-    
-    # Generar rutas para bancos
-    foreach ($banco in $bancos) {
-        $bancoPath = "$basePath\$banco"
-        $script:LISTAS_PROYECTOS[$banco] = @()
-        
-        foreach ($op in $operaciones) {
-            $suffix = switch ($op) {
-                "CREATE" { "val-create" }
-                "MODIFY" { "val-mod" }
-                "CANCEL" { "val-cancel" }
-                "INQUIRY" { "inquiry" }
-            }
-            
-            $rutaCompleta = "$bancoPath\$SPI" + "SPI-BACK-lambda-java-$suffix$VPATH" + $banco.ToLower()
-            $claveMapeo = "$($banco.ToLower())-$($op.ToLower())"
-            
-            $script:MAPEO_PROYECTOS[$claveMapeo] = $rutaCompleta
-            $script:NOMBRES_PROYECTOS[$rutaCompleta] = "$banco - $op"
-            $script:LISTAS_PROYECTOS[$banco] += $rutaCompleta
-        }
-    }
-    
-    # LIBS
-    $libsRutas = @{
-        "SYNC" = "$libsPath\$SPI" + "SPI-BACK-libs-java-synch-dyn-open$VPATHLIB"
-        "COMMONS" = "$libsPath\$SPI" + "BACK-libs-java-commons"
-        "REDEBAN" = "$libsPath\$SPI" + "SPI-BACK-libs-java-vault-connection-red"
-        "CORNER" = "$libsPath\$SPI" + "SPI-BACK-libs-java-vault-connection-crn"
-        "OPEN" = "$libsPath\$SPI" + "BACK-libs-java-logs-opensearch"
-        "OPEN_BAVV" = "$libsPath\$SPI" + "BACK-libs-java-logs-opensearch-bavv"
-        "OPEN_BBOG" = "$libsPath\$SPI" + "BACK-libs-java-logs-opensearch-bbog"
-        "OPEN_BOCC" = "$libsPath\$SPI" + "BACK-libs-java-logs-opensearch-bocc"
-        "OPEN_BPOP" = "$libsPath\$SPI" + "BACK-libs-java-logs-opensearch-bpop"
-        "OPEN_DALE" = "$libsPath\$SPI" + "BACK-libs-java-logs-opensearch-dale"
-        "ARTEFACTOS" = "C:\Users\miguelrobles\Desktop\SISTEMA-PAGOS-INMEDIATOS-BACK-ArtefactosDespliegues"
-    }
-    
-    $script:LISTAS_PROYECTOS["LIBS"] = @()
-    foreach ($lib in $libsRutas.GetEnumerator()) {
-        $claveMapeo = "libs-$($lib.Key.ToLower())"
-        $script:MAPEO_PROYECTOS[$claveMapeo] = $lib.Value
-        $script:NOMBRES_PROYECTOS[$lib.Value] = "LIBS - $($lib.Key)"
-        $script:LISTAS_PROYECTOS["LIBS"] += $lib.Value
-    }
-    
-    # Listas por operación
-    foreach ($op in $operaciones) {
-        $script:LISTAS_PROYECTOS[$op] = @()
-        foreach ($banco in $bancos) {
-            $claveMapeo = "$($banco.ToLower())-$($op.ToLower())"
-            $script:LISTAS_PROYECTOS[$op] += $script:MAPEO_PROYECTOS[$claveMapeo]
-        }
-    }
-    
-    $script:LISTAS_PROYECTOS["ALL"] = @()
-    $claves = $script:LISTAS_PROYECTOS.Keys | Where-Object { $_ -ne "ALL" }
-    foreach ($clave in $claves) {
-    $script:LISTAS_PROYECTOS["ALL"] += $script:LISTAS_PROYECTOS[$clave]
-
-    $script:BAVV_LIST = $script:LISTAS_PROYECTOS["BAVV"]
-$script:BBOG_LIST = $script:LISTAS_PROYECTOS["BBOG"]
-$script:BOCC_LIST = $script:LISTAS_PROYECTOS["BOCC"]
-$script:BPOP_LIST = $script:LISTAS_PROYECTOS["BPOP"]
-$script:DALE_LIST = $script:LISTAS_PROYECTOS["DALE"]
-$script:LIBS_LIST = $script:LISTAS_PROYECTOS["LIBS"]
-$script:CREATE_LIST = $script:LISTAS_PROYECTOS["CREATE"]
-$script:INQUIRY_LIST = $script:LISTAS_PROYECTOS["INQUIRY"]
-$script:MODIFY_LIST = $script:LISTAS_PROYECTOS["MODIFY"]
-$script:CANCEL_LIST = $script:LISTAS_PROYECTOS["CANCEL"]
-$script:LIBS_ARTEFACTOS = $script:MAPEO_PROYECTOS["libs-artefactos"]
-}
-}
 
 
 function EjecutarScriptDesdeAutoHotkey {
@@ -112,12 +22,11 @@ function EjecutarScriptDesdeAutoHotkey {
     )
 
     $VERSION = Mostrar-MenuVersion -AutomaticMode
-    InicializarConfiguracionRutas
+    # ... todas las rutas y listas ...
     Procesar-ComandoAutoHotkey -Accion $Accion -Proyectos $Proyectos -Rama $Rama
     Write-Host "`nPresione Enter para cerrar..." -ForegroundColor Cyan
     Read-Host
 }
-
 
 function Mapear-ProyectoDesdeAutoHotkey {
     param (
@@ -657,17 +566,147 @@ function Manejar-SubMenu {
 # Mostrar versión automática si se usa AutoHotkey, manual si no
 if ($Accion -and $Proyectos) {
     $VERSION = Mostrar-MenuVersion -AutomaticMode
-    InicializarConfiguracionRutas
 } else {
     $VERSION = Mostrar-MenuVersion
-    InicializarConfiguracionRutas
 }
 
  # Directorio destino de los archivos ZIP
     $ZIP_DESTINATION_PATH = "D:\Compilaciones\"
     
 
+
+ # Configuracion de rutas 
+
+    $BAVV_PATH = "C:\Users\miguelrobles\Desktop\SPI\" + $VERSION + "\BAVV\"
+    $BBOG_PATH = "C:\Users\miguelrobles\Desktop\SPI\" + $VERSION + "\BBOG\"
+    $BOCC_PATH = "C:\Users\miguelrobles\Desktop\SPI\" + $VERSION + "\BOCC\"
+    $BPOP_PATH = "C:\Users\miguelrobles\Desktop\SPI\" + $VERSION + "\BPOP\"
+    $DALE_PATH = "C:\Users\miguelrobles\Desktop\SPI\" + $VERSION + "\DALE\"
+    $LIBS_PATH = 'C:\Users\miguelrobles\Desktop\SPI\' + $VERSION + "\LIBS\"
+
+    # Listas de proyectos
+    $BAVV_CREATE_DIR = $BAVV_PATH + $SPI + "SPI-BACK-lambda-java-val-create" + $VPATH + "bavv"
+    $BBOG_CREATE_DIR = $BBOG_PATH + $SPI + "SPI-BACK-lambda-java-val-create" + $VPATH + "bbog"
+    $BOCC_CREATE_DIR = $BOCC_PATH + $SPI + "SPI-BACK-lambda-java-val-create" + $VPATH + "bocc"
+    $BPOP_CREATE_DIR = $BPOP_PATH + $SPI + "SPI-BACK-lambda-java-val-create" + $VPATH + "bpop"
+    $DALE_CREATE_DIR = $DALE_PATH + $SPI + "SPI-BACK-lambda-java-val-create" + $VPATH + "dale"
+
+    $BAVV_MOD_DIR = $BAVV_PATH + $SPI + "SPI-BACK-lambda-java-val-mod" + $VPATH + "bavv" 
+    $BBOG_MOD_DIR = $BBOG_PATH + $SPI + "SPI-BACK-lambda-java-val-mod" + $VPATH + "bbog"
+    $BOCC_MOD_DIR = $BOCC_PATH + $SPI + "SPI-BACK-lambda-java-val-mod" + $VPATH + "bocc"
+    $BPOP_MOD_DIR = $BPOP_PATH + $SPI + "SPI-BACK-lambda-java-val-mod" + $VPATH + "bpop"
+    $DALE_MOD_DIR = $DALE_PATH + $SPI + "SPI-BACK-lambda-java-val-mod" + $VPATH + "dale"
+
+    $BAVV_CANCEL_DIR = $BAVV_PATH + $SPI + "SPI-BACK-lambda-java-val-cancel" + $VPATH + "bavv"
+    $BBOG_CANCEL_DIR = $BBOG_PATH + $SPI + "SPI-BACK-lambda-java-val-cancel" + $VPATH + "bbog"
+    $BOCC_CANCEL_DIR = $BOCC_PATH + $SPI + "SPI-BACK-lambda-java-val-cancel" + $VPATH + "bocc"
+    $BPOP_CANCEL_DIR = $BPOP_PATH + $SPI + "SPI-BACK-lambda-java-val-cancel" + $VPATH + "bpop"
+    $DALE_CANCEL_DIR = $DALE_PATH + $SPI + "SPI-BACK-lambda-java-val-cancel" + $VPATH + "dale"
+
+    $BAVV_INQUIRY_DIR = $BAVV_PATH + $SPI + "SPI-BACK-lambda-java-inquiry" + $VPATH + "bavv"
+    $BBOG_INQUIRY_DIR = $BBOG_PATH + $SPI + "SPI-BACK-lambda-java-inquiry" + $VPATH + "bbog"
+    $BOCC_INQUIRY_DIR = $BOCC_PATH + $SPI + "SPI-BACK-lambda-java-inquiry" + $VPATH + "bocc"
+    $BPOP_INQUIRY_DIR = $BPOP_PATH + $SPI + "SPI-BACK-lambda-java-inquiry" + $VPATH + "bpop"
+    $DALE_INQUIRY_DIR = $DALE_PATH + $SPI + "SPI-BACK-lambda-java-inquiry" + $VPATH + "dale"
+
+    $LIBS_SYNC_DIR = $LIBS_PATH + 'SISTEMA-PAGOS-INMEDIATOS-SPI-BACK-libs-java-synch-dyn-open' + $VPATHLIB
+    $LIBS_COMMONS = $LIBS_PATH + 'SISTEMA-PAGOS-INMEDIATOS-BACK-libs-java-commons'
+    $LIBS_REDEBAN = $LIBS_PATH + 'SISTEMA-PAGOS-INMEDIATOS-SPI-BACK-libs-java-vault-connection-red'
+    $LIBS_CORNER = $LIBS_PATH + 'SISTEMA-PAGOS-INMEDIATOS-SPI-BACK-libs-java-vault-connection-crn'
+    $LIBS_ARTEFACTOS = 'C:\Users\miguelrobles\Desktop\SISTEMA-PAGOS-INMEDIATOS-BACK-ArtefactosDespliegues'
  
+    $BAVV_LIST = @($BAVV_CREATE_DIR, $BAVV_MOD_DIR, $BAVV_CANCEL_DIR, $BAVV_INQUIRY_DIR)
+    $BBOG_LIST = @($BBOG_CREATE_DIR, $BBOG_MOD_DIR, $BBOG_CANCEL_DIR, $BBOG_INQUIRY_DIR)
+    $BOCC_LIST = @($BOCC_CREATE_DIR, $BOCC_MOD_DIR, $BOCC_CANCEL_DIR, $BOCC_INQUIRY_DIR)
+    $BPOP_LIST = @($BPOP_CREATE_DIR, $BPOP_MOD_DIR, $BPOP_CANCEL_DIR, $BPOP_INQUIRY_DIR)
+    $DALE_LIST = @($DALE_CREATE_DIR, $DALE_MOD_DIR, $DALE_CANCEL_DIR, $DALE_INQUIRY_DIR)
+    $LIBS_LIST = @($LIBS_SYNC_DIR, $LIBS_COMMONS, $LIBS_REDEBAN, $LIBS_CORNER, $LIBS_ARTEFACTOS)
+    $CREATE_LIST = @($BAVV_CREATE_DIR, $BBOG_CREATE_DIR, $BOCC_CREATE_DIR, $BPOP_CREATE_DIR, $DALE_CREATE_DIR)
+    $INQUIRY_LIST = @($BAVV_INQUIRY_DIR, $BBOG_INQUIRY_DIR, $BOCC_INQUIRY_DIR, $BPOP_INQUIRY_DIR, $DALE_INQUIRY_DIR)
+    $MODIFY_LIST = @($BAVV_MOD_DIR, $BBOG_MOD_DIR, $BOCC_MOD_DIR, $BPOP_MOD_DIR, $DALE_MOD_DIR)
+    $CANCEL_LIST = @($BAVV_CANCEL_DIR, $BBOG_CANCEL_DIR, $BOCC_CANCEL_DIR, $BPOP_CANCEL_DIR, $DALE_CANCEL_DIR)
+
+
+$MAPEO_PROYECTOS = @{
+    # BOCC
+    "bocc-inquiry"   = $BOCC_INQUIRY_DIR
+    "bocc-create"    = $BOCC_CREATE_DIR
+    "bocc-modify"    = $BOCC_MOD_DIR
+    "bocc-cancel"    = $BOCC_CANCEL_DIR
+
+    # BAVV
+    "BAVV-Inquiry"   = $BAVV_INQUIRY_DIR
+    "BAVV-Create"    = $BAVV_CREATE_DIR
+    "BAVV-Modify"    = $BAVV_MOD_DIR
+    "BAVV-Cancel"    = $BAVV_CANCEL_DIR
+
+    # BBOG
+    "bbog-Inquiry"   = $BBOG_INQUIRY_DIR
+    "bbog-Create"    = $BBOG_CREATE_DIR
+    "bbog-Modify"    = $BBOG_MOD_DIR
+    "bbog-Cancel"    = $BBOG_CANCEL_DIR
+
+    # BPOP
+    "bpop-Inquiry"   = $BPOP_INQUIRY_DIR
+    "bpop-Create"    = $BPOP_CREATE_DIR
+    "bpop-Modify"    = $BPOP_MOD_DIR
+    "bpop-Cancel"    = $BPOP_CANCEL_DIR
+
+    # DALE
+    "dale-Inquiry"   = $DALE_INQUIRY_DIR
+    "dale-Create"    = $DALE_CREATE_DIR
+    "dale-Modify"    = $DALE_MOD_DIR
+    "dale-Cancel"    = $DALE_CANCEL_DIR
+
+    # LIBS
+    "libs-sync"      = $LIBS_SYNC_DIR
+    "libs-commons"   = $LIBS_COMMONS
+    "libs-redeban"   = $LIBS_REDEBAN
+    "libs-corner"    = $LIBS_CORNER
+    "libs-artefactos"= $LIBS_ARTEFACTOS
+}
+
+
+    # Mapeo de nombres de proyectos
+    $NOMBRES_PROYECTOS = @{
+        # BAVV
+        $BAVV_CREATE_DIR  = "BAVV - Create"
+        $BAVV_MOD_DIR     = "BAVV - Modify"  
+        $BAVV_CANCEL_DIR  = "BAVV - Cancel"
+        $BAVV_INQUIRY_DIR = "BAVV - Inquiry"
+    
+        # BBOG
+        $BBOG_CREATE_DIR  = "BBOG - Crear"
+        $BBOG_MOD_DIR     = "BBOG - Modificar"
+        $BBOG_CANCEL_DIR  = "BBOG - Cancelar"
+        $BBOG_INQUIRY_DIR = "BBOG - Consulta"
+    
+        # BOCC
+        $BOCC_CREATE_DIR  = "BOCC - Crear"
+        $BOCC_MOD_DIR     = "BOCC - Modificar"
+        $BOCC_CANCEL_DIR  = "BOCC - Cancelar"
+        $BOCC_INQUIRY_DIR = "BOCC - Consulta"
+    
+        # BPOP
+        $BPOP_CREATE_DIR  = "BPOP - Crear"
+        $BPOP_MOD_DIR     = "BPOP - Modificar"
+        $BPOP_CANCEL_DIR  = "BPOP - Cancelar"
+        $BPOP_INQUIRY_DIR = "BPOP - Consulta"
+    
+        # DALE
+        $DALE_CREATE_DIR  = "DALE - Crear"
+        $DALE_MOD_DIR     = "DALE - Modificar"
+        $DALE_CANCEL_DIR  = "DALE - Cancelar"
+        $DALE_INQUIRY_DIR = "DALE - Consulta"
+
+        # LIBS
+        $LIBS_SYNC_DIR    = "SYNC-DYN-OPEN"
+        $LIBS_COMMONS     = "COMMONS"
+        $LIBS_REDEBAN     = "REDEBAN"
+        $LIBS_CORNER      = "CORNER"
+        $LIBS_ARTEFACTOS  = "ARTEFACTOS"
+    }
+
 
     
 if (-not (Test-Path -Path $ZIP_DESTINATION_PATH)) {
@@ -680,7 +719,6 @@ if ($Accion -and $Proyectos) {
     Write-Host "`nPresione Enter para cerrar..." -ForegroundColor Cyan
     Read-Host
 } else {
-    
     $continuar = $true
     while ($continuar) {
         Mostrar-MenuPrincipal

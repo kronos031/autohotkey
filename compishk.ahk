@@ -22,7 +22,7 @@ CrearProyectoMap() {
 proyectoMap := CrearProyectoMap()
  
 entidades := ["BAVV", "BBOG", "BOCC", "BPOP", "DALE"]
-libs := ["Corner","Commons", "Sync", "Open", "Redeban", "Artefactos"]
+libs := [ "Artefactos","Redeban", "Corner","Commons", "Sync", "Open","Open_BAVV","Open_BBOG","Open_BOCC","Open_BPOP","Open_DALE"]
 operaciones := ["Create", "Modify", "Cancel", "Inquiry"]
 acciones := ["compile", "update", "branch", "copyzip", "navigate"]
 
@@ -51,11 +51,15 @@ lbLibrerias := myGui.AddListBox("x220 y70 w70 r12 Multi", libs)
 myGui.AddText("x20 y160", "Acción:").Font := "s10 Bold"
 cbAccion := myGui.AddListBox("x20 y180 w70 r5", acciones)
  
+btnSync := myGui.AddButton("x120 y150 w70 h30 Default", "Sync")
+btnSync.OnEvent("Click", Sync)
+
 ; Botones
-btnEjecutar := myGui.AddButton("x120 y180 w75 h30 Default", "Ejecutar")
+btnEjecutar := myGui.AddButton("x120 y185 w70 h30 Default", "Ejecutar")
 btnEjecutar.OnEvent("Click", Ejecutar)
 
-btnLimpiar := myGui.AddButton("x120 y220 w75 h30", "Limpiar")
+
+btnLimpiar := myGui.AddButton("x120 y220 w70 h30", "Limpiar")
 btnLimpiar.OnEvent("Click", LimpiarSelecciones)
  
 ; Área de estado
@@ -79,6 +83,12 @@ ActualizarEstado(mensaje) {
     txtEstado.Text := tiempo . " - " . mensaje . "`r`n" . txtEstado.Text
 }
   
+Sync(*) {
+    pythonPath := "C:\Users\miguelrobles\AppData\Local\Microsoft\WindowsApps\python3.11.exe"
+    scriptPath := "c:\Users\miguelrobles\Desktop\autohotkey\sync.py"
+    Run('powershell.exe -NoExit -Command "& \"' . pythonPath . '\" \"' . scriptPath . '\""')
+}
+
 ; Función principal de ejecución - CORREGIDA
 Ejecutar(*) {
     ; Validar selecciones - CORREGIR: Verificar si son arrays o strings

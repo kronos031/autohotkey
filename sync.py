@@ -22,10 +22,11 @@ class MultiProjectSyncer:
         
         # Bancos destino con sus códigos
         self.target_banks = {
-            "BBOG": "bbog", 
-            "BOCC": "bocc",
-            "BPOP": "bpop",
-            "DALE": "dale",
+            
+             "BBOG": "bbog",
+             "BOCC": "bocc",
+             "BPOP": "bpop",
+            "DALE": "dale" 
             
         }
         
@@ -333,7 +334,7 @@ class MultiProjectSyncer:
                 print(f"📄 Copiado (raíz): {java_file.name}")
             
             if files_copied > 0:
-                print(f"    📄 {files_copied} archivos raíz copiados")
+                
                 synced_folders += 1
                 
         if synced_folders == 0:
@@ -506,15 +507,24 @@ class MultiProjectSyncer:
             for line in lines:
                 status_code = line[:2].strip()
                 file_path = line[3:].strip()
-                if status_code in {'M', 'A', 'AM', 'MM'}:
+                if status_code in {'M', 'A', 'AM', 'MM', 'R', 'C', 'RM', 'RC'}:
+                    if status_code in {'M', 'A', 'AM', 'MM'}:
+                        full_path = (project_path / file_path).resolve()
+                        modified_files.append(full_path)
+                # Para renombrados, tomar ambos archivos
+                    if status_code.startswith('R'):
+                        # Formato: "R old_file -> new_file"
+                        if ' -> ' in file_path:
+                            old_file, new_file = file_path.split(' -> ')
+                            modified_files.append((project_path / old_file.strip()).resolve())
+                            modified_files.append((project_path / new_file.strip()).resolve())
+                else:
                     full_path = (project_path / file_path).resolve()
                     modified_files.append(full_path)
             
-            #print("📝 Archivos modificados:")
-            for f in modified_files:
-                #print(f" - {f.relative_to(project_path)}")
+        
             
-              return modified_files
+            return modified_files
         except Exception as e:
             print(f"⚠️ No se pudo obtener archivos modificados con git: {e}")
             return []
