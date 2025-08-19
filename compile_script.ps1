@@ -1,10 +1,15 @@
 param(
     [string]$Accion,
     [string]$Proyectos,
-    [string]$Rama
+    [string]$VersHot
 )
+# DEBUG: Mostrar parámetros recibidos
+Write-Host " Parámetros recibidos:" -ForegroundColor Magenta
+Write-Host "  Accion: '$Accion'" -ForegroundColor Magenta
+Write-Host "  Proyectos: '$Proyectos'" -ForegroundColor Magenta 
+Write-Host "  Version: '$VersHot'" -ForegroundColor Magenta
 
-$VERSION = ""
+#$VERSION = ""
 $VPATH = ""
 $VPATHLIB = ""
 $ZIPPATH = ""
@@ -20,10 +25,11 @@ $script:LISTAS_PROYECTOS = @{}
 function InicializarConfiguracionRutas {
     $basePath = "C:\Users\miguelrobles\Desktop\SPI\$VERSION"
     $libsPath = "$basePath\LIBS"
+    $transvPath = "$basePath\TRANSV"
     
     # Crear rutas dinámicamente
     $bancos = @("BAVV", "BBOG", "BOCC", "BPOP", "DALE")
-    $operaciones = @("CREATE", "MODIFY", "CANCEL", "INQUIRY")
+    $operaciones = @("CREATE", "MODIFY", "CANCEL", "INQUIRY","TIMEST","OPEN")
     
     # Limpiar hashtables
     $script:MAPEO_PROYECTOS.Clear()
@@ -41,6 +47,8 @@ function InicializarConfiguracionRutas {
                 "MODIFY" { "val-mod" }
                 "CANCEL" { "val-cancel" }
                 "INQUIRY" { "inquiry" }
+                "OPEN" { "logs-opensearch" }
+                "TIMEST" { "save-time-line" }
             }
             
             $rutaCompleta = "$bancoPath\$SPI" + "SPI-BACK-lambda-java-$suffix$VPATH" + $banco.ToLower()
@@ -54,17 +62,27 @@ function InicializarConfiguracionRutas {
     
     # LIBS
     $libsRutas = @{
-        "SYNC" = "$libsPath\$SPI" + "SPI-BACK-libs-java-synch-dyn-open$VPATHLIB"
-        "COMMONS" = "$libsPath\$SPI" + "BACK-libs-java-commons"
-        "REDEBAN" = "$libsPath\$SPI" + "SPI-BACK-libs-java-vault-connection-red"
-        "CORNER" = "$libsPath\$SPI" + "SPI-BACK-libs-java-vault-connection-crn"
-        "OPEN" = "$libsPath\$SPI" + "BACK-libs-java-logs-opensearch"
-        "OPEN_BAVV" = "$libsPath\$SPI" + "BACK-libs-java-logs-opensearch-bavv"
-        "OPEN_BBOG" = "$libsPath\$SPI" + "BACK-libs-java-logs-opensearch-bbog"
-        "OPEN_BOCC" = "$libsPath\$SPI" + "BACK-libs-java-logs-opensearch-bocc"
-        "OPEN_BPOP" = "$libsPath\$SPI" + "BACK-libs-java-logs-opensearch-bpop"
-        "OPEN_DALE" = "$libsPath\$SPI" + "BACK-libs-java-logs-opensearch-dale"
+        "SYNC"       = "$libsPath\$SPI" + "SPI-BACK-libs-java-synch-dyn-open$VPATHLIB"
+        "COMMONS"    = "$libsPath\$SPI" + "BACK-libs-java-commons"
+        "REDEBAN"    = "$libsPath\$SPI" + "SPI-BACK-libs-java-vault-connection-red"
+        "CORNER"     = "$libsPath\$SPI" + "SPI-BACK-libs-java-vault-connection-crn"
+        "OPEN"       = "$libsPath\$SPI" + "BACK-libs-java-logs-opensearch"
+        "OPEN_BAVV"  = "$libsPath\$SPI" + "BACK-libs-java-logs-opensearch-bavv"
+        "OPEN_BBOG"  = "$libsPath\$SPI" + "BACK-libs-java-logs-opensearch-bbog"
+        "OPEN_BOCC"  = "$libsPath\$SPI" + "BACK-libs-java-logs-opensearch-bocc"
+        "OPEN_BPOP"  = "$libsPath\$SPI" + "BACK-libs-java-logs-opensearch-bpop"
+        "OPEN_DALE"  = "$libsPath\$SPI" + "BACK-libs-java-logs-opensearch-dale"
         "ARTEFACTOS" = "C:\Users\miguelrobles\Desktop\SISTEMA-PAGOS-INMEDIATOS-BACK-ArtefactosDespliegues"
+    }
+
+    # TRANSV
+    $transvRutas = @{
+        "CREATE"   = "$transvPath\$SPI" + "SPI-BACK-lambda-java-create-red"
+        "MODIFY"   = "$transvPath\$SPI" + "BACK-lambda-java-mod-red"
+        "CANCEL"   = "$transvPath\$SPI" + "SPI-BACK-lambda-java-cancel-red"
+        "RUN-GLUE" = "$transvPath\$SPI" + "BACK-java-run-glue"
+        "PGP"      = "$transvPath\$SPI" + "BACK-lambda-java-val-pgp"
+        "CONSENT"  = "$transvPath\$SPI" + "SPI-BACK-lambda-java-consent-red"
     }
     
     $script:LISTAS_PROYECTOS["LIBS"] = @()
@@ -73,6 +91,14 @@ function InicializarConfiguracionRutas {
         $script:MAPEO_PROYECTOS[$claveMapeo] = $lib.Value
         $script:NOMBRES_PROYECTOS[$lib.Value] = "LIBS - $($lib.Key)"
         $script:LISTAS_PROYECTOS["LIBS"] += $lib.Value
+    }
+
+    $script:LISTAS_PROYECTOS["TRANSV"] = @()
+    foreach ($transv in $transvRutas.GetEnumerator()) {
+        $claveMapeo = "transv-$($transv.Key.ToLower())"
+        $script:MAPEO_PROYECTOS[$claveMapeo] = $transv.Value
+        $script:NOMBRES_PROYECTOS[$transv.Value] = "TRANSV - $($transv.Key)"
+        $script:LISTAS_PROYECTOS["TRANSV"] += $transv.Value
     }
     
     # Listas por operación
@@ -87,20 +113,23 @@ function InicializarConfiguracionRutas {
     $script:LISTAS_PROYECTOS["ALL"] = @()
     $claves = $script:LISTAS_PROYECTOS.Keys | Where-Object { $_ -ne "ALL" }
     foreach ($clave in $claves) {
-    $script:LISTAS_PROYECTOS["ALL"] += $script:LISTAS_PROYECTOS[$clave]
+        $script:LISTAS_PROYECTOS["ALL"] += $script:LISTAS_PROYECTOS[$clave]
 
-    $script:BAVV_LIST = $script:LISTAS_PROYECTOS["BAVV"]
-$script:BBOG_LIST = $script:LISTAS_PROYECTOS["BBOG"]
-$script:BOCC_LIST = $script:LISTAS_PROYECTOS["BOCC"]
-$script:BPOP_LIST = $script:LISTAS_PROYECTOS["BPOP"]
-$script:DALE_LIST = $script:LISTAS_PROYECTOS["DALE"]
-$script:LIBS_LIST = $script:LISTAS_PROYECTOS["LIBS"]
-$script:CREATE_LIST = $script:LISTAS_PROYECTOS["CREATE"]
-$script:INQUIRY_LIST = $script:LISTAS_PROYECTOS["INQUIRY"]
-$script:MODIFY_LIST = $script:LISTAS_PROYECTOS["MODIFY"]
-$script:CANCEL_LIST = $script:LISTAS_PROYECTOS["CANCEL"]
-$script:LIBS_ARTEFACTOS = $script:MAPEO_PROYECTOS["libs-artefactos"]
-}
+        $script:BAVV_LIST = $script:LISTAS_PROYECTOS["BAVV"]
+        $script:BBOG_LIST = $script:LISTAS_PROYECTOS["BBOG"]
+        $script:BOCC_LIST = $script:LISTAS_PROYECTOS["BOCC"]
+        $script:BPOP_LIST = $script:LISTAS_PROYECTOS["BPOP"]
+        $script:DALE_LIST = $script:LISTAS_PROYECTOS["DALE"]
+        $script:LIBS_LIST = $script:LISTAS_PROYECTOS["LIBS"]
+        $script:TRANSV_LIST = $script:LISTAS_PROYECTOS["TRANSV"]
+        $script:TIMEST_LIST = $script:LISTAS_PROYECTOS["TIMEST"]
+        $script:OPEN_LIST = $script:LISTAS_PROYECTOS["OPEN"]
+        $script:CREATE_LIST = $script:LISTAS_PROYECTOS["CREATE"]
+        $script:INQUIRY_LIST = $script:LISTAS_PROYECTOS["INQUIRY"]
+        $script:MODIFY_LIST = $script:LISTAS_PROYECTOS["MODIFY"]
+        $script:CANCEL_LIST = $script:LISTAS_PROYECTOS["CANCEL"]
+        $script:LIBS_ARTEFACTOS = $script:MAPEO_PROYECTOS["libs-artefactos"]
+    }
 }
 
 
@@ -108,16 +137,50 @@ function EjecutarScriptDesdeAutoHotkey {
     param(
         [string]$Accion,
         [string]$Proyectos,
-        [string]$Rama
+        [string]$VersHot 
     )
-
-    $VERSION = Mostrar-MenuVersion -AutomaticMode
+    ConfigurarVersionDesdeAutoHotkey $VersHot
+    
     InicializarConfiguracionRutas
-    Procesar-ComandoAutoHotkey -Accion $Accion -Proyectos $Proyectos -Rama $Rama
+    Procesar-ComandoAutoHotkey -Accion $Accion -Proyectos $Proyectos
     Write-Host "`nPresione Enter para cerrar..." -ForegroundColor Cyan
     Read-Host
 }
 
+function ConfigurarVersionDesdeAutoHotkey {
+    param([string]$VersHot)
+    
+    switch ($VersHot.ToUpper()) {
+        'Java' {
+            $script:VERSION = "V2"
+            $script:VPATH = "-"
+            $script:VPATHLIB = ""
+            $script:ZIPPATH = "build\distributions\*.zip"
+            Write-Host "$(Obtener-HoraActual) Versión V2 configurada desde AutoHotkey" -ForegroundColor Green
+        }
+        'Micronaut' {
+            $script:VERSION = "V3"
+            $script:VPATH = "-micro-"
+            $script:ZIPPATH = "build\libs\*.zip"
+            $script:VPATHLIB = "-micro"
+            Write-Host "$(Obtener-HoraActual) Versión V3 configurada desde AutoHotkey" -ForegroundColor Green
+        }
+        'MicroMod' {
+            $script:VERSION = "V2"
+            $script:VPATH = "-micro-"
+            $script:ZIPPATH = "build\libs\*.zip"
+            $script:VPATHLIB = "-micro"
+            Write-Host "$(Obtener-HoraActual) Versión V2 MICRO configurada desde AutoHotkey" -ForegroundColor Green
+        }
+        default {
+            Write-Host "$(Obtener-HoraActual) Versión no reconocida: $VersHot. Usando V3 por defecto." -ForegroundColor Yellow
+            $script:VERSION = "V3"
+            $script:VPATH = "-micro-"
+            $script:ZIPPATH = "build\libs\*.zip"
+            $script:VPATHLIB = "-micro"
+        }
+    }
+}
 
 function Mapear-ProyectoDesdeAutoHotkey {
     param (
@@ -144,11 +207,7 @@ function Mostrar-MenuVersion {
     
     if ($AutomaticMode) {
         # Configuración automática para llamadas desde AutoHotkey
-        $script:VERSION = "V3"
-        $script:VPATH = "-micro-"
-        $script:ZIPPATH = "build\libs\*.zip"
-        $script:VPATHLIB = "-micro"
-        Write-Host "$(Obtener-HoraActual) Versión V3 seleccionada automáticamente" -ForegroundColor Green
+        Write-Host "$(Obtener-HoraActual) Usando versión configurada automáticamente: $VERSION" -ForegroundColor Green
         return $VERSION
     }
     
@@ -205,12 +264,12 @@ function Procesar-ComandoAutoHotkey {
     $rutasProyectos = @()
     
     foreach ($proyecto in $proyectosList) {
-    $proyectoLimpio = $proyecto.Trim(" '""") # Elimina espacios, comillas simples y dobles
-    $rutaProyecto = Mapear-ProyectoDesdeAutoHotkey $proyectoLimpio
-    if ($rutaProyecto) {
-        $rutasProyectos += $rutaProyecto
+        $proyectoLimpio = $proyecto.Trim(" '""") # Elimina espacios, comillas simples y dobles
+        $rutaProyecto = Mapear-ProyectoDesdeAutoHotkey $proyectoLimpio
+        if ($rutaProyecto) {
+            $rutasProyectos += $rutaProyecto
+        }
     }
-}
     
     if ($rutasProyectos.Count -eq 0) {
         Write-Host "$(Obtener-HoraActual) Error: No se encontraron proyectos válidos" -ForegroundColor Red
@@ -229,17 +288,19 @@ function Procesar-ComandoAutoHotkey {
                 Actualizar-Proyecto $rutaProyecto
             }
             "branch" {
-        # Siempre pedir la rama cuando viene desde AutoHotkey
-        $Rama = Read-Host "Ingrese el nombre de la rama"
+                # Siempre pedir la rama cuando viene desde AutoHotkey
+                $Rama = Read-Host "Ingrese el nombre de la rama"
         
-        if ($Rama -and $Rama.Trim() -ne "") {
-            Cambiar-Rama $rutaProyecto $Rama
-        }
-        else {
-            Write-Host "$(Obtener-HoraActual) Error: Se requiere especificar una rama" -ForegroundColor Red
-        }
+                if ($Rama -and $Rama.Trim() -ne "") {
+                    Cambiar-Rama $rutaProyecto $Rama
+                }
+                else {
+                    Write-Host "$(Obtener-HoraActual) Error: Se requiere especificar una rama" -ForegroundColor Red
+                }
             }
             "copyzip" {
+                $Branch = git -C $rutaProyecto branch --show-current
+                Write-Host "$(Obtener-HoraActual) Rama $Branch "
                 Copiar-ArchivosZIP $rutaProyecto
             }
             "navigate" {
@@ -256,23 +317,45 @@ function Procesar-ComandoAutoHotkey {
 
 
 # Funcion para copiar archivos ZIP
+ # Función para copiar archivos ZIP
 function Copiar-ArchivosZIP {
     param (
         [string]$rutaProyecto
+        
     )
     
-    Write-Host "$(Obtener-HoraActual) Copiando archivos ZIP desde: $($NOMBRES_PROYECTOS[$rutaProyecto])" -ForegroundColor Cyan
+    # Extraer la operación del nombre del proyecto
+    $nombreProyecto = $NOMBRES_PROYECTOS[$rutaProyecto]
+    $operacion = ($nombreProyecto -split ' - ')[1]
+    if (-not $operacion) {
+        $operacion = "GENERAL"
+    }
     
+    Write-Host "$(Obtener-HoraActual) Copiando archivos ZIP desde: $nombreProyecto" -ForegroundColor Cyan
+    
+    # Crear carpeta con operación y fecha (formato: OPERACION_YYYYMMDD)
+    $fechaActual = Get-Date -Format "yyyyMMdd"
+    $carpetaOperacionFecha = "${operacion}_${fechaActual}"
+    $destinoConFecha = Join-Path -Path $ZIP_DESTINATION_PATH -ChildPath $carpetaOperacionFecha
+    
+    # Verificar y crear el directorio base si no existe
     if (-not (Test-Path -Path $ZIP_DESTINATION_PATH)) {
         New-Item -ItemType Directory -Path $ZIP_DESTINATION_PATH -Force | Out-Null
-        Write-Host "$(Obtener-HoraActual) Directorio de destino creado: $ZIP_DESTINATION_PATH" -ForegroundColor Yellow
-    } 
+        Write-Host "$(Obtener-HoraActual) Directorio base creado: $ZIP_DESTINATION_PATH" -ForegroundColor Yellow
+    }
+    
+    # Verificar y crear el directorio de operación con fecha si no existe
+    if (-not (Test-Path -Path $destinoConFecha)) {
+        New-Item -ItemType Directory -Path $destinoConFecha -Force | Out-Null
+        Write-Host "$(Obtener-HoraActual) Directorio de destino creado: $destinoConFecha" -ForegroundColor Yellow
+    }
+
     $rutaZip = Join-Path -Path $rutaProyecto -ChildPath $ZIPPATH
     $archivosZip = Get-ChildItem -Path $rutaZip -ErrorAction SilentlyContinue
     
     if ($archivosZip.Count -gt 0) {
         foreach ($archivo in $archivosZip) {
-            $destino = Join-Path -Path $ZIP_DESTINATION_PATH -ChildPath $archivo.Name
+            $destino = Join-Path -Path $destinoConFecha -ChildPath $archivo.Name
             Copy-Item -Path $archivo.FullName -Destination $destino -Force
             Write-Host "$(Obtener-HoraActual) Copiado: $($archivo.Name)" -ForegroundColor Green
         }
@@ -297,10 +380,10 @@ function Compilar-Proyecto {
         gradle buildNativeLambda
     }
     elseif ($VERSION -eq "V2" -and $VPATH -eq "-") {
-        gradle buildNativeLambda
-    }
-    else {
         gradle buildZip
+    }
+    elseif ($VERSION -eq "V2" -and $VPATH -eq "-micro-") {
+        gradle buildNativeLambda
     }
     
     Copiar-ArchivosZIP $rutaProyecto
@@ -340,11 +423,19 @@ function Actualizar-Proyecto {
         git pull
         git status        <# Action to perform if the condition is true #>
     }
-    else {
+    elseif ($ruta_proyecto -and $ruta_proyecto -cne 'transvrutas') {
         Write-Host "$(Obtener-HoraActual) Actualizando proyecto: $($NOMBRES_PROYECTOS[$rutaProyecto])" -ForegroundColor Cyan
         Set-Location $rutaProyecto
         git fetch
         git pull
+        gradle publishToMavenLocal
+        Write-Host "Publicando cambios de libreria:"
+    }
+    else {
+        Write-Host "$(Obtener-HoraActual) Actualizando proyecto: $($NOMBRES_PROYECTOS[$rutaProyecto])" -ForegroundColor Cyan
+        Set-Location $rutaProyecto
+        git fetch
+        git pull 
         <# Action when all if and elseif conditions are false #>
     }
     #gradle publishToMavenLocal
@@ -365,7 +456,7 @@ function NavegarAProyecto {
 
     Write-Host "$(Obtener-HoraActual) Navegando a: $($NOMBRES_PROYECTOS[$rutaProyecto])" -ForegroundColor Cyan
     Write-Host "$(Obtener-HoraActual) Ruta: $rutaProyecto" -ForegroundColor Gray
-    
+    #
     if (Test-Path $rutaProyecto) {
         if (Test-Path "$rutaProyecto\.git") { 
             $ramaActual = git -C $rutaProyecto branch --show-current 2>$null
@@ -373,8 +464,25 @@ function NavegarAProyecto {
         }
         
         Write-Host "`n$(Obtener-HoraActual) Abriendo proyecto en PowerShell..." -ForegroundColor Cyan
-        Start-Process pwsh -ArgumentList "-NoExit", "-Command", "Set-Location '$rutaProyecto'; Write-Host '`nTrabajando en: $($NOMBRES_PROYECTOS[$rutaProyecto])`n' -ForegroundColor Green; Write-Host 'Ruta: $rutaProyecto' -ForegroundColor Gray; if (Test-Path '.git') { git branch --show-current 2>`$null | ForEach-Object { Write-Host 'Rama actual: $ramaActual' -ForegroundColor Yellow }; Write-Host 'Actualizando referencias remotas...' -ForegroundColor Cyan; git fetch; git pull}"
+        #Start-Process pwsh -ArgumentList "-NoExit", "-Command", "Set-Location '$rutaProyecto'; Write-Host '`nTrabajando en: $($NOMBRES_PROYECTOS[$rutaProyecto])`n' -ForegroundColor Green; Write-Host 'Ruta: $rutaProyecto' -ForegroundColor Gray; if (Test-Path '.git') { git branch --show-current 2>`$null | ForEach-Object { Write-Host 'Rama actual: $ramaActual' -ForegroundColor Yellow }; Write-Host 'Actualizando referencias remotas...' -ForegroundColor Cyan; git fetch; git pull}"
+        Start-Process pwsh -ArgumentList @(
+            "-NoExit",
+            "-Command",
+            @"
+        Set-Location '$rutaProyecto';
+        Write-Host '`nTrabajando en: $($NOMBRES_PROYECTOS[$rutaProyecto])`n' -ForegroundColor Green;
+        Write-Host 'Ruta: $rutaProyecto' -ForegroundColor Gray;
         
+        if (Test-Path '.git') {
+            git branch --show-current 2>`$null | ForEach-Object {
+                Write-Host 'Rama actual: $_' -ForegroundColor Yellow
+            };
+            Write-Host 'Actualizando referencias remotas...' -ForegroundColor Cyan;
+            git status;
+            git fetch;
+            git pull
+        }
+"@) 
     }
     else {
         Write-Host "$(Obtener-HoraActual) Error: La ruta no existe: $rutaProyecto" -ForegroundColor Red
@@ -416,6 +524,9 @@ function Mostrar-SubMenuEntidades {
     Write-Host "9: MODIFY"
     Write-Host "10: CANCEL"
     Write-Host "11: ALL PROYECTS"
+    Write-Host "12: TRANSV"
+    Write-Host "13: OPEN"
+
 }
 
 # Funcion para mostrar proyectos con seleccion multiple
@@ -586,6 +697,9 @@ function Manejar-SubMenu {
             '9'  = @{ Nombre = "MODIFICACIONES"; Lista = $MODIFY_LIST }
             '10' = @{ Nombre = "CANCELACIONES"; Lista = $CANCEL_LIST }
             '11' = @{ Nombre = "TODAS"; Lista = $null }
+            '12' = @{ Nombre = "TRASNVERSALES"; Lista = $TRANSV_LIST }
+            '13' = @{ Nombre = "TIMEST"; Lista = $TIMEST_LIST }
+            '14' = @{ Nombre = "OPEN"; Lista = $OPEN_LIST }
         }
 
         if ($listaEntidades.ContainsKey($seleccionEntidad)) {
@@ -653,22 +767,11 @@ function Manejar-SubMenu {
         }
     }
 }
-
-# Mostrar versión automática si se usa AutoHotkey, manual si no
-if ($Accion -and $Proyectos) {
-    $VERSION = Mostrar-MenuVersion -AutomaticMode
-    InicializarConfiguracionRutas
-} else {
-    $VERSION = Mostrar-MenuVersion
-    InicializarConfiguracionRutas
-}
-
- # Directorio destino de los archivos ZIP
-    $ZIP_DESTINATION_PATH = "D:\Compilaciones\"
-    
-
  
 
+# Directorio destino de los archivos ZIP
+$ZIP_DESTINATION_PATH = "D:\Compilaciones\"
+     
     
 if (-not (Test-Path -Path $ZIP_DESTINATION_PATH)) {
     New-Item -ItemType Directory -Path $ZIP_DESTINATION_PATH -Force | Out-Null
@@ -676,10 +779,12 @@ if (-not (Test-Path -Path $ZIP_DESTINATION_PATH)) {
 }
    
 if ($Accion -and $Proyectos) {
-    EjecutarScriptDesdeAutoHotkey -Accion $Accion -Proyectos $Proyectos -Rama $Rama
-    Write-Host "`nPresione Enter para cerrar..." -ForegroundColor Cyan
-    Read-Host
-} else {
+    # No llamar Mostrar-MenuVersion aquí, se maneja en EjecutarScriptDesdeAutoHotkey
+    EjecutarScriptDesdeAutoHotkey -Accion $Accion -Proyectos $Proyectos -VersHot $VersHot
+}
+else {
+    $VERSION = Mostrar-MenuVersion
+    InicializarConfiguracionRutas
     
     $continuar = $true
     while ($continuar) {
@@ -687,4 +792,4 @@ if ($Accion -and $Proyectos) {
         $seleccion = Read-Host "Ingrese su seleccion (1-6)"
         $continuar = Manejar-MenuPrincipal $seleccion
     }
-} 
+}

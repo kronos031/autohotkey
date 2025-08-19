@@ -26,7 +26,7 @@ class MultiProjectSyncer:
              "BBOG": "bbog",
              "BOCC": "bocc",
              "BPOP": "bpop",
-            "DALE": "dale" 
+             "DALE": "dale" 
             
         }
         

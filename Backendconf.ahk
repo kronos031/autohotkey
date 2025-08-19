@@ -145,14 +145,13 @@ MostrarMenu(*) {
 	MenuFlotante.Add("🔒  SPI", SubMenuSpi)  ; 
 	MenuFlotante.Add()
 	MenuFlotante.Add("🔒  Git", SubMenuGit)  ; 
-	MenuFlotante.Add("🖱️ Double-Click",  ForzarDobleClick)
-	MenuFlotante.Add("⏱️ Enter Automático", ToggleEnterTimer) 
+	;MenuFlotante.Add("🖱️ Double-Click",  ForzarDobleClick)
+    MenuFlotante.Add("🖱️ Compilaciones", AbrirCompilaciones)
+	;MenuFlotante.Add("⏱️ Enter Automático", ToggleEnterTimer) 
 	MenuFlotante.Add("⏱️ Mouse Mov", ToggleMouseMovement) 
-	MenuFlotante.Add("⚙️ Compile Scr", EjecutarBat)
+	;MenuFlotante.Add("⚙️ Compile Scr", EjecutarBat)
 	MenuFlotante.Add("⚙️ AWS Cred", Credaws)
-	
-	
-	
+	 
 ; =======================
     ; Configuración del submenú "usuario"
     ; =======================
@@ -253,6 +252,9 @@ MostrarToolTip(estado) {
     SetTimer(() => ToolTip(), -1000)  ; Oculta el ToolTip después de 1 segundo
 }
 
+AbrirCompilaciones(*) {
+  Run("D:\Compilaciones")
+}
 ; =======================
 ; HOTKEY ESPECIAL PARA VPN
 ; =======================

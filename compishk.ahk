@@ -5,7 +5,9 @@ CrearProyectoMap() {
         "Create", "CREATE_DIR",
         "Modify", "MOD_DIR", 
         "Cancel", "CANCEL_DIR",
-        "Inquiry", "INQUIRY_DIR"
+        "Inquiry", "INQUIRY_DIR",
+        "TimeSt","TIME_DIR",
+        "Open", "OPEN_DIR"
     ) 
     proyectoMap := Map()
     
@@ -23,8 +25,10 @@ proyectoMap := CrearProyectoMap()
  
 entidades := ["BAVV", "BBOG", "BOCC", "BPOP", "DALE"]
 libs := [ "Artefactos","Redeban", "Corner","Commons", "Sync", "Open","Open_BAVV","Open_BBOG","Open_BOCC","Open_BPOP","Open_DALE"]
-operaciones := ["Create", "Modify", "Cancel", "Inquiry"]
+transv:= ["Create","Modify","Cancel","Run-GLue","PGP","Consent"]
+operaciones := ["Create", "Modify", "Cancel", "Inquiry","TimeSt","Open"]
 acciones := ["compile", "update", "branch", "copyzip", "navigate"]
+versiones := ["Java", "Micronaut", "MicroMod"]
 
 ; Crear GUI
 myGui := Gui("+AlwaysOnTop +Resize", "Menú SPI")
@@ -32,7 +36,7 @@ myGui.Font := "s10 Segoe UI"
 myGui.BackColor := "0xF0F0F0"
 
 ; Título
-myGui.AddText("x20 y15 w300 Center", "Sistema de Pagos Inmediatos - SPI").Font := "s12 Bold"
+myGui.AddText("x20 y15 w250 Center", "Sistema de Pagos Inmediatos - SPI").Font := "s12 Bold"
 
 ; Sección de Entidades
 myGui.AddText("x20 y50", "Entidades:").Font := "s10 Bold"
@@ -44,8 +48,11 @@ lbOperaciones := myGui.AddListBox("x120 y70 w70 r5 Multi", operaciones)
 
 ; Sección de Librerías
 myGui.AddText("x220 y50", "Librerias:").Font := "s10 Bold"
-lbLibrerias := myGui.AddListBox("x220 y70 w70 r12 Multi", libs)
+lbLibrerias := myGui.AddListBox("x220 y70 w90 r6 Multi", libs)
 
+; Sección de Transversales
+myGui.AddText("x220 y160", "Transversales:").Font := "s10 Bold"
+lbtransv := myGui.AddListBox("x220 y180 w90 r6 Multi", transv)
 
 ; Sección de Acciones
 myGui.AddText("x20 y160", "Acción:").Font := "s10 Bold"
@@ -61,6 +68,11 @@ btnEjecutar.OnEvent("Click", Ejecutar)
 
 btnLimpiar := myGui.AddButton("x120 y220 w70 h30", "Limpiar")
 btnLimpiar.OnEvent("Click", LimpiarSelecciones)
+
+myGui.AddText("x240 y15", "Ver.").Font := "s12 Bold"
+cbVersion  := myGui.AddComboBox("x265 y13 w70 r6", versiones)
+cbVersion.Choose(2)
+
  
 ; Área de estado
 myGui.AddText("x20 y270", "Estado:").Font := "s10 Bold"
@@ -73,7 +85,8 @@ LimpiarSelecciones(*) {
     lbEntidades.Choose(0)
     lbOperaciones.Choose(0)
     lbLibrerias.Choose(0)
-    cbAccion.Choose(0) 
+    lbtransv.Choose(0)
+    cbAccion.Choose(0)  
     ActualizarEstado("Selecciones limpiadas")
 }
 
@@ -86,7 +99,9 @@ ActualizarEstado(mensaje) {
 Sync(*) {
     pythonPath := "C:\Users\miguelrobles\AppData\Local\Microsoft\WindowsApps\python3.11.exe"
     scriptPath := "c:\Users\miguelrobles\Desktop\autohotkey\sync.py"
-    Run('powershell.exe -NoExit -Command "& \"' . pythonPath . '\" \"' . scriptPath . '\""')
+    ;destino := "bavp"
+    ;Run('pwsh.exe -NoExit -Command "& \"' . pythonPath . '\" \"' . scriptPath . '\""' . " destino " . destino )
+    Run('pwsh.exe -NoExit -Command "& \"' . pythonPath . '\" \"' . scriptPath . '\""'  )
 }
 
 ; Función principal de ejecución - CORREGIDA
@@ -95,7 +110,10 @@ Ejecutar(*) {
     entidadesSeleccionadas := lbEntidades.Value
     operacionesSeleccionadas := lbOperaciones.Value
     libreriasSeleccionadas :=  lbLibrerias.Value  
+    transversalesSeleccionadas :=  lbtransv.Value  
     accionSeleccionada := cbAccion.Text
+    versionSeleccionada := cbVersion.Text
+     
     
     ; Convertir strings vacíos a arrays vacíos para consistencia
     if (Type(entidadesSeleccionadas) = "String") {
@@ -107,7 +125,10 @@ Ejecutar(*) {
     if (Type(libreriasSeleccionadas) = "String") {
         libreriasSeleccionadas := []
     }
-    
+    if (Type(transversalesSeleccionadas) = "String") {
+        transversalesSeleccionadas := []
+    }
+
     ; Si hay entidades seleccionadas, debe haber operaciones
     if (entidadesSeleccionadas.Length > 0 && operacionesSeleccionadas.Length = 0) {
         ActualizarEstado("ERROR: Las entidades requieren al menos una operación")
@@ -119,13 +140,17 @@ Ejecutar(*) {
         ActualizarEstado("ADVERTENCIA: Las librerías no usan operaciones, solo acciones")
     }
     
+    if (transversalesSeleccionadas.Length > 0 && operacionesSeleccionadas.Length > 0) {
+        ActualizarEstado("ADVERTENCIA: Las transversales no usan operaciones, solo acciones")
+    }
+
     if (!accionSeleccionada) {
         ActualizarEstado("ERROR: Selecciona una acción")
         return
     } 
 
     ; Construir lista de proyectos
-    proyectosStr := ConstruirListaProyectos(entidadesSeleccionadas, operacionesSeleccionadas, libreriasSeleccionadas)
+    proyectosStr := ConstruirListaProyectos(entidadesSeleccionadas, operacionesSeleccionadas, libreriasSeleccionadas, transversalesSeleccionadas)
     
     if (!proyectosStr) {
         ActualizarEstado("ERROR: No se pudieron mapear los proyectos seleccionados")
@@ -136,7 +161,7 @@ Ejecutar(*) {
     ActualizarEstado("Iniciando ejecución...")
     
     try {
-        psCommand := ConstruirComandoPowerShell(accionSeleccionada, proyectosStr)
+        psCommand := ConstruirComandoPowerShell(accionSeleccionada, proyectosStr, versionSeleccionada)
         ActualizarEstado("Comando: " . psCommand)
         
         ; Ejecutar comando de PowerShell
@@ -150,7 +175,7 @@ Ejecutar(*) {
     }
 }
  ;Construir lista de proyectos
-ConstruirListaProyectos(entidadesSeleccionadas, operacionesSeleccionadas, libreriasSeleccionadas) {
+ConstruirListaProyectos(entidadesSeleccionadas, operacionesSeleccionadas, libreriasSeleccionadas, transversalesSeleccionadas) {
     proyectos := []
     
     ; Convertir índices a nombres
@@ -190,7 +215,21 @@ ConstruirListaProyectos(entidadesSeleccionadas, operacionesSeleccionadas, librer
             proyectos.Push(libreria)
         }
     }
-     
+    
+    ; Procesar Transversales (NO requieren operaciones, solo acciones)
+    if (transversalesSeleccionadas.Length > 0) {
+        ; Convertir índices a nombres de librerías
+        transversalesNombres := []
+        for indice in transversalesSeleccionadas {
+            transversalNombre := transv[indice]
+             transversalesNombres.Push("TRANSV-" . transversalNombre)
+        }
+        
+        ; Agregar Transversales directamente (sin operaciones)
+        for transversal in transversalesNombres {
+            proyectos.Push(transversal)
+        }
+    }
 
     if (proyectos.Length = 0) {
         return ""
@@ -200,12 +239,16 @@ ConstruirListaProyectos(entidadesSeleccionadas, operacionesSeleccionadas, librer
 }
 
 ; Función para construir el comando PowerShell
-ConstruirComandoPowerShell(accion, proyectosStr) {
-    ps1Path := "C:\Users\miguelrobles\Desktop\autohotkey\compile_script.ps1"
+ConstruirComandoPowerShell(accion, proyectosStr, versionSeleccionada) {
+    ps1Path := "C:\Users\miguelrobles\Desktop\autohotkey\compile_script.ps1" 
     
-    args := Format("-Accion '{1}' -Proyectos '{2}'", accion, proyectosStr)
-      
-    return Format("pwsh.exe -File `"{1}`" {2}", ps1Path, args)
+    args := Format('-Accion "{1}" -Proyectos "{2}" -VersHot "{3}"', accion, proyectosStr, versionSeleccionada)
+    
+    comando := Format('pwsh.exe -File "{1}" {2}', ps1Path, args)
+    
+    ActualizarEstado("DEBUG - Comando completo: " . comando)
+    
+    return comando
 }
 
 ; Función auxiliar para unir array con delimitador
