@@ -22,7 +22,7 @@ class MultiProjectSyncer:
         
         # Bancos destino con sus códigos
         self.target_banks = {
-            
+             "BAVV": "bavv",
              "BBOG": "bbog",
              "BOCC": "bocc",
              "BPOP": "bpop",

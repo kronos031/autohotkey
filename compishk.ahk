@@ -7,6 +7,7 @@ CrearProyectoMap() {
         "Cancel", "CANCEL_DIR",
         "Inquiry", "INQUIRY_DIR",
         "TimeSt","TIME_DIR",
+        "ActTime","ACTTIME_DIR",
         "Open", "OPEN_DIR"
     ) 
     proyectoMap := Map()
@@ -26,7 +27,7 @@ proyectoMap := CrearProyectoMap()
 entidades := ["BAVV", "BBOG", "BOCC", "BPOP", "DALE"]
 libs := [ "Artefactos","Redeban", "Corner","Commons", "Sync", "Open","Open_BAVV","Open_BBOG","Open_BOCC","Open_BPOP","Open_DALE"]
 transv:= ["Create","Modify","Cancel","Run-GLue","PGP","Consent"]
-operaciones := ["Create", "Modify", "Cancel", "Inquiry","TimeSt","Open"]
+operaciones := ["Create", "Modify", "Cancel", "Inquiry","TimeSt","ActTime","Open"]
 acciones := ["compile", "update", "branch", "copyzip", "navigate"]
 versiones := ["Java", "Micronaut", "MicroMod"]
 

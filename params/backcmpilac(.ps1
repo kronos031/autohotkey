@@ -29,7 +29,7 @@ function InicializarConfiguracionRutas {
     
     # Crear rutas dinámicamente
     $bancos = @("BAVV", "BBOG", "BOCC", "BPOP", "DALE")
-    $operaciones = @("CREATE", "MODIFY", "CANCEL", "INQUIRY","TIMEST","ACTTIME","OPEN")
+    $operaciones = @("CREATE", "MODIFY", "CANCEL", "INQUIRY","TIMEST","OPEN")
     
     # Limpiar hashtables
     $script:MAPEO_PROYECTOS.Clear()
@@ -49,9 +49,8 @@ function InicializarConfiguracionRutas {
                 "INQUIRY" { "inquiry" }
                 "OPEN" { "logs-opensearch" }
                 "TIMEST" { "save-time-line" }
-                "ACTTIME" { "activate-time-line" } 
             }
-           
+            
             $rutaCompleta = "$bancoPath\$SPI" + "SPI-BACK-lambda-java-$suffix$VPATH" + $banco.ToLower()
             $claveMapeo = "$($banco.ToLower())-$($op.ToLower())"
             
@@ -63,20 +62,19 @@ function InicializarConfiguracionRutas {
     
     # LIBS
     $libsRutas = @{
-         
         "SYNC"       = "$libsPath\$SPI" + "SPI-BACK-libs-java-synch-dyn-open$VPATHLIB"
         "COMMONS"    = "$libsPath\$SPI" + "BACK-libs-java-commons"
         "REDEBAN"    = "$libsPath\$SPI" + "SPI-BACK-libs-java-vault-connection-red"
         "CORNER"     = "$libsPath\$SPI" + "SPI-BACK-libs-java-vault-connection-crn"
         "OPEN"       = "$libsPath\$SPI" + "BACK-libs-java-logs-opensearch"
-        "OPEN_BAVV"  = "$basePath\BAVV\$SPI" + "BACK-libs-java-logs-opensearch-bavv"
-        "OPEN_BBOG"  = "$basePath\BBOG\$SPI" + "BACK-libs-java-logs-opensearch-bbog"
-        "OPEN_BOCC"  = "$basePath\BOCC\$SPI" + "BACK-libs-java-logs-opensearch-bocc"
-        "OPEN_BPOP"  = "$basePath\BPOP\$SPI" + "BACK-libs-java-logs-opensearch-bpop"
-        "OPEN_DALE"  = "$basePath\DALE\$SPI" + "BACK-libs-java-logs-opensearch-dale"
+        "OPEN_BAVV"  = "$libsPath\$SPI" + "BACK-libs-java-logs-opensearch-bavv"
+        "OPEN_BBOG"  = "$libsPath\$SPI" + "BACK-libs-java-logs-opensearch-bbog"
+        "OPEN_BOCC"  = "$libsPath\$SPI" + "BACK-libs-java-logs-opensearch-bocc"
+        "OPEN_BPOP"  = "$libsPath\$SPI" + "BACK-libs-java-logs-opensearch-bpop"
+        "OPEN_DALE"  = "$libsPath\$SPI" + "BACK-libs-java-logs-opensearch-dale"
         "ARTEFACTOS" = "C:\Users\miguelrobles\Desktop\SISTEMA-PAGOS-INMEDIATOS-BACK-ArtefactosDespliegues"
     }
-    
+
     # TRANSV
     $transvRutas = @{
         "CREATE"   = "$transvPath\$SPI" + "SPI-BACK-lambda-java-create-red"
@@ -348,17 +346,11 @@ function Copiar-ArchivosZIP {
         $operacion = "GENERAL"
     }
     
-    $branchLimpia = if ($Branch) { 
-        $Branch -replace '[\\/:*?"<>|]', '_' 
-    } else { 
-        "Default" 
-    }
-    
     Write-Host "$(Obtener-HoraActual) Copiando archivos ZIP desde: $nombreProyecto" -ForegroundColor Cyan
     
     # Crear carpeta con operación y fecha (formato: OPERACION_YYYYMMDD)
-    $fechaActual = Get-Date -Format "yyyyMMdd"
-    $carpetaOperacionFecha = "${operacion}_${branchLimpia}_${fechaActual}"
+    $fechaActual = Get-Date -Format "yyyyMMddHHmm"
+    $carpetaOperacionFecha = "${operacion}_${fechaActual}"
     $destinoConFecha = Join-Path -Path $ZIP_DESTINATION_PATH -ChildPath $carpetaOperacionFecha
     
     # Verificar y crear el directorio base si no existe
@@ -397,22 +389,7 @@ function Compilar-Proyecto {
     
     Write-Host "$(Obtener-HoraActual) Compilando proyecto: $($NOMBRES_PROYECTOS[$rutaProyecto])" -ForegroundColor Cyan
     Set-Location $rutaProyecto
-    $Branch = git -C $rutaProyecto branch --show-current 2>$null
-                
-                # Verificar si se pudo obtener la rama
-                if ($LASTEXITCODE -eq 0 -and $Branch) {
-                    Write-Host "$(Obtener-HoraActual) Rama: $Branch"
-                } else {
-                    # Intentar obtener el HEAD detached o commit actual
-                    $CommitHash = git -C $rutaProyecto rev-parse --short HEAD 2>$null
-                    
-                    if ($LASTEXITCODE -eq 0 -and $CommitHash) {
-                        Write-Host "$(Obtener-HoraActual) HEAD detached en: $CommitHash"
-                    } else {
-                        Write-Host "$(Obtener-HoraActual) No se pudo determinar la rama o commit (¿no es un repositorio Git?)"
-                        $Branch = "Default"
-                    }
-                }
+    git branch
     
     if ($VERSION -eq "V3") {
         gradle buildNativeLambda
@@ -424,7 +401,7 @@ function Compilar-Proyecto {
         gradle buildNativeLambda
     }
     
-    Copiar-ArchivosZIP $rutaProyecto $Branch
+    Copiar-ArchivosZIP $rutaProyecto
     Write-Host "$(Obtener-HoraActual) Compilacion completada para: $($NOMBRES_PROYECTOS[$rutaProyecto])" -ForegroundColor Green
 }
 
@@ -461,26 +438,20 @@ function Actualizar-Proyecto {
         git pull
         git status        <# Action to perform if the condition is true #>
     }
-    elseif (  $($NOMBRES_PROYECTOS[$rutaProyecto]) -like "*LIBS*") {
+    elseif ($ruta_proyecto -and $ruta_proyecto -cne 'transvrutas') {
         Write-Host "$(Obtener-HoraActual) Actualizando proyecto: $($NOMBRES_PROYECTOS[$rutaProyecto])" -ForegroundColor Cyan
         Set-Location $rutaProyecto
         git fetch
-        git pull 
-        Write-Host "$(Obtener-HoraActual) Publicando cambios de libreria" -ForegroundColor Cyan
+        git pull
         gradle publishToMavenLocal
+        Write-Host "Publicando cambios de libreria:"
     }
-     elseif ($ruta_proyecto -and $ruta_proyecto -like '*transvRutas*') {
-        Write-Host "$(Obtener-HoraActual) Actualizando proyecto: $($NOMBRES_PROYECTOS[$rutaProyecto])" -ForegroundColor Cyan
-        Set-Location $rutaProyecto
-        git fetch
-        git pull    
-    }
-
     else {
         Write-Host "$(Obtener-HoraActual) Actualizando proyecto: $($NOMBRES_PROYECTOS[$rutaProyecto])" -ForegroundColor Cyan
         Set-Location $rutaProyecto
         git fetch
-        git pull  
+        git pull 
+        <# Action when all if and elseif conditions are false #>
     }
     #gradle publishToMavenLocal
     Write-Host "$(Obtener-HoraActual) Actualizacion completada para: $($NOMBRES_PROYECTOS[$rutaProyecto])" -ForegroundColor Green
@@ -549,7 +520,7 @@ function Mostrar-MenuPrincipal {
     Write-Host "2: Cambiar rama" -ForegroundColor Yellow
     Write-Host "3: Actualizar" -ForegroundColor Blue
     Write-Host "4: Copiar ZIPs" -ForegroundColor Green
-    Write-Host "5: Abrir" -ForegroundColor Magenta
+    Write-Host "5: Abrir si" -ForegroundColor Magenta
     Write-Host "6: Salir" -ForegroundColor Red
 }
 
@@ -677,23 +648,7 @@ function Procesar-ProyectosSeleccionados {
                 Cambiar-Rama $proyecto $nombreRama
             }
             "copyzip" {
-                 $Branch = git -C $rutaProyecto branch --show-current 2>$null
-                
-                # Verificar si se pudo obtener la rama
-                if ($LASTEXITCODE -eq 0 -and $Branch) {
-                    Write-Host "$(Obtener-HoraActual) Rama: $Branch"
-                } else {
-                    # Intentar obtener el HEAD detached o commit actual
-                    $CommitHash = git -C $rutaProyecto rev-parse --short HEAD 2>$null
-                    
-                    if ($LASTEXITCODE -eq 0 -and $CommitHash) {
-                        Write-Host "$(Obtener-HoraActual) HEAD detached en: $CommitHash"
-                    } else {
-                        Write-Host "$(Obtener-HoraActual) No se pudo determinar la rama o commit (¿no es un repositorio Git?)"
-                        $Branch = "Default"
-                    }
-                }
-                Copiar-ArchivosZIP $proyecto $Branch
+                Copiar-ArchivosZIP $proyecto
             }
             "update" {
                 Actualizar-Proyecto $proyecto
@@ -760,7 +715,6 @@ function Manejar-SubMenu {
             '12' = @{ Nombre = "TRASNVERSALES"; Lista = $TRANSV_LIST }
             '13' = @{ Nombre = "TIMEST"; Lista = $TIMEST_LIST }
             '14' = @{ Nombre = "OPEN"; Lista = $OPEN_LIST }
-            '15' = @{ Nombre = "ACTTIME"; Lista = $ACT_LIST }
         }
 
         if ($listaEntidades.ContainsKey($seleccionEntidad)) {
@@ -785,25 +739,8 @@ function Manejar-SubMenu {
                 }
                 elseif ($accion -eq "copyzip") {
                     Write-Host "$(Obtener-HoraActual) Copiando todos los archivos ZIP" -ForegroundColor Yellow
-                    $Branch = git -C $rutaProyecto branch --show-current 2>$null
-                
-                # Verificar si se pudo obtener la rama
-                if ($LASTEXITCODE -eq 0 -and $Branch) {
-                    Write-Host "$(Obtener-HoraActual) Rama: $Branch"
-                } else {
-                    # Intentar obtener el HEAD detached o commit actual
-                    $CommitHash = git -C $rutaProyecto rev-parse --short HEAD 2>$null
-                    
-                    if ($LASTEXITCODE -eq 0 -and $CommitHash) {
-                        Write-Host "$(Obtener-HoraActual) HEAD detached en: $CommitHash"
-                    } else {
-                        Write-Host "$(Obtener-HoraActual) No se pudo determinar la rama o commit (¿no es un repositorio Git?)"
-                        $Branch = "Default"
-                    }
-                }
                     foreach ($proyecto in $BAVV_LIST + $BBOG_LIST + $BOCC_LIST + $BPOP_LIST + $DALE_LIST + $LIBS_LIST + $INQUIRY_LIST + $MODIFY_LIST + $CANCEL_LIST) {
-                       
-                        Copiar-ArchivosZIP $proyecto $Branch
+                        Copiar-ArchivosZIP $proyecto
                     }
                     Write-Host "$(Obtener-HoraActual) Todos los archivos ZIP han sido copiados." -ForegroundColor Green
                 }

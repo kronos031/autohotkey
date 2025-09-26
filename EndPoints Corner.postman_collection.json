@@ -1,0 +1,4697 @@
+{
+	"info": {
+		"_postman_id": "58bd78bc-df1b-4ba1-8bb6-ece1c2fd2d44",
+		"name": "EndPoints Corner",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37089439"
+	},
+	"item": [
+		{
+			"name": "PT",
+			"item": [
+				{
+					"name": "BBOG",
+					"item": [
+						{
+							"name": "Consulta Llave",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0001",
+										"type": "text"
+									},
+									{
+										"key": "X-IPAddr",
+										"value": "10.130.1.74",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys/:valueKey ",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey "
+									],
+									"variable": [
+										{
+											"key": "valueKey ",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Creación Llave",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0001",
+										"type": "text"
+									},
+									{
+										"key": "X-IPAddr",
+										"value": "10.130.1.74",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificación Llave",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0001",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas22\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys/:valueKey",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey"
+									],
+									"variable": [
+										{
+											"key": "valueKey",
+											"value": "Legholas22"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificación Estado Llave",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0001",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"state\": \"ACTV\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys/:valor llave/update_status",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys",
+										":valor llave",
+										"update_status"
+									],
+									"variable": [
+										{
+											"key": "valor llave",
+											"value": "Legholas22"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cancelación Llave",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0001",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys/:valueKey",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey"
+									],
+									"variable": [
+										{
+											"key": "valueKey",
+											"value": "Legholas22"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta lista de llaves",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0097",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys?page=1&size=10&document_type=CC&document_number=1019052148",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "document_type",
+											"value": "CC"
+										},
+										{
+											"key": "document_number",
+											"value": "1019052148"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "BPOP",
+					"item": [
+						{
+							"name": "Modificación Llave",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0002",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia22\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanc22\",\r\n        \"second_surname\": \"Holjun22\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas11\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BPOP/api/dict/directory-keys/:valueKey",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BPOP",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey"
+									],
+									"variable": [
+										{
+											"key": "valueKey",
+											"value": "Legholas11"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cancelación Llave",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0002",
+										"type": "text"
+									},
+									{
+										"key": "X-IPAddr",
+										"value": "10.130.1.74",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BPOP/api/dict/directory-keys/:valueKey",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BPOP",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey"
+									],
+									"variable": [
+										{
+											"key": "valueKey",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta Llave",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0002",
+										"type": "text"
+									},
+									{
+										"key": "X-IPAddr",
+										"value": "10.130.1.74",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BPOP/api/dict/directory-keys/:valueKey  ",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BPOP",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey  "
+									],
+									"variable": [
+										{
+											"key": "valueKey  ",
+											"value": "Legholas11"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificación Estado Llave",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0002",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"state\": \"ACTV\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys/:valor llave/update_status",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys",
+										":valor llave",
+										"update_status"
+									],
+									"variable": [
+										{
+											"key": "valor llave",
+											"value": "Legholas11"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Creación Llave",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0002",
+										"type": "text"
+									},
+									{
+										"key": "X-IPAddr",
+										"value": "10.130.1.74",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BPOP/api/dict/directory-keys",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BPOP",
+										"api",
+										"dict",
+										"directory-keys"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta lista de llaves",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0097",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BPOP/api/dict/directory-keys?page=1&size=10&document_type=CC&document_number=1019052148",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BPOP",
+										"api",
+										"dict",
+										"directory-keys"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "document_type",
+											"value": "CC"
+										},
+										{
+											"key": "document_number",
+											"value": "1019052148"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "BOCC",
+					"item": [
+						{
+							"name": "Creación Llave",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0023",
+										"type": "text"
+									},
+									{
+										"key": "X-IPAddr",
+										"value": "10.130.1.74",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/directory-keys",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BOCC",
+										"api",
+										"dict",
+										"directory-keys"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta Llave",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0023",
+										"type": "text"
+									},
+									{
+										"key": "X-IPAddr",
+										"value": "10.130.1.74",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/directory-keys/:valueKey  ",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BOCC",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey  "
+									],
+									"variable": [
+										{
+											"key": "valueKey  ",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificación Llave",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0023",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia22\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanc22\",\r\n        \"second_surname\": \"Holjun22\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas11\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/directory-keys/:valueKey",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BOCC",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey"
+									],
+									"variable": [
+										{
+											"key": "valueKey",
+											"value": "Legholas11"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificación Estado Llave",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0023",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"state\": \"ACTV\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/directory-keys/:valor llave/update_status",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BOCC",
+										"api",
+										"dict",
+										"directory-keys",
+										":valor llave",
+										"update_status"
+									],
+									"variable": [
+										{
+											"key": "valor llave",
+											"value": "Legholas11"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cancelación Llave",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0023",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/directory-keys/:valueKey",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BOCC",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey"
+									],
+									"variable": [
+										{
+											"key": "valueKey",
+											"value": "Legholas11"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta lista de llaves",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0097",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/directory-keys?page=1&size=10&document_type=CC&document_number=1019052148",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BOCC",
+										"api",
+										"dict",
+										"directory-keys"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "document_type",
+											"value": "CC"
+										},
+										{
+											"key": "document_number",
+											"value": "1019052148"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DALE",
+					"item": [
+						{
+							"name": "Cancelación Llave",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0097",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys/:valueKey",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey"
+									],
+									"variable": [
+										{
+											"key": "valueKey",
+											"value": "Legholas11"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificación Estado Llave",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0097",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"state\": \"ACTV\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/directory-keys/:valor llave/update_status",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BOCC",
+										"api",
+										"dict",
+										"directory-keys",
+										":valor llave",
+										"update_status"
+									],
+									"variable": [
+										{
+											"key": "valor llave",
+											"value": "Legholas11"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta Llave",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Creación Llave",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0097",
+										"type": "text"
+									},
+									{
+										"key": "X-IPAddr",
+										"value": "10.130.1.74",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificación Llave",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0097",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia22\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanc22\",\r\n        \"second_surname\": \"Holjun22\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas11\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys/:valueKey",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey"
+									],
+									"variable": [
+										{
+											"key": "valueKey",
+											"value": "Legholas11"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta lista de llaves",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0097",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys?page=1&size=10&document_type=CC&document_number=1019052148",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "document_type",
+											"value": "CC"
+										},
+										{
+											"key": "document_number",
+											"value": "1019052148"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "BAVV",
+					"item": [
+						{
+							"name": "Modificación Estado Llave",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0052",
+										"type": "text"
+									},
+									{
+										"key": "X-IPAddr",
+										"value": "10.130.1.74",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"state\": \"ACTV\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/directory-keys/:valor llave/update_status",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BOCC",
+										"api",
+										"dict",
+										"directory-keys",
+										":valor llave",
+										"update_status"
+									],
+									"variable": [
+										{
+											"key": "valor llave",
+											"value": "Legholas11"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta Llave",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0052",
+										"type": "text"
+									},
+									{
+										"key": "X-IPAddr",
+										"value": "10.130.1.74",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BAVV/api/dict/directory-keys/:valueKey  ",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BAVV",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey  "
+									],
+									"variable": [
+										{
+											"key": "valueKey  ",
+											"value": "Legholas22"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Creacióin Llave",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0052",
+										"type": "text"
+									},
+									{
+										"key": "X-IPAddr",
+										"value": "10.130.1.74",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BAVV/api/dict/directory-keys",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BAVV",
+										"api",
+										"dict",
+										"directory-keys"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificación Llave",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0052",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia22\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanc22\",\r\n        \"second_surname\": \"Holjun22\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas11\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BAVV/api/dict/directory-keys/:valueKey?X-RqUID=2025052217465 &X-Channel=MB &X-CompanyId=0052",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BAVV",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey"
+									],
+									"query": [
+										{
+											"key": "X-RqUID",
+											"value": "2025052217465 "
+										},
+										{
+											"key": "X-Channel",
+											"value": "MB "
+										},
+										{
+											"key": "X-CompanyId",
+											"value": "0052"
+										},
+										{
+											"key": "X-IPAddr",
+											"value": "10.130.1.74",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "valueKey",
+											"value": "Legholas11"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cancelación Llave",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0052",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BAVV/api/dict/directory-keys/:valueKey",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BAVV",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey"
+									],
+									"variable": [
+										{
+											"key": "valueKey",
+											"value": "Legholas11"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta lista de llaves",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0097",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BAVV/api/dict/directory-keys?page=1&size=10&document_type=CC&document_number=1019052148",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BAVV",
+										"api",
+										"dict",
+										"directory-keys"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "document_type",
+											"value": "CC"
+										},
+										{
+											"key": "document_number",
+											"value": "1019052148"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "QA",
+			"item": [
+				{
+					"name": "BBOG",
+					"item": [
+						{
+							"name": "Consulta Llave",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0001",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys/:valueKey  ",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey  "
+									],
+									"variable": [
+										{
+											"key": "valueKey  ",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Creación Llave",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0001",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificación Llave",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0001",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas22\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys/:valueKey",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey"
+									],
+									"variable": [
+										{
+											"key": "valueKey",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificación Estado Llave",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0001",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"state\": \"ACTV\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys/:valor llave/update_status",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys",
+										":valor llave",
+										"update_status"
+									],
+									"variable": [
+										{
+											"key": "valor llave",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cancelación Llave",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0001",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys/:valueKey",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey"
+									],
+									"variable": [
+										{
+											"key": "valueKey",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta lista de llaves",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Channel",
+										"value": "MB",
+										"type": "text"
+									},
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys?page=1&size=10&document_type=CC&document_number=1019052148",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "document_type",
+											"value": "CC"
+										},
+										{
+											"key": "document_number",
+											"value": "1019052148"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "BPOP",
+					"item": [
+						{
+							"name": "Modificación Llave",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0002",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas22\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BPOP/api/dict/directory-keys/:valueKey",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BPOP",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey"
+									],
+									"variable": [
+										{
+											"key": "valueKey",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cancelación Llave",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0002",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BPOP/api/dict/directory-keys/:valueKey",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BPOP",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey"
+									],
+									"variable": [
+										{
+											"key": "valueKey",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta Llave",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0002",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BPOP/api/dict/directory-keys/:valueKey  ",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BPOP",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey  "
+									],
+									"variable": [
+										{
+											"key": "valueKey  ",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificación Estado Llave",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0002",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"state\": \"ACTV\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys/:valor llave/update_status",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys",
+										":valor llave",
+										"update_status"
+									],
+									"variable": [
+										{
+											"key": "valor llave",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Creación Llave",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0002",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BPOP/api/dict/directory-keys",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BPOP",
+										"api",
+										"dict",
+										"directory-keys"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta lista de llaves",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Channel",
+										"value": "MB",
+										"type": "text"
+									},
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BPOP/api/dict/directory-keys?page=1&size=10&document_type=CC&document_number=1019052148",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BPOP",
+										"api",
+										"dict",
+										"directory-keys"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "document_type",
+											"value": "CC"
+										},
+										{
+											"key": "document_number",
+											"value": "1019052148"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "BOCC",
+					"item": [
+						{
+							"name": "Creación Llave",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0023",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/directory-keys",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BOCC",
+										"api",
+										"dict",
+										"directory-keys"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta Llave",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0023",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/directory-keys/:valueKey  ",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BOCC",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey  "
+									],
+									"variable": [
+										{
+											"key": "valueKey  ",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificación Llave",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0023",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas22\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/directory-keys/:valueKey",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BOCC",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey"
+									],
+									"variable": [
+										{
+											"key": "valueKey",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificación Estado Llave",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0023",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"state\": \"ACTV\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/directory-keys/:valor llave/update_status",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BOCC",
+										"api",
+										"dict",
+										"directory-keys",
+										":valor llave",
+										"update_status"
+									],
+									"variable": [
+										{
+											"key": "valor llave",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cancelación Llave",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0023",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/directory-keys/:valueKey",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BOCC",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey"
+									],
+									"variable": [
+										{
+											"key": "valueKey",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta lista de llaves",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Channel",
+										"value": "MB",
+										"type": "text"
+									},
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/directory-keys?page=1&size=10&document_type=CC&document_number=1019052148",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BOCC",
+										"api",
+										"dict",
+										"directory-keys"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "document_type",
+											"value": "CC"
+										},
+										{
+											"key": "document_number",
+											"value": "1019052148"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DALE",
+					"item": [
+						{
+							"name": "Creación Llave",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0097",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta Llave",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0097",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys/:valueKey  ",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey  "
+									],
+									"variable": [
+										{
+											"key": "valueKey  ",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificación Llave",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0097",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas22\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys/:valueKey",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey"
+									],
+									"variable": [
+										{
+											"key": "valueKey",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cancelación Llave",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0097",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys/:valueKey",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey"
+									],
+									"variable": [
+										{
+											"key": "valueKey",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificación Estado Llave",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0097",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"state\": \"ACTV\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/directory-keys/:valor llave/update_status",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BOCC",
+										"api",
+										"dict",
+										"directory-keys",
+										":valor llave",
+										"update_status"
+									],
+									"variable": [
+										{
+											"key": "valor llave",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta lista de llaves",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0097",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys?page=1&size=10&document_type=CC&document_number=1019052148",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "document_type",
+											"value": "CC"
+										},
+										{
+											"key": "document_number",
+											"value": "1019052148"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "BAVV",
+					"item": [
+						{
+							"name": "Modificación Estado Llave",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0052",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"state\": \"ACTV\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/directory-keys/:valor llave/update_status",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BOCC",
+										"api",
+										"dict",
+										"directory-keys",
+										":valor llave",
+										"update_status"
+									],
+									"variable": [
+										{
+											"key": "valor llave",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta Llave",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0052",
+										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "C110",
+										"value": "2025-08-21T11:05:31.966",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BAVV/api/dict/directory-keys/:valueKey ",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BAVV",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey "
+									],
+									"variable": [
+										{
+											"key": "valueKey ",
+											"value": "3003474722"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Creacióin Llave",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BAVV/api/dict/directory-keys?X-RqUID=2025052217465 &X-Channel=MB &X-CompanyId=0052",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BAVV",
+										"api",
+										"dict",
+										"directory-keys"
+									],
+									"query": [
+										{
+											"key": "X-RqUID",
+											"value": "2025052217465 "
+										},
+										{
+											"key": "X-Channel",
+											"value": "MB "
+										},
+										{
+											"key": "X-CompanyId",
+											"value": "0052"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificación Llave",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0052",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas22\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BAVV/api/dict/directory-keys/:valueKey?X-RqUID=2025052217465 &X-Channel=MB &X-CompanyId=0052",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BAVV",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey"
+									],
+									"query": [
+										{
+											"key": "X-RqUID",
+											"value": "2025052217465 "
+										},
+										{
+											"key": "X-Channel",
+											"value": "MB "
+										},
+										{
+											"key": "X-CompanyId",
+											"value": "0052"
+										}
+									],
+									"variable": [
+										{
+											"key": "valueKey",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cancelación Llave",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0052",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BAVV/api/dict/directory-keys/:valueKey",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BAVV",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey"
+									],
+									"variable": [
+										{
+											"key": "valueKey",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta lista de llaves",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0097",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BAVV/api/dict/directory-keys?page=1&size=10&document_type=CC&document_number=1019052148",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BAVV",
+										"api",
+										"dict",
+										"directory-keys"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "document_type",
+											"value": "CC"
+										},
+										{
+											"key": "document_number",
+											"value": "1019052148"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "PRD",
+			"item": [
+				{
+					"name": "BBOG",
+					"item": [
+						{
+							"name": "Consulta Llave",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0001",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.129.50.33:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys/:valueKey  ",
+									"protocol": "https",
+									"host": [
+										"10",
+										"129",
+										"50",
+										"33"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey  "
+									],
+									"variable": [
+										{
+											"key": "valueKey  ",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Creación Llave",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0001",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.129.50.33:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys",
+									"protocol": "https",
+									"host": [
+										"10",
+										"129",
+										"50",
+										"33"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificación Llave",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0001",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas22\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.129.50.33:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys/:valueKey",
+									"protocol": "https",
+									"host": [
+										"10",
+										"129",
+										"50",
+										"33"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey"
+									],
+									"variable": [
+										{
+											"key": "valueKey",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificación Estado Llave",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0001",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"state\": \"ACTV\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.129.50.33:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys/:valor llave/update_status",
+									"protocol": "https",
+									"host": [
+										"10",
+										"129",
+										"50",
+										"33"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys",
+										":valor llave",
+										"update_status"
+									],
+									"variable": [
+										{
+											"key": "valor llave",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cancelación Llave",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0001",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.129.50.33:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys/:valueKey",
+									"protocol": "https",
+									"host": [
+										"10",
+										"129",
+										"50",
+										"33"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey"
+									],
+									"variable": [
+										{
+											"key": "valueKey",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "BPOP",
+					"item": [
+						{
+							"name": "Modificación Llave",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0002",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas22\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.129.50.33:5072/DirectoryIntegrationGouPAY_BPOP/api/dict/directory-keys/:valueKey",
+									"protocol": "https",
+									"host": [
+										"10",
+										"129",
+										"50",
+										"33"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BPOP",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey"
+									],
+									"variable": [
+										{
+											"key": "valueKey",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cancelación Llave",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0002",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.129.50.33:5072/DirectoryIntegrationGouPAY_BPOP/api/dict/directory-keys/:valueKey",
+									"protocol": "https",
+									"host": [
+										"10",
+										"129",
+										"50",
+										"33"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BPOP",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey"
+									],
+									"variable": [
+										{
+											"key": "valueKey",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta Llave",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0002",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.129.50.33:5072/DirectoryIntegrationGouPAY_BPOP/api/dict/directory-keys/:valueKey  ",
+									"protocol": "https",
+									"host": [
+										"10",
+										"129",
+										"50",
+										"33"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BPOP",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey  "
+									],
+									"variable": [
+										{
+											"key": "valueKey  ",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificación Estado Llave",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0002",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"state\": \"ACTV\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.129.50.33:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys/:valor llave/update_status",
+									"protocol": "https",
+									"host": [
+										"10",
+										"129",
+										"50",
+										"33"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys",
+										":valor llave",
+										"update_status"
+									],
+									"variable": [
+										{
+											"key": "valor llave",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Creación Llave",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0002",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.129.50.33:5072/DirectoryIntegrationGouPAY_BPOP/api/dict/directory-keys",
+									"protocol": "https",
+									"host": [
+										"10",
+										"129",
+										"50",
+										"33"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BPOP",
+										"api",
+										"dict",
+										"directory-keys"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "BOCC",
+					"item": [
+						{
+							"name": "Creación Llave",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0023",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.129.50.33:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/directory-keys",
+									"protocol": "https",
+									"host": [
+										"10",
+										"129",
+										"50",
+										"33"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BOCC",
+										"api",
+										"dict",
+										"directory-keys"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta Llave",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0023",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.129.50.33:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/directory-keys/:valueKey  ",
+									"protocol": "https",
+									"host": [
+										"10",
+										"129",
+										"50",
+										"33"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BOCC",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey  "
+									],
+									"variable": [
+										{
+											"key": "valueKey  ",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificación Llave",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0023",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas22\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.129.50.33:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/directory-keys/:valueKey",
+									"protocol": "https",
+									"host": [
+										"10",
+										"129",
+										"50",
+										"33"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BOCC",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey"
+									],
+									"variable": [
+										{
+											"key": "valueKey",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificación Estado Llave",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0023",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"state\": \"ACTV\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.129.50.33:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/directory-keys/:valor llave/update_status",
+									"protocol": "https",
+									"host": [
+										"10",
+										"129",
+										"50",
+										"33"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BOCC",
+										"api",
+										"dict",
+										"directory-keys",
+										":valor llave",
+										"update_status"
+									],
+									"variable": [
+										{
+											"key": "valor llave",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cancelación Llave",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0023",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.129.50.33:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/directory-keys/:valueKey",
+									"protocol": "https",
+									"host": [
+										"10",
+										"129",
+										"50",
+										"33"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BOCC",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey"
+									],
+									"variable": [
+										{
+											"key": "valueKey",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DALE",
+					"item": [
+						{
+							"name": "Cancelación Llave",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0097",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.129.50.33:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys/:valueKey",
+									"protocol": "https",
+									"host": [
+										"10",
+										"129",
+										"50",
+										"33"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey"
+									],
+									"variable": [
+										{
+											"key": "valueKey",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificación Estado Llave",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0097",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"state\": \"ACTV\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.129.50.33:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/directory-keys/:valor llave/update_status",
+									"protocol": "https",
+									"host": [
+										"10",
+										"129",
+										"50",
+										"33"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BOCC",
+										"api",
+										"dict",
+										"directory-keys",
+										":valor llave",
+										"update_status"
+									],
+									"variable": [
+										{
+											"key": "valor llave",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta Llave",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0097",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.129.50.33:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys/:valueKey  ",
+									"protocol": "https",
+									"host": [
+										"10",
+										"129",
+										"50",
+										"33"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey  "
+									],
+									"variable": [
+										{
+											"key": "valueKey  ",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Creación Llave",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0097",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.129.50.33:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys",
+									"protocol": "https",
+									"host": [
+										"10",
+										"129",
+										"50",
+										"33"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificación Llave",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0097",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas22\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.129.50.33:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys/:valueKey",
+									"protocol": "https",
+									"host": [
+										"10",
+										"129",
+										"50",
+										"33"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey"
+									],
+									"variable": [
+										{
+											"key": "valueKey",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "BAVV",
+					"item": [
+						{
+							"name": "Modificación Estado Llave",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0052",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"state\": \"ACTV\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.129.50.33:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/directory-keys/:valor llave/update_status",
+									"protocol": "https",
+									"host": [
+										"10",
+										"129",
+										"50",
+										"33"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BOCC",
+										"api",
+										"dict",
+										"directory-keys",
+										":valor llave",
+										"update_status"
+									],
+									"variable": [
+										{
+											"key": "valor llave",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta Llave",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0052",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.129.50.33:5072/DirectoryIntegrationGouPAY_BAVV/api/dict/directory-keys/:valueKey ",
+									"protocol": "https",
+									"host": [
+										"10",
+										"129",
+										"50",
+										"33"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BAVV",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey "
+									],
+									"variable": [
+										{
+											"key": "valueKey ",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Creacióin Llave",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0052",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.129.50.33:5072/DirectoryIntegrationGouPAY_BAVV/api/dict/directory-keys?X-RqUID=2025052217465 &X-Channel=MB &X-CompanyId=0052",
+									"protocol": "https",
+									"host": [
+										"10",
+										"129",
+										"50",
+										"33"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BAVV",
+										"api",
+										"dict",
+										"directory-keys"
+									],
+									"query": [
+										{
+											"key": "X-RqUID",
+											"value": "2025052217465 "
+										},
+										{
+											"key": "X-Channel",
+											"value": "MB "
+										},
+										{
+											"key": "X-CompanyId",
+											"value": "0052"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificación Llave",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0052",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas22\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.129.50.33:5072/DirectoryIntegrationGouPAY_BAVV/api/dict/directory-keys/:valueKey?X-RqUID=2025052217465 &X-Channel=MB &X-CompanyId=0052",
+									"protocol": "https",
+									"host": [
+										"10",
+										"129",
+										"50",
+										"33"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BAVV",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey"
+									],
+									"query": [
+										{
+											"key": "X-RqUID",
+											"value": "2025052217465 "
+										},
+										{
+											"key": "X-Channel",
+											"value": "MB "
+										},
+										{
+											"key": "X-CompanyId",
+											"value": "0052"
+										}
+									],
+									"variable": [
+										{
+											"key": "valueKey",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cancelación Llave",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0052",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.129.50.33:5072/DirectoryIntegrationGouPAY_BAVV/api/dict/directory-keys/:valueKey",
+									"protocol": "https",
+									"host": [
+										"10",
+										"129",
+										"50",
+										"33"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BAVV",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey"
+									],
+									"variable": [
+										{
+											"key": "valueKey",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
