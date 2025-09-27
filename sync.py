@@ -15,7 +15,7 @@ from datetime import datetime
 class MultiProjectSyncer:
     def __init__(self):
         # Ruta base donde están todos los proyectos
-        self.base_path = Path(r'C:\Users\miguelrobles\Desktop\SPI\V3')
+        self.base_path = Path.home() / 'Desktop' / 'SPI' / 'V3'
         
         # Banco fuente  
         self.source_bank =   input("Ingrese la entidad origen: ").lower().strip()

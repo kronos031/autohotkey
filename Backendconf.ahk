@@ -6,7 +6,7 @@ InstallKeybdHook
 ;       VARIABLES
 ; =======================
 global usuario := "miguelrobles@cbit-online.com"
-global contrasena := "Emily@2039"
+global contrasena := "Emily@2040"
 global usuariol := "prv_lherreno@ath.com.co"
 global usuariolcbit := "luisherreno@cbit-online.com"
 global contrasenal := "Periferia2054*"
@@ -15,7 +15,6 @@ global hotkeysEnabled := true  ; Estado inicial: activados
 global hotkeysForced := false  ; Controla si la desactivación fue manual o automática
 global dobleClikForzado := false
 global valorActual := 1
-
 ; =======================
 ;       HOTKEYS
 ; =======================
@@ -45,7 +44,7 @@ $3::Send("^v")
 ; Nuevo hotkey para segundo portapapeles
 $4::CopiarSegundoPortapapeles
 $5::PegarSegundoPortapapeles
-Xbutton2::Run("C:\Users\miguelrobles\Desktop\autohotkey\compishk.ahk")  ; Ejecuta el nuevo script
+Xbutton2::Run("C:\Users\" . A_UserName . "\Desktop\autohotkey\compishk.ahk")  ; Ejecuta el nuevo script
 
 ; =======================
 ;    FUNCIONES PORTAPAPELES
@@ -144,7 +143,7 @@ MostrarMenu(*) {
 	MenuFlotante.Add("🏭 LogInsight", LogInsight)  ;  
 	MenuFlotante.Add("🔒  SPI", SubMenuSpi)  ; 
 	MenuFlotante.Add()
-	MenuFlotante.Add("🔒  Git", SubMenuGit)  ; 
+	;MenuFlotante.Add("🔒  Git", SubMenuGit)  ; 
 	;MenuFlotante.Add("🖱️ Double-Click",  ForzarDobleClick)
     MenuFlotante.Add("🖱️ Compilaciones", AbrirCompilaciones)
 	;MenuFlotante.Add("⏱️ Enter Automático", ToggleEnterTimer) 
@@ -313,7 +312,7 @@ GitCommit(*) {
 ; =======================
 CambiarHotkey(*) {
     global
-    Run("C:\Users\miguelrobles\Desktop\autohotkey\MultiClipboard.ahk")  ; Ejecuta el nuevo script
+    Run("C:\Users\" . A_UserName . "\Desktop\autohotkey\MultiClipboard.ahk")  ; Ejecuta el nuevo script
     ExitApp()  ; Cierra el script actual
 }
 
@@ -442,7 +441,7 @@ global aws_session_token := ""
 EjecutarBat(*) {
     ; Permite seleccionar un archivo .bat para ejecutar
     ;archivoSeleccionado := FileSelect(1, , "Seleccionar archivo BAT", "Archivos BAT (*.bat)")
-	archivoSeleccionado := "C:\Users\miguelrobles\Desktop\autohotkey\Compile_SPI.bat" 
+	archivoSeleccionado := "C:\Users\" . A_UserName . "\Desktop\autohotkey\Compile_SPI.bat" 
     
     if (archivoSeleccionado) {
         try {

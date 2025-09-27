@@ -3,6 +3,8 @@ param(
     [string]$Proyectos,
     [string]$VersHot
 )
+$CURRENT_USER = $env:USERNAME
+
 # DEBUG: Mostrar parámetros recibidos
 Write-Host " Parámetros recibidos:" -ForegroundColor Magenta
 Write-Host "  Accion: '$Accion'" -ForegroundColor Magenta
@@ -23,7 +25,7 @@ $script:NOMBRES_PROYECTOS = @{}
 $script:LISTAS_PROYECTOS = @{}
 
 function InicializarConfiguracionRutas {
-    $basePath = "C:\Users\miguelrobles\Desktop\SPI\$VERSION"
+    $basePath = "C:\Users\$CURRENT_USER\Desktop\SPI\$VERSION"
     $libsPath = "$basePath\LIBS"
     $transvPath = "$basePath\TRANSV"
     
@@ -74,7 +76,7 @@ function InicializarConfiguracionRutas {
         "OPEN_BOCC"  = "$basePath\BOCC\$SPI" + "BACK-libs-java-logs-opensearch-bocc"
         "OPEN_BPOP"  = "$basePath\BPOP\$SPI" + "BACK-libs-java-logs-opensearch-bpop"
         "OPEN_DALE"  = "$basePath\DALE\$SPI" + "BACK-libs-java-logs-opensearch-dale"
-        "ARTEFACTOS" = "C:\Users\miguelrobles\Desktop\SISTEMA-PAGOS-INMEDIATOS-BACK-ArtefactosDespliegues"
+        "ARTEFACTOS" = "C:\Users\$CURRENT_USER\Desktop\SISTEMA-PAGOS-INMEDIATOS-BACK-ArtefactosDespliegues"
     }
     
     # TRANSV

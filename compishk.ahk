@@ -98,8 +98,8 @@ ActualizarEstado(mensaje) {
 }
   
 Sync(*) {
-    pythonPath := "C:\Users\miguelrobles\AppData\Local\Microsoft\WindowsApps\python3.11.exe"
-    scriptPath := "c:\Users\miguelrobles\Desktop\autohotkey\sync.py"
+    pythonPath := "C:\Users\" . A_UserName . "\AppData\Local\Microsoft\WindowsApps\python3.11.exe"
+    scriptPath := "c:\Users\" . A_UserName . "\Desktop\autohotkey\sync.py"
     ;destino := "bavp"
     ;Run('pwsh.exe -NoExit -Command "& \"' . pythonPath . '\" \"' . scriptPath . '\""' . " destino " . destino )
     Run('pwsh.exe -NoExit -Command "& \"' . pythonPath . '\" \"' . scriptPath . '\""'  )
@@ -241,7 +241,7 @@ ConstruirListaProyectos(entidadesSeleccionadas, operacionesSeleccionadas, librer
 
 ; Función para construir el comando PowerShell
 ConstruirComandoPowerShell(accion, proyectosStr, versionSeleccionada) {
-    ps1Path := "C:\Users\miguelrobles\Desktop\autohotkey\compile_script.ps1" 
+    ps1Path := "C:\Users\" . A_UserName . "\Desktop\autohotkey\compile_script.ps1" 
     
     args := Format('-Accion "{1}" -Proyectos "{2}" -VersHot "{3}"', accion, proyectosStr, versionSeleccionada)
     
