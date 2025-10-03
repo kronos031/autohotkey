@@ -106,8 +106,7 @@ Sync(*) {
 }
 
 ; Función principal de ejecución - CORREGIDA
-Ejecutar(*) {
-    ; Validar selecciones - CORREGIR: Verificar si son arrays o strings
+Ejecutar(*) { 
     entidadesSeleccionadas := lbEntidades.Value
     operacionesSeleccionadas := lbOperaciones.Value
     libreriasSeleccionadas :=  lbLibrerias.Value  

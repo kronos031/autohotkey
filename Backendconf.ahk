@@ -36,6 +36,19 @@ AppsKey::Send("{AppsKey}")
 ; Recargar el script con Shift + F1
 +F1::Reload
 
+F12::
+			{
+				SoundSetMute -1, ,"Varios micrófonos",
+				If SoundGetMute( , "Varios micrófonos") = 0
+			   ;ToolTip("✅ Microfono Habilitado", 100, 100)
+			    
+				TrayTip("Microfono Habilitado","Estado Microfono",2)
+				If SoundGetMute( , "Varios micrófonos") = 1
+				  SetTimer(() => ToolTip(), -200)  
+				; ToolTip("✅ Microfono deshabilitado", 100, 100)
+				;TrayTip("Microfono deshabilitado","Estado Microfono",1)
+			}
+			
 ; Hotkeys para Ctrl+A, Ctrl+C, Ctrl+V
 $1::Send("^a")
 $2::Send("^c")
@@ -62,6 +75,7 @@ CopiarSegundoPortapapeles(*) {
     
     if A_Clipboard {
         segundoPortapapeles := A_Clipboard
+		
         ToolTip("✅ Copiado al segundo portapapeles", 100, 100)
         SetTimer(() => ToolTip(), -800)  ; Oculta el ToolTip después de 800 ms
     }
@@ -149,7 +163,12 @@ MostrarMenu(*) {
 	;MenuFlotante.Add("⏱️ Enter Automático", ToggleEnterTimer) 
 	MenuFlotante.Add("⏱️ Mouse Mov", ToggleMouseMovement) 
 	;MenuFlotante.Add("⚙️ Compile Scr", EjecutarBat)
+	MenuFlotante.Add()  ; Separador
+	MenuFlotante.Add("📧 OpLocal", Oplocal)
+	MenuFlotante.Add()  ; Separador
 	MenuFlotante.Add("⚙️ AWS Cred", Credaws)
+	MenuFlotante.Add("⚙️ Rutas AWS", (*) =>Run("C:\Users\" . A_UserName . "\Desktop\autohotkey\rutas_lamdas.ahk"))
+ 
 	 
 ; =======================
     ; Configuración del submenú "usuario"
@@ -456,7 +475,14 @@ EjecutarBat(*) {
     
     SetTimer(() => ToolTip(), -2000)  ; Ocultar el tooltip después de 2 segundos
 }
-
+; =======================
+; Op Local
+; =======================  
+Oplocal(*) {
+    global jsonData := 'new SecretManagerDto(9200, "https", "admin", "127.0.0.1", "admin");'
+    A_Clipboard := jsonData
+    SendInput("^v")
+}
 ; =======================
 ; HEADERS SPI
 ; =======================  
