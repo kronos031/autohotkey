@@ -14,6 +14,9 @@
 					"item": [
 						{
 							"name": "Consulta Llave",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
 							"request": {
 								"method": "GET",
 								"header": [
@@ -35,10 +38,28 @@
 									{
 										"key": "X-IPAddr",
 										"value": "10.130.1.74",
-										"type": "text",
-										"disabled": true
+										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "C110",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
 									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys/:valueKey ",
 									"protocol": "https",
@@ -56,10 +77,17 @@
 										"directory-keys",
 										":valueKey "
 									],
+									"query": [
+										{
+											"key": null,
+											"value": "",
+											"disabled": true
+										}
+									],
 									"variable": [
 										{
 											"key": "valueKey ",
-											"value": ""
+											"value": "Diego8801"
 										}
 									]
 								}
@@ -89,13 +117,22 @@
 									{
 										"key": "X-IPAddr",
 										"value": "10.130.1.74",
-										"type": "text",
-										"disabled": true
+										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "client",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
+									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Andres\",\r\n    \"second_name\": \"Felipe\",\r\n    \"first_surname\": \"Merida\",\r\n    \"second_surname\": \"Rodriguez\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1020476984\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"iego51\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312317472\",\r\n    \"receptor\": \"GOU\",\r\n    \"account_opening_date\": \"2025-09-22\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Diego2055\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -141,11 +178,21 @@
 										"key": "X-CompanyId",
 										"value": "0001",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "client",
+										"type": "text"
+									},
+									{
+										"key": "r101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas22\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
+									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Marcs\",\r\n        \"second_name\": \"Jaro\",\r\n        \"first_surname\": \"Merda\",\r\n        \"second_surname\": \"Rodrigue\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"1013676677\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"iego51\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CCTE\",\r\n        \"account_number\": \"3123172\",\r\n        \"receptor\": \"GOU\",\r\n        \"account_opening_date\": \"2025-09-22\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -172,7 +219,7 @@
 									"variable": [
 										{
 											"key": "valueKey",
-											"value": "Legholas22"
+											"value": "iego51"
 										}
 									]
 								}
@@ -198,11 +245,21 @@
 										"key": "X-CompanyId",
 										"value": "0001",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "client",
+										"type": "text"
+									},
+									{
+										"key": "r101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"state\": \"ACTV\"\r\n}\r\n",
+									"raw": "{\r\n    \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"payment_number\": \"115175725914\",\r\n    \"receptor\": \"AVC\",\r\n    \"nit\": 860002964,\r\n    \"account_openning_dt\": \"2025-09-22\"\r\n  },\r\n    \"person\": {\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1013676675\"\r\n  },\r\n  \"state\": \"ACTV\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -229,8 +286,9 @@
 									],
 									"variable": [
 										{
-											"key": "valor llave",
-											"value": "Legholas22"
+											"key": "valueKey",
+											"value": "3164148759",
+											"type": "string"
 										}
 									]
 								}
@@ -255,6 +313,16 @@
 									{
 										"key": "X-CompanyId",
 										"value": "0001",
+										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
 										"type": "text"
 									}
 								],
@@ -287,7 +355,7 @@
 									"variable": [
 										{
 											"key": "valueKey",
-											"value": "Legholas22"
+											"value": "3164148759"
 										}
 									]
 								}
@@ -296,6 +364,9 @@
 						},
 						{
 							"name": "Consulta lista de llaves",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
 							"request": {
 								"method": "GET",
 								"header": [
@@ -311,18 +382,18 @@
 									},
 									{
 										"key": "X-CompanyId",
-										"value": "0097",
+										"value": "0001",
 										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys?page=1&size=10&document_type=CC&document_number=1019052148",
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys?page=1&size=100&document_type=CC&document_number=8080281241",
 									"protocol": "https",
 									"host": [
 										"10",
 										"130",
-										"2",
-										"131"
+										"1",
+										"74"
 									],
 									"port": "5072",
 									"path": [
@@ -338,7 +409,7 @@
 										},
 										{
 											"key": "size",
-											"value": "10"
+											"value": "100"
 										},
 										{
 											"key": "document_type",
@@ -346,7 +417,75 @@
 										},
 										{
 											"key": "document_number",
-											"value": "1019052148"
+											"value": "8080281241"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TimeStamps",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0001",
+										"type": "text"
+									},
+									{
+										"key": "X-IPAddr",
+										"value": "10.130.1.74",
+										"type": "text"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"R107\": \"2023-10-05T14:48:00.000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/timestamps/?request_id=68da97069f6a2b96b76446b6",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"timestamps",
+										""
+									],
+									"query": [
+										{
+											"key": "request_id",
+											"value": "68da97069f6a2b96b76446b6"
 										}
 									]
 								}
@@ -377,11 +516,21 @@
 										"key": "X-CompanyId",
 										"value": "0002",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia22\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanc22\",\r\n        \"second_surname\": \"Holjun22\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas11\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
+									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia22\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanc22\",\r\n        \"second_surname\": \"Holjun22\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas11\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\",\r\n        \"receptor\": \"GOU\",\r\n        \"account_opening_date\": \"2025-09-22\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -438,10 +587,28 @@
 									{
 										"key": "X-IPAddr",
 										"value": "10.130.1.74",
-										"type": "text",
-										"disabled": true
+										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
 									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BPOP/api/dict/directory-keys/:valueKey",
 									"protocol": "https",
@@ -462,7 +629,7 @@
 									"variable": [
 										{
 											"key": "valueKey",
-											"value": ""
+											"value": "3003473518"
 										}
 									]
 								}
@@ -492,8 +659,17 @@
 									{
 										"key": "X-IPAddr",
 										"value": "10.130.1.74",
-										"type": "text",
-										"disabled": true
+										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "C110",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"url": {
@@ -516,7 +692,7 @@
 									"variable": [
 										{
 											"key": "valueKey  ",
-											"value": "Legholas11"
+											"value": "DIE7O90"
 										}
 									]
 								}
@@ -542,11 +718,21 @@
 										"key": "X-CompanyId",
 										"value": "0002",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "r101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"state\": \"ACTV\"\r\n}\r\n",
+									"raw": "{\r\n    \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"payment_number\": \"115175725914\",\r\n    \"receptor\": \"AVC\",\r\n    \"nit\": 860002964,\r\n    \"account_openning_dt\": \"2025-09-22\"\r\n  },\r\n    \"person\": {\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1485215654532\"\r\n  },\r\n  \"state\": \"ICTV\"\r\n}\r\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -573,8 +759,9 @@
 									],
 									"variable": [
 										{
-											"key": "valor llave",
-											"value": "Legholas11"
+											"key": "valueKey",
+											"value": "",
+											"type": "string"
 										}
 									]
 								}
@@ -604,13 +791,22 @@
 									{
 										"key": "X-IPAddr",
 										"value": "10.130.1.74",
-										"type": "text",
-										"disabled": true
+										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
+									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"PROOF\",\r\n    \"second_name\": \"FELIPE\",\r\n    \"first_surname\": \"WORKS\",\r\n    \"second_surname\": \"LOPEZ\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1485215654532\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"DIE7O00\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"33453465\",\r\n    \"receptor\": \"TFY\",\r\n    \"account_opening_date\": \"2025-09-22\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba PERI1\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -632,6 +828,13 @@
 										"api",
 										"dict",
 										"directory-keys"
+									],
+									"query": [
+										{
+											"key": null,
+											"value": "",
+											"disabled": true
+										}
 									]
 								}
 							},
@@ -659,7 +862,7 @@
 									}
 								],
 								"url": {
-									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BPOP/api/dict/directory-keys?page=1&size=10&document_type=CC&document_number=1019052148",
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BPOP/api/dict/directory-keys?page=1&size=10&document_type=CC&document_number=1033707198",
 									"protocol": "https",
 									"host": [
 										"10",
@@ -689,8 +892,64 @@
 										},
 										{
 											"key": "document_number",
-											"value": "1019052148"
+											"value": "1033707198"
 										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TimeStamps",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0002",
+										"type": "text"
+									},
+									{
+										"key": "X-IPAddr",
+										"value": "10.130.1.74",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"R107\": \"2023-10-05T14:48:00.000Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BPOP/api/dict/timestamps/68da97069f6a2b96b76446b6",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BPOP",
+										"api",
+										"dict",
+										"timestamps",
+										"68da97069f6a2b96b76446b6"
 									]
 								}
 							},
@@ -724,13 +983,22 @@
 									{
 										"key": "X-IPAddr",
 										"value": "10.130.1.74",
-										"type": "text",
-										"disabled": true
+										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
+									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Leghol6\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\",\r\n    \"receptor\": \"TFY\",\r\n    \"account_opening_date\": \"2025-09-22\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -738,7 +1006,7 @@
 									}
 								},
 								"url": {
-									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/directory-keys",
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/directory-keys?=",
 									"protocol": "https",
 									"host": [
 										"10",
@@ -752,6 +1020,12 @@
 										"api",
 										"dict",
 										"directory-keys"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": ""
+										}
 									]
 								}
 							},
@@ -780,8 +1054,17 @@
 									{
 										"key": "X-IPAddr",
 										"value": "10.130.1.74",
-										"type": "text",
-										"disabled": true
+										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "client",
+										"type": "text"
+									},
+									{
+										"key": "C110",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"url": {
@@ -804,7 +1087,7 @@
 									"variable": [
 										{
 											"key": "valueKey  ",
-											"value": ""
+											"value": "Diego8801"
 										}
 									]
 								}
@@ -830,11 +1113,21 @@
 										"key": "X-CompanyId",
 										"value": "0023",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "client",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia22\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanc22\",\r\n        \"second_surname\": \"Holjun22\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas11\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
+									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia22\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanc22\",\r\n        \"second_surname\": \"Holjun22\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas11\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\",\r\n        \"receptor\": \"GOU\",\r\n        \"account_opening_date\": \"2025-09-22\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -887,11 +1180,21 @@
 										"key": "X-CompanyId",
 										"value": "0023",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "r101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"state\": \"ACTV\"\r\n}\r\n",
+									"raw": "{\r\n    \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"payment_number\": \"115175725914\",\r\n    \"receptor\": \"AVC\",\r\n    \"nit\": 999999991,\r\n    \"account_openning_dt\": \"2025-01-30\"\r\n  },\r\n    \"person\": {\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1098606394\"\r\n  },\r\n  \"state\": \"SUSB\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -944,6 +1247,16 @@
 									{
 										"key": "X-CompanyId",
 										"value": "0023",
+										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
 										"type": "text"
 									}
 								],
@@ -996,7 +1309,7 @@
 									}
 								],
 								"url": {
-									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/directory-keys?page=1&size=10&document_type=CC&document_number=1019052148",
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/directory-keys?page=1&size=10&document_type=CC&document_number=8080281241",
 									"protocol": "https",
 									"host": [
 										"10",
@@ -1026,8 +1339,64 @@
 										},
 										{
 											"key": "document_number",
-											"value": "1019052148"
+											"value": "8080281241"
 										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TimeStamps",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0023",
+										"type": "text"
+									},
+									{
+										"key": "X-IPAddr",
+										"value": "10.130.1.74",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"R107\": \"2023-10-05T14:48:00.000Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/timestamps/68da97069f6a2b96b76446b6",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BOCC",
+										"api",
+										"dict",
+										"timestamps",
+										"68da97069f6a2b96b76446b6"
 									]
 								}
 							},
@@ -1056,6 +1425,16 @@
 									{
 										"key": "X-CompanyId",
 										"value": "0097",
+										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
 										"type": "text"
 									}
 								],
@@ -1105,11 +1484,21 @@
 										"key": "X-CompanyId",
 										"value": "0097",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "r101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"state\": \"ACTV\"\r\n}",
+									"raw": "{\r\n    \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"payment_number\": \"115175725914\",\r\n    \"receptor\": \"AVC\",\r\n    \"nit\": 999999991,\r\n    \"account_openning_dt\": \"2025-01-30\"\r\n  },\r\n    \"person\": {\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1098606394\"\r\n  },\r\n  \"state\": \"SUSB\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1148,9 +1537,68 @@
 							"name": "Consulta Llave",
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0023",
+										"type": "text"
+									},
+									{
+										"key": "X-IPAddr",
+										"value": "10.130.1.74",
+										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "C110",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": ""
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys/:valueKey  ",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys",
+										":valueKey  "
+									],
+									"query": [
+										{
+											"key": null,
+											"value": "",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "valueKey  ",
+											"value": "Diego8801"
+										}
+									]
 								}
 							},
 							"response": []
@@ -1178,13 +1626,22 @@
 									{
 										"key": "X-IPAddr",
 										"value": "10.130.1.74",
-										"type": "text",
-										"disabled": true
+										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
+									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Lego11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\",\r\n    \"receptor\": \"GOU\",\r\n    \"account_opening_date\": \"2025-09-22\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1230,11 +1687,21 @@
 										"key": "X-CompanyId",
 										"value": "0097",
 										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia22\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanc22\",\r\n        \"second_surname\": \"Holjun22\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas11\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
+									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia22\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanc22\",\r\n        \"second_surname\": \"Holjun22\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas11\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\",\r\n        \"receptor\": \"GOU\",\r\n        \"account_opening_date\": \"2025-09-22\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1290,7 +1757,7 @@
 									}
 								],
 								"url": {
-									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys?page=1&size=10&document_type=CC&document_number=1019052148",
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys?page=1&size=10&document_type=CC&document_number=8080281241",
 									"protocol": "https",
 									"host": [
 										"10",
@@ -1320,8 +1787,64 @@
 										},
 										{
 											"key": "document_number",
-											"value": "1019052148"
+											"value": "8080281241"
 										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TimeStamps",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0097",
+										"type": "text"
+									},
+									{
+										"key": "X-IPAddr",
+										"value": "10.130.1.74",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"R107\": \"2023-10-05T14:48:00.000Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/timestamps/68da97069f6a2b96b76446b6",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"timestamps",
+										"68da97069f6a2b96b76446b6"
 									]
 								}
 							},
@@ -1355,13 +1878,22 @@
 									{
 										"key": "X-IPAddr",
 										"value": "10.130.1.74",
-										"type": "text",
-										"disabled": true
+										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "r101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"state\": \"ACTV\"\r\n}",
+									"raw": "{\r\n    \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"payment_number\": \"115175725914\",\r\n    \"receptor\": \"AVC\",\r\n    \"nit\": 999999991,\r\n    \"account_openning_dt\": \"2025-01-30\"\r\n  },\r\n    \"person\": {\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1098606394\"\r\n  },\r\n  \"state\": \"SUSB\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1419,6 +1951,21 @@
 									{
 										"key": "X-IPAddr",
 										"value": "10.130.1.74",
+										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "client",
+										"type": "text"
+									},
+									{
+										"key": "C110",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
+									},
+									{
+										"key": "",
+										"value": "",
 										"type": "text",
 										"disabled": true
 									}
@@ -1443,7 +1990,7 @@
 									"variable": [
 										{
 											"key": "valueKey  ",
-											"value": "Legholas22"
+											"value": "3003474720"
 										}
 									]
 								}
@@ -1473,13 +2020,22 @@
 									{
 										"key": "X-IPAddr",
 										"value": "10.130.1.74",
-										"type": "text",
-										"disabled": true
+										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "r101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
+									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Diego\",\r\n    \"second_name\": \"Fernando\",\r\n    \"first_surname\": \"Martinez\",\r\n    \"second_surname\": \"Ramirez\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1013676675\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"DIEO28\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"101310131013\",\r\n    \"receptor\": \"GOU\",\r\n    \"account_opening_date\": \"2025-09-22\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba @DIEGO28\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1525,11 +2081,21 @@
 										"key": "X-CompanyId",
 										"value": "0052",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia22\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanc22\",\r\n        \"second_surname\": \"Holjun22\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas11\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
+									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia22\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanc22\",\r\n        \"second_surname\": \"Holjun22\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas11\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\",\r\n        \"receptor\": \"GOU\",\r\n        \"account_opening_date\": \"2025-09-22\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1537,7 +2103,7 @@
 									}
 								},
 								"url": {
-									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BAVV/api/dict/directory-keys/:valueKey?X-RqUID=2025052217465 &X-Channel=MB &X-CompanyId=0052",
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BAVV/api/dict/directory-keys/:valueKey",
 									"protocol": "https",
 									"host": [
 										"10",
@@ -1555,20 +2121,18 @@
 									],
 									"query": [
 										{
-											"key": "X-RqUID",
-											"value": "2025052217465 "
+											"key": "",
+											"value": "",
+											"disabled": true
 										},
 										{
-											"key": "X-Channel",
-											"value": "MB "
+											"key": "",
+											"value": "",
+											"disabled": true
 										},
 										{
-											"key": "X-CompanyId",
-											"value": "0052"
-										},
-										{
-											"key": "X-IPAddr",
-											"value": "10.130.1.74",
+											"key": "",
+											"value": "",
 											"disabled": true
 										}
 									],
@@ -1600,6 +2164,16 @@
 									{
 										"key": "X-CompanyId",
 										"value": "0052",
+										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "r101",
+										"value": "2025-08-21T11:05:31.966Z",
 										"type": "text"
 									}
 								],
@@ -1652,7 +2226,7 @@
 									}
 								],
 								"url": {
-									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BAVV/api/dict/directory-keys?page=1&size=10&document_type=CC&document_number=1019052148",
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BAVV/api/dict/directory-keys?page=1&size=100&document_type=CC&document_number=2025369005",
 									"protocol": "https",
 									"host": [
 										"10",
@@ -1674,7 +2248,7 @@
 										},
 										{
 											"key": "size",
-											"value": "10"
+											"value": "100"
 										},
 										{
 											"key": "document_type",
@@ -1682,8 +2256,74 @@
 										},
 										{
 											"key": "document_number",
-											"value": "1019052148"
+											"value": "2025369005"
+										},
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
 										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TimeStamps",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0052",
+										"type": "text"
+									},
+									{
+										"key": "X-IPAddr",
+										"value": "10.130.1.74",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"R107\": \"2023-10-05T14:48:00.000Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BAVV/api/dict/timestamps/68da97069f6a2b96b76446b6",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BAVV",
+										"api",
+										"dict",
+										"timestamps",
+										"68da97069f6a2b96b76446b6"
 									]
 								}
 							},
@@ -1718,6 +2358,16 @@
 										"key": "X-CompanyId",
 										"value": "0001",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "client",
+										"type": "text"
+									},
+									{
+										"key": "C110",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"url": {
@@ -1740,7 +2390,7 @@
 									"variable": [
 										{
 											"key": "valueKey  ",
-											"value": ""
+											"value": "Diego8801"
 										}
 									]
 								}
@@ -1766,11 +2416,21 @@
 										"key": "X-CompanyId",
 										"value": "0001",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
+									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Prueba\",\r\n    \"second_name\": \"Fernando\",\r\n    \"first_surname\": \"Diego\",\r\n    \"second_surname\": \"Martinez\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1013676677\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Dieg79\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312316561\",\r\n    \"receptor\": \"GOU\",\r\n    \"account_opening_date\": \"2025-09-22\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Diego2000\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1778,13 +2438,13 @@
 									}
 								},
 								"url": {
-									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys",
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys",
 									"protocol": "https",
 									"host": [
 										"10",
 										"130",
-										"1",
-										"74"
+										"2",
+										"131"
 									],
 									"port": "5072",
 									"path": [
@@ -1792,6 +2452,13 @@
 										"api",
 										"dict",
 										"directory-keys"
+									],
+									"query": [
+										{
+											"key": null,
+											"value": "",
+											"disabled": true
+										}
 									]
 								}
 							},
@@ -1816,11 +2483,21 @@
 										"key": "X-CompanyId",
 										"value": "0001",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas22\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
+									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"1013676677\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Diego0759\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"312316561\",\r\n        \"receptor\": \"GOU\",\r\n        \"account_opening_date\": \"2025-09-22\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1847,7 +2524,7 @@
 									"variable": [
 										{
 											"key": "valueKey",
-											"value": ""
+											"value": "Diego0759"
 										}
 									]
 								}
@@ -1873,11 +2550,21 @@
 										"key": "X-CompanyId",
 										"value": "0001",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"state\": \"ACTV\"\r\n}",
+									"raw": "{\r\n    \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"payment_number\": \"115175725914\",\r\n    \"receptor\": \"AVC\",\r\n    \"nit\": 999999991,\r\n    \"account_openning_dt\": \"2025-01-30\"\r\n  },\r\n    \"person\": {\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1013676677\"\r\n  },\r\n  \"state\": \"SUSB\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1905,7 +2592,7 @@
 									"variable": [
 										{
 											"key": "valor llave",
-											"value": ""
+											"value": "Dieg100"
 										}
 									]
 								}
@@ -1977,7 +2664,7 @@
 									}
 								],
 								"url": {
-									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys?page=1&size=10&document_type=CC&document_number=1019052148",
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys?page=1&size=100&document_type=CC&document_number=1013676675",
 									"protocol": "https",
 									"host": [
 										"10",
@@ -1999,7 +2686,7 @@
 										},
 										{
 											"key": "size",
-											"value": "10"
+											"value": "100"
 										},
 										{
 											"key": "document_type",
@@ -2007,8 +2694,64 @@
 										},
 										{
 											"key": "document_number",
-											"value": "1019052148"
+											"value": "1013676675"
 										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TimeStamps",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0001",
+										"type": "text"
+									},
+									{
+										"key": "X-IPAddr",
+										"value": "10.130.1.74",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"R107\": \"2023-10-05T14:48:00.000Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/timestamps/68e6a0bd576765eb8cae0530",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"timestamps",
+										"68e6a0bd576765eb8cae0530"
 									]
 								}
 							},
@@ -2038,11 +2781,21 @@
 										"key": "X-CompanyId",
 										"value": "0002",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas22\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
+									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas22\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\",\r\n        \"receptor\": \"GOU\",\r\n        \"account_opening_date\": \"2025-09-22\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2095,6 +2848,16 @@
 										"key": "X-CompanyId",
 										"value": "0002",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"url": {
@@ -2143,6 +2906,16 @@
 										"key": "X-CompanyId",
 										"value": "0002",
 										"type": "text"
+									},
+									{
+										"key": "User-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "c110",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"url": {
@@ -2165,7 +2938,7 @@
 									"variable": [
 										{
 											"key": "valueKey  ",
-											"value": ""
+											"value": "Diego8801"
 										}
 									]
 								}
@@ -2191,11 +2964,21 @@
 										"key": "X-CompanyId",
 										"value": "0002",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "r101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"state\": \"ACTV\"\r\n}",
+									"raw": "{\r\n    \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"payment_number\": \"115175725914\",\r\n    \"receptor\": \"AVC\",\r\n    \"nit\": 999999991,\r\n    \"account_openning_dt\": \"2025-01-30\"\r\n  },\r\n    \"person\": {\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1098606394\"\r\n  },\r\n  \"state\": \"SUSB\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2249,11 +3032,21 @@
 										"key": "X-CompanyId",
 										"value": "0002",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "client",
+										"type": "text"
+									},
+									{
+										"key": "r101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
+									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Diego\",\r\n    \"second_name\": \"Fer\",\r\n    \"first_surname\": \"Mar\",\r\n    \"second_surname\": \"Rar\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1013675849\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Diefr97\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\",\r\n    \"receptor\": \"GOU\",\r\n    \"account_opening_date\": \"2025-09-22\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Diefer\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2333,6 +3126,62 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "TimeStamps",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0002",
+										"type": "text"
+									},
+									{
+										"key": "X-IPAddr",
+										"value": "10.130.1.74",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"R107\": \"2023-10-05T14:48:00.000Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BPOP/api/dict/timestamps/68da97069f6a2b96b76446b6",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BPOP",
+										"api",
+										"dict",
+										"timestamps",
+										"68da97069f6a2b96b76446b6"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -2358,11 +3207,21 @@
 										"key": "X-CompanyId",
 										"value": "0023",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "r101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
+									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707000\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Diego1\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312000000\",\r\n    \"receptor\": \"GOU\",\r\n    \"account_opening_date\": \"2025-09-22\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Diego11\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2408,6 +3267,16 @@
 										"key": "X-CompanyId",
 										"value": "0023",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "c110",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"url": {
@@ -2430,7 +3299,7 @@
 									"variable": [
 										{
 											"key": "valueKey  ",
-											"value": ""
+											"value": "Diego8801"
 										}
 									]
 								}
@@ -2456,11 +3325,21 @@
 										"key": "X-CompanyId",
 										"value": "0023",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "client",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas22\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
+									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Diego1\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\",\r\n        \"receptor\": \"GOU\",\r\n        \"account_opening_date\": \"2025-09-22\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2487,7 +3366,7 @@
 									"variable": [
 										{
 											"key": "valueKey",
-											"value": ""
+											"value": "Diego1"
 										}
 									]
 								}
@@ -2513,11 +3392,21 @@
 										"key": "X-CompanyId",
 										"value": "0023",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "r101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"state\": \"ACTV\"\r\n}",
+									"raw": "{\r\n    \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"payment_number\": \"115175725914\",\r\n    \"receptor\": \"AVC\",\r\n    \"nit\": 999999991,\r\n    \"account_openning_dt\": \"2025-01-30\"\r\n  },\r\n    \"person\": {\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1098606394\"\r\n  },\r\n  \"state\": \"SUSB\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2571,8 +3460,27 @@
 										"key": "X-CompanyId",
 										"value": "0023",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "r101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
 									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/directory-keys/:valueKey",
 									"protocol": "https",
@@ -2653,6 +3561,62 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "TimeStamps",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0023",
+										"type": "text"
+									},
+									{
+										"key": "X-IPAddr",
+										"value": "10.130.1.74",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"R107\": \"2023-10-05T14:48:00.000Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/timestamps/68da97069f6a2b96b76446b6",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BOCC",
+										"api",
+										"dict",
+										"timestamps",
+										"68da97069f6a2b96b76446b6"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -2678,11 +3642,21 @@
 										"key": "X-CompanyId",
 										"value": "0097",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "client",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
+									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Leghas112\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\",\r\n    \"receptor\": \"TFY\",\r\n    \"account_opening_date\": \"2025-09-22\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2728,6 +3702,16 @@
 										"key": "X-CompanyId",
 										"value": "0097",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "C110",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"url": {
@@ -2750,7 +3734,7 @@
 									"variable": [
 										{
 											"key": "valueKey  ",
-											"value": ""
+											"value": "Diego8801"
 										}
 									]
 								}
@@ -2776,11 +3760,21 @@
 										"key": "X-CompanyId",
 										"value": "0097",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas22\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
+									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Leghas112\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\",\r\n        \"receptor\": \"GOU\",\r\n        \"account_opening_date\": \"2025-09-22\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2807,7 +3801,7 @@
 									"variable": [
 										{
 											"key": "valueKey",
-											"value": ""
+											"value": "Leghas112"
 										}
 									]
 								}
@@ -2833,8 +3827,27 @@
 										"key": "X-CompanyId",
 										"value": "0097",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
 									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys/:valueKey",
 									"protocol": "https",
@@ -2855,7 +3868,7 @@
 									"variable": [
 										{
 											"key": "valueKey",
-											"value": ""
+											"value": "Legholas112"
 										}
 									]
 								}
@@ -2881,11 +3894,21 @@
 										"key": "X-CompanyId",
 										"value": "0097",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "r101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"state\": \"ACTV\"\r\n}",
+									"raw": "{\r\n    \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"payment_number\": \"115175725914\",\r\n    \"receptor\": \"AVC\",\r\n    \"nit\": 999999991,\r\n    \"account_openning_dt\": \"2025-01-30\"\r\n  },\r\n    \"person\": {\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1098606394\"\r\n  },\r\n  \"state\": \"SUSB\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2978,6 +4001,62 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "TimeStamps",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0097",
+										"type": "text"
+									},
+									{
+										"key": "X-IPAddr",
+										"value": "10.130.1.74",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"R107\": \"2023-10-05T14:48:00.000Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/timestamps/68da97069f6a2b96b76446b6",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"timestamps",
+										"68da97069f6a2b96b76446b6"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -3003,11 +4082,21 @@
 										"key": "X-CompanyId",
 										"value": "0052",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "r101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"state\": \"ACTV\"\r\n}",
+									"raw": "{\r\n    \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"payment_number\": \"115175725914\",\r\n    \"receptor\": \"GOU\",\r\n    \"nit\": 999999991,\r\n    \"account_openning_dt\": \"2025-01-30\"\r\n  },\r\n    \"person\": {\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1013676675\"\r\n  },\r\n  \"state\": \"ACTV\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3035,7 +4124,7 @@
 									"variable": [
 										{
 											"key": "valor llave",
-											"value": ""
+											"value": "3185861830"
 										}
 									]
 								}
@@ -3104,10 +4193,31 @@
 							"name": "Creacióin Llave",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "X-Channel",
+										"value": "MB",
+										"type": "text"
+									},
+									{
+										"key": "X-RqUID",
+										"value": "97566501",
+										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "r101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
+									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Daniel\",\r\n    \"second_name\": \"Fernando\",\r\n    \"first_surname\": \"Martinez\",\r\n    \"second_surname\": \"Martinez\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1013676678\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"@ATG791\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"3543287254\",\r\n    \"receptor\": \"GOU\",\r\n    \"account_opening_date\": \"2025-09-22\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba @ADTG791\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3115,7 +4225,7 @@
 									}
 								},
 								"url": {
-									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BAVV/api/dict/directory-keys?X-RqUID=2025052217465 &X-Channel=MB &X-CompanyId=0052",
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BAVV/api/dict/directory-keys",
 									"protocol": "https",
 									"host": [
 										"10",
@@ -3132,16 +4242,19 @@
 									],
 									"query": [
 										{
-											"key": "X-RqUID",
-											"value": "2025052217465 "
+											"key": "",
+											"value": "",
+											"disabled": true
 										},
 										{
-											"key": "X-Channel",
-											"value": "MB "
+											"key": "",
+											"value": "",
+											"disabled": true
 										},
 										{
-											"key": "X-CompanyId",
-											"value": "0052"
+											"key": "",
+											"value": "",
+											"disabled": true
 										}
 									]
 								}
@@ -3167,11 +4280,21 @@
 										"key": "X-CompanyId",
 										"value": "0052",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas22\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
+									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas22\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\",\r\n        \"receptor\": \"GOU\",\r\n        \"account_opening_date\": \"2025-09-22\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3179,7 +4302,7 @@
 									}
 								},
 								"url": {
-									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BAVV/api/dict/directory-keys/:valueKey?X-RqUID=2025052217465 &X-Channel=MB &X-CompanyId=0052",
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BAVV/api/dict/directory-keys/:valueKey",
 									"protocol": "https",
 									"host": [
 										"10",
@@ -3197,16 +4320,19 @@
 									],
 									"query": [
 										{
-											"key": "X-RqUID",
-											"value": "2025052217465 "
+											"key": "",
+											"value": "",
+											"disabled": true
 										},
 										{
-											"key": "X-Channel",
-											"value": "MB "
+											"key": "",
+											"value": "",
+											"disabled": true
 										},
 										{
-											"key": "X-CompanyId",
-											"value": "0052"
+											"key": "",
+											"value": "",
+											"disabled": true
 										}
 									],
 									"variable": [
@@ -3325,6 +4451,62 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "TimeStamps",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0052",
+										"type": "text"
+									},
+									{
+										"key": "X-IPAddr",
+										"value": "10.130.1.74",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"R107\": \"2023-10-05T14:48:00.000Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BAVV/api/dict/timestamps/68da97069f6a2b96b76446b6",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BAVV",
+										"api",
+										"dict",
+										"timestamps",
+										"68da97069f6a2b96b76446b6"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				}
@@ -3403,11 +4585,21 @@
 										"key": "X-CompanyId",
 										"value": "0001",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "client",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
+									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Leghol1\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\",\r\n    \"receptor\": \"GOU\",\r\n    \"account_opening_date\": \"2025-09-22\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3453,11 +4645,21 @@
 										"key": "X-CompanyId",
 										"value": "0001",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas22\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
+									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas22\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\",\r\n        \"receptor\": \"GOU\",\r\n        \"account_opening_date\": \"2025-09-22\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3510,11 +4712,21 @@
 										"key": "X-CompanyId",
 										"value": "0001",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"state\": \"ACTV\"\r\n}",
+									"raw": "{\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"payment_number\": \"115175725914\",\r\n    \"receptor\": \"AVC\",\r\n    \"nit\": 999999991,\r\n    \"account_openning_dt\": \"2025-01-30\"\r\n  },\r\n  \"person\": {\r\n    \"document_type\": \"CC\",\r\n    \"document_value\": \"string\"\r\n  },\r\n  \"state\": \"ACTV\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3568,6 +4780,16 @@
 										"key": "X-CompanyId",
 										"value": "0001",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"url": {
@@ -3592,6 +4814,121 @@
 											"key": "valueKey",
 											"value": ""
 										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta lista de llaves",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0001",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys?page=1&size=100&document_type=CC&document_number=1013676675",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "100"
+										},
+										{
+											"key": "document_type",
+											"value": "CC"
+										},
+										{
+											"key": "document_number",
+											"value": "1013676675"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TimeStamps",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0001",
+										"type": "text"
+									},
+									{
+										"key": "X-IPAddr",
+										"value": "10.130.1.74",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"R107\": \"2023-10-05T14:48:00.000Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/timestamps/68da97069f6a2b96b76446b6",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"timestamps",
+										"68da97069f6a2b96b76446b6"
 									]
 								}
 							},
@@ -3621,11 +4958,21 @@
 										"key": "X-CompanyId",
 										"value": "0002",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas22\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
+									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas22\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\",\r\n        \"receptor\": \"GOU\",\r\n        \"account_opening_date\": \"2025-09-22\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3677,6 +5024,16 @@
 									{
 										"key": "X-CompanyId",
 										"value": "0002",
+										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "r101",
+										"value": "2025-08-21T11:05:31.966Z",
 										"type": "text"
 									}
 								],
@@ -3774,11 +5131,21 @@
 										"key": "X-CompanyId",
 										"value": "0002",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"state\": \"ACTV\"\r\n}",
+									"raw": "{\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"payment_number\": \"115175725914\",\r\n    \"receptor\": \"AVC\",\r\n    \"nit\": 999999991,\r\n    \"account_openning_dt\": \"2025-01-30\"\r\n  },\r\n  \"person\": {\r\n    \"document_type\": \"CC\",\r\n    \"document_value\": \"string\"\r\n  },\r\n  \"state\": \"ACTV\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3832,11 +5199,21 @@
 										"key": "X-CompanyId",
 										"value": "0002",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
+									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Les11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\",\r\n    \"receptor\": \"GOU\",\r\n    \"account_opening_date\": \"2025-09-22\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3858,6 +5235,121 @@
 										"api",
 										"dict",
 										"directory-keys"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta lista de llaves",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0002",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BPOP/api/dict/directory-keys?page=1&size=100&document_type=CC&document_number=1013676675",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BPOP",
+										"api",
+										"dict",
+										"directory-keys"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "100"
+										},
+										{
+											"key": "document_type",
+											"value": "CC"
+										},
+										{
+											"key": "document_number",
+											"value": "1013676675"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TimeStamps",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0002",
+										"type": "text"
+									},
+									{
+										"key": "X-IPAddr",
+										"value": "10.130.1.74",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"R107\": \"2023-10-05T14:48:00.000Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BPOP/api/dict/timestamps/68da97069f6a2b96b76446b6",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BPOP",
+										"api",
+										"dict",
+										"timestamps",
+										"68da97069f6a2b96b76446b6"
 									]
 								}
 							},
@@ -3887,11 +5379,21 @@
 										"key": "X-CompanyId",
 										"value": "0023",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
+									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\",\r\n    \"receptor\": \"GOU\",\r\n    \"account_opening_date\": \"2025-09-22\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3985,11 +5487,21 @@
 										"key": "X-CompanyId",
 										"value": "0023",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "client",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas22\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
+									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas22\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\",\r\n        \"receptor\": \"GOU\",\r\n        \"account_opening_date\": \"2025-09-22\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -4042,11 +5554,21 @@
 										"key": "X-CompanyId",
 										"value": "0023",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "r101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"state\": \"ACTV\"\r\n}",
+									"raw": "{\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"payment_number\": \"115175725914\",\r\n    \"receptor\": \"AVC\",\r\n    \"nit\": 999999991,\r\n    \"account_openning_dt\": \"2025-01-30\"\r\n  },\r\n  \"person\": {\r\n    \"document_type\": \"CC\",\r\n    \"document_value\": \"string\"\r\n  },\r\n  \"state\": \"ACTV\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -4100,6 +5622,16 @@
 										"key": "X-CompanyId",
 										"value": "0023",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"url": {
@@ -4128,6 +5660,121 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Consulta lista de llaves",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0023",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/directory-keys?page=1&size=100&document_type=CC&document_number=1013676675",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BOCC",
+										"api",
+										"dict",
+										"directory-keys"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "100"
+										},
+										{
+											"key": "document_type",
+											"value": "CC"
+										},
+										{
+											"key": "document_number",
+											"value": "1013676675"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TimeStamps",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0023",
+										"type": "text"
+									},
+									{
+										"key": "X-IPAddr",
+										"value": "10.130.1.74",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"R107\": \"2023-10-05T14:48:00.000Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BOCC/api/dict/timestamps/68da97069f6a2b96b76446b6",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BOCC",
+										"api",
+										"dict",
+										"timestamps",
+										"68da97069f6a2b96b76446b6"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -4152,6 +5799,16 @@
 									{
 										"key": "X-CompanyId",
 										"value": "0097",
+										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
 										"type": "text"
 									}
 								],
@@ -4201,11 +5858,21 @@
 										"key": "X-CompanyId",
 										"value": "0097",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "r101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"state\": \"ACTV\"\r\n}",
+									"raw": "{\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"payment_number\": \"115175725914\",\r\n    \"receptor\": \"AVC\",\r\n    \"nit\": 999999991,\r\n    \"account_openning_dt\": \"2025-01-30\"\r\n  },\r\n  \"person\": {\r\n    \"document_type\": \"CC\",\r\n    \"document_value\": \"string\"\r\n  },\r\n  \"state\": \"ACTV\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -4307,11 +5974,21 @@
 										"key": "X-CompanyId",
 										"value": "0097",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
+									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\",\r\n    \"receptor\": \"GOU\",\r\n    \"account_opening_date\": \"2025-09-22\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -4357,11 +6034,21 @@
 										"key": "X-CompanyId",
 										"value": "0097",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas22\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
+									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas22\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\",\r\n        \"receptor\": \"GOU\",\r\n        \"account_opening_date\": \"2025-09-22\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -4394,6 +6081,121 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Consulta lista de llaves",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0097",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/directory-keys?page=1&size=100&document_type=CC&document_number=1013676675",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"directory-keys"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "100"
+										},
+										{
+											"key": "document_type",
+											"value": "CC"
+										},
+										{
+											"key": "document_number",
+											"value": "1013676675"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TimeStamps",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB ",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0097",
+										"type": "text"
+									},
+									{
+										"key": "X-IPAddr",
+										"value": "10.130.1.74",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"R107\": \"2023-10-05T14:48:00.000Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BBOG/api/dict/timestamps/68da97069f6a2b96b76446b6",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BBOG",
+										"api",
+										"dict",
+										"timestamps",
+										"68da97069f6a2b96b76446b6"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -4419,11 +6221,27 @@
 										"key": "X-CompanyId",
 										"value": "0052",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "r101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"state\": \"ACTV\"\r\n}",
+									"raw": "{\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"payment_number\": \"115175725914\",\r\n    \"receptor\": \"AVC\",\r\n    \"nit\": 999999991,\r\n    \"account_openning_dt\": \"2025-01-30\"\r\n  },\r\n  \"person\": {\r\n    \"document_type\": \"CC\",\r\n    \"document_value\": \"string\"\r\n  },\r\n  \"state\": \"ACTV\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -4525,11 +6343,21 @@
 										"key": "X-CompanyId",
 										"value": "0052",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "r101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
+									"raw": "{\r\n  \"person\": {\r\n    \"first_name\": \"Jonhatan\",\r\n    \"second_name\": \"Gilbert\",\r\n    \"first_surname\": \"Romero\",\r\n    \"second_surname\": \"Caldeth\",\r\n    \"type_person\": \"N\",\r\n    \"document_type\": \"CC\",\r\n    \"document_number\": \"1033707198\"\r\n  },\r\n  \"key\": {\r\n    \"key_type\": \"NRIC\",\r\n    \"value_key\": \"Legholas11\"\r\n  },\r\n  \"payment_method\": {\r\n    \"type_payment_acc\": \"CAHO\",\r\n    \"account_number\": \"312312312312312\",\r\n    \"receptor\": \"GOU\",\r\n    \"account_opening_date\": \"2025-09-22\"\r\n  },\r\n  \"description\": \"creación de mi llave de prueba Legholas22\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -4537,7 +6365,7 @@
 									}
 								},
 								"url": {
-									"raw": "https://10.129.50.33:5072/DirectoryIntegrationGouPAY_BAVV/api/dict/directory-keys?X-RqUID=2025052217465 &X-Channel=MB &X-CompanyId=0052",
+									"raw": "https://10.129.50.33:5072/DirectoryIntegrationGouPAY_BAVV/api/dict/directory-keys",
 									"protocol": "https",
 									"host": [
 										"10",
@@ -4554,16 +6382,14 @@
 									],
 									"query": [
 										{
-											"key": "X-RqUID",
-											"value": "2025052217465 "
+											"key": "",
+											"value": "",
+											"disabled": true
 										},
 										{
-											"key": "X-Channel",
-											"value": "MB "
-										},
-										{
-											"key": "X-CompanyId",
-											"value": "0052"
+											"key": "",
+											"value": "",
+											"disabled": true
 										}
 									]
 								}
@@ -4589,11 +6415,21 @@
 										"key": "X-CompanyId",
 										"value": "0052",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "R101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas22\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
+									"raw": "{\r\n    \"person\": {\r\n        \"first_name\": \"Felicia1\",\r\n        \"second_name\": \"E.\",\r\n        \"first_surname\": \"Blanco1\",\r\n        \"second_surname\": \"Holjund1\",\r\n        \"type_person\": \"N\",\r\n        \"document_type\": \"CC\",\r\n        \"document_number\": \"34556788\"\r\n    },\r\n    \"key\": {\r\n        \"key_type\": \"NRIC\",\r\n        \"value_key\": \"Legholas22\"\r\n    },\r\n    \"payment_method\": {\r\n        \"type_payment_acc\": \"CAHO\",\r\n        \"account_number\": \"6666666666\",\r\n        \"receptor\": \"GOU\",\r\n        \"account_opening_date\": \"2025-09-22\"\r\n    },\r\n    \"description\": \"Número de cedula.\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -4601,7 +6437,7 @@
 									}
 								},
 								"url": {
-									"raw": "https://10.129.50.33:5072/DirectoryIntegrationGouPAY_BAVV/api/dict/directory-keys/:valueKey?X-RqUID=2025052217465 &X-Channel=MB &X-CompanyId=0052",
+									"raw": "https://10.129.50.33:5072/DirectoryIntegrationGouPAY_BAVV/api/dict/directory-keys/:valueKey",
 									"protocol": "https",
 									"host": [
 										"10",
@@ -4616,20 +6452,6 @@
 										"dict",
 										"directory-keys",
 										":valueKey"
-									],
-									"query": [
-										{
-											"key": "X-RqUID",
-											"value": "2025052217465 "
-										},
-										{
-											"key": "X-Channel",
-											"value": "MB "
-										},
-										{
-											"key": "X-CompanyId",
-											"value": "0052"
-										}
 									],
 									"variable": [
 										{
@@ -4660,6 +6482,16 @@
 										"key": "X-CompanyId",
 										"value": "0052",
 										"type": "text"
+									},
+									{
+										"key": "user-operation",
+										"value": "participant",
+										"type": "text"
+									},
+									{
+										"key": "r101",
+										"value": "2025-08-21T11:05:31.966Z",
+										"type": "text"
 									}
 								],
 								"url": {
@@ -4684,6 +6516,121 @@
 											"key": "valueKey",
 											"value": ""
 										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta lista de llaves",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465 ",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0052",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://10.130.2.131:5072/DirectoryIntegrationGouPAY_BAVV/api/dict/directory-keys?page=1&size=100&document_type=CC&document_number=1013676675",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"2",
+										"131"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BAVV",
+										"api",
+										"dict",
+										"directory-keys"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "100"
+										},
+										{
+											"key": "document_type",
+											"value": "CC"
+										},
+										{
+											"key": "document_number",
+											"value": "1013676675"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TimeStamps",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-RqUID",
+										"value": "2025052217465",
+										"type": "text"
+									},
+									{
+										"key": "X-Channel",
+										"value": "MB",
+										"type": "text"
+									},
+									{
+										"key": "X-CompanyId",
+										"value": "0052",
+										"type": "text"
+									},
+									{
+										"key": "X-IPAddr",
+										"value": "10.130.1.74",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"R107\": \"2023-10-05T14:48:00.000Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://10.130.1.74:5072/DirectoryIntegrationGouPAY_BAVV/api/dict/timestamps/68da97069f6a2b96b76446b6",
+									"protocol": "https",
+									"host": [
+										"10",
+										"130",
+										"1",
+										"74"
+									],
+									"port": "5072",
+									"path": [
+										"DirectoryIntegrationGouPAY_BAVV",
+										"api",
+										"dict",
+										"timestamps",
+										"68da97069f6a2b96b76446b6"
 									]
 								}
 							},

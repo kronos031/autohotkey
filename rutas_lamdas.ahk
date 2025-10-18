@@ -5,34 +5,34 @@ global selectedEnv := "pt"
 global selectedPath := ""
 
 ; Crear GUI moderna y compacta
-MyGui := Gui("+AlwaysOnTop -Caption +Border", "Menú de Opciones")
+MyGui := Gui("  -Caption +Border", "Menú de Opciones")
 MyGui.BackColor := "0x1A1A2E"
 MyGui.SetFont("s10 c0xEEEEEE", "Segoe UI")
 
 ; Header visual
 MyGui.Add("Text", "x0 y0 w440 h60 Background0x0F3460 Center 0x200")
-MyGui.Add("Text", "x0 y0 w440 h60 BackgroundTrans Center 0x200", "⚡ AWS DEPLOYMENT").SetFont("s16 Bold c0xE94560")
+MyGui.Add("Text", "x80  y0 w440 h60 BackgroundTrans   0x200", "⚡ AWS").SetFont("s16 Bold c0xE94560")
 
 ; Panel de configuración
-MyGui.Add("Text", "x15 y70 w410 h100 Background0x16213E")
+MyGui.Add("Text", "x15 y70 w225 h100 Background0x16213E")
 
 ; Ambiente
 MyGui.Add("Text", "x30 y78 w120 h25 BackgroundTrans", "🌐 Ambiente:").SetFont("s10 Bold c0x4ECCA3")
-ddlEnvironment := MyGui.Add("DropDownList", "x150 y78 w230 Background0x0F3460", ["pt", "qa", "prd"])
+ddlEnvironment := MyGui.Add("DropDownList", "x150 y78 w80 Background0x0F3460", ["pt", "qa", "prd"])
 ddlEnvironment.Choose(1)
 ddlEnvironment.OnEvent("Change", (*) => UpdateEnvironment())
 
 ; Ruta
 MyGui.Add("Text", "x30 y115 w120 h25 BackgroundTrans", "📁 Ruta Base:").SetFont("s10 Bold c0x4ECCA3")
-edtPath := MyGui.Add("Edit", "x150 y115 w200 h25 Background0x0F3460 c0xEEEEEE", "D:\Compilaciones\")
-btnBrowse := MyGui.Add("Button", "x355 y115 w35 h25 Background0xE94560 c0xFFFFFF", "...")
+edtPath := MyGui.Add("Edit", "x30 y145 w200 h25 Background0x0F3460 c0xEEEEEE", "D:\Compilaciones\")
+btnBrowse := MyGui.Add("Button", "x150 y115 w80  h25 Background0xE94560 c0xFFFFFF", "...")
 btnBrowse.OnEvent("Click", (*) => BrowseFolder())
 
 ; Línea separadora
-MyGui.Add("Text", "x20 y185 w400 h1 Background0x4ECCA3")
+MyGui.Add("Text", "x20 y185 w220 h1 Background0x4ECCA3")
 
 ; Título de acciones
-MyGui.Add("Text", "x0 y195 w440 h30 BackgroundTrans Center", "ACCIONES").SetFont("s11 Bold c0x4ECCA3")
+MyGui.Add("Text", "x100 y195 w440 h30 BackgroundTrans  ", "ACCIONES").SetFont("s11 Bold c0x4ECCA3")
 
 ; Botones de acción compactos
 btnY := 230, btnH := 40
@@ -40,19 +40,17 @@ CreateButton("📋 CONSULTA", "CONSULTA", btnY)
 CreateButton("✏️ MODIFICAR", "MOD", btnY += btnH + 8)
 CreateButton("❌ CANCELAR", "CANCEL", btnY += btnH + 8)
 CreateButton("➕ CREAR", "CREATE", btnY += btnH + 8)
+CreateButton("➕ ACTTIME", "ACTTIME", btnY += btnH + 8)
 CreateButton("📅 TIMELINE", "TIMELINE", btnY += btnH + 8)
 
 ; Separador antes del cierre
-MyGui.Add("Text", "x20 y" btnY+btnH+15 " w400 h1 Background0x4ECCA3")
+MyGui.Add("Text", "x20 y" btnY+btnH+15 " w220 h1 Background0x4ECCA3")
 
 ; Botón cerrar
-btnClose := MyGui.Add("Button", "x120 y" btnY+btnH+25 " w200 h35 Background0xE94560 c0xFFFFFF", "🚪 CERRAR")
+btnClose := MyGui.Add("Button", "x40 y" btnY+btnH+25 " w180 h35 Background0xE94560 c0xFFFFFF", "🚪 CERRAR")
 btnClose.SetFont("s10 Bold")
 btnClose.OnEvent("Click", (*) => MyGui.Hide())
-
-; Footer
-MyGui.Add("Text", "x0 y" btnY+btnH+70 " w440 h25 Background0x0F3460 Center 0x200", "Ctrl+Shift+M para abrir").SetFont("s8 c0xAAAAAA")
-
+  
 ; Estilo para todos los botones de acción
 for ctrl in MyGui {
     if (ctrl.Type = "Button" && ctrl != btnBrowse && ctrl != btnClose)
@@ -63,7 +61,7 @@ btnBrowse.SetFont("s9")
 ; Función para crear botones
 CreateButton(text, option, yPos) {
     global MyGui
-    btn := MyGui.Add("Button", "x40 y" yPos " w360 h40 Background0x0F3460 c0xFFFFFF", text)
+    btn := MyGui.Add("Button", "x40 y" yPos " w180 h40 Background0x0F3460 c0xFFFFFF", text)
     btn.OnEvent("Click", (*) => ExecuteAction(option))
     return btn
 }
@@ -105,8 +103,9 @@ GetConfig(option) {
     "CONSULTA", ["010", "inquiry", ""],
     "MOD", ["08", "val-mod", ""],
     "CANCEL", ["09", "val-cancel", ""],
-    "CREATE", ["07", "val-create", ""],
-    "TIMELINE", ["12", "save-time-line", ""]
+    "CREATE", ["07", "val-create", ""], 
+	"ACTTIME", ["011", "activate-time-line", ""],
+    "TIMELINE", ["012", "save-time-line", ""]
 )
     cfg := suffixes[option]
     config["lambda"] := cfg[1]
@@ -121,6 +120,21 @@ GetConfig(option) {
 
 ; Ejecutar acciones
 ExecuteAction(option) {
+  global selectedPath
+    selectedPath := edtPath.Value
+    
+    ; Validar que la ruta no esté vacía
+    if (selectedPath = "" || selectedPath = "D:\Compilaciones\") {
+        MsgBox("⚠️ Debes seleccionar una ruta válida antes de continuar.`n`nUsa el botón [...] para seleccionar la carpeta.", "Ruta Requerida", "Icon! OK")
+        return
+    }
+    
+    ; Validar que la ruta exista
+    if (!DirExist(selectedPath)) {
+        result := MsgBox("⚠️ La ruta no existe:`n" selectedPath "`n`n¿Deseas continuar de todas formas?", "Ruta No Encontrada", "YesNo Icon!")
+        if (result = "No")
+            return
+    }
     MyGui.Hide()
     cfg := GetConfig(option)
     bancos := ["BAVV", "BBOG", "BOCC", "BPOP", "DALE"]
@@ -141,35 +155,41 @@ ExecuteAction(option) {
         lambdaCommands .= (A_Index < bancos.Length ? '; ' : "")
     }
 
-    fullCommand := s3Commands . lambdaCommands
-
+   ; Preguntar si también quiere los comandos Lambda
     mensaje := "═════════════════════════`n"
     mensaje .= "   CONFIG: " option "`n"
     mensaje .= "═════════════════════════`n`n"
     mensaje .= "⚡ Lambda: " cfg["lambda"] "`n"
     mensaje .= "🔧 Servicio: " cfg["service"] "`n"
     mensaje .= "🌐 Entorno: " cfg["environment"] "`n"
-    mensaje .= "📂 Ruta: " cfg["ruta"] "`n`n"
-    mensaje .= "¿Copiar comandos al portapapeles?"
+    mensaje .= "📂 Ruta: " cfg["ruta"] "`n`n" 
+    mensaje .= "¿Copiar comandos de Actualizar Lambda?"
 
-    result := MsgBox(mensaje, "🚀 Configuración - " option, "YesNo Icon?")
+    result := MsgBox(mensaje, "🚀 Actualizar Lambdas - " option, "YesNo Icon?")
 
     if (result = "Yes") {
+        fullCommand := s3Commands . lambdaCommands
         A_Clipboard := fullCommand
         tempFile := A_Temp . "\aws_deploy_" option ".ps1"
         try FileDelete(tempFile)
         try FileAppend(fullCommand, tempFile, "UTF-8") 
         rutaBaseEscaped := StrReplace(selectedPath, "'", "''") 
         commandEscaped := StrReplace(fullCommand, '"', '`"')
-        psCommand := "pwsh.exe -NoExit -Command `"cd '" . rutaBaseEscaped . "'; Set-Clipboard -Value '" . commandEscaped . "'; Write-Host '✓ PowerShell iniciado' -ForegroundColor Cyan; Write-Host '✓ Comandos copiados - Ctrl+V' -ForegroundColor Green`""
+        psCommand := "pwsh.exe -NoExit -Command `"cd '" . rutaBaseEscaped . "'; Set-Clipboard -Value '" . commandEscaped . "'; Write-Host '✓ PowerShell iniciado' -ForegroundColor Cyan; Write-Host '✓ Comandos S3 + UPDATE-FUNCTION  - Ctrl+V' -ForegroundColor Green`""
         Run(psCommand)
     } else {
-        A_Clipboard := fullCommand
-        ToolTip("✓ Comandos copiados")
-        SetTimer(() => ToolTip(), -2000)
+        fullCommand := s3Commands
+		A_Clipboard := fullCommand 
+		  tempFile := A_Temp . "\aws_deploy_" option ".ps1"
+        try FileDelete(tempFile)
+        try FileAppend(fullCommand, tempFile, "UTF-8") 
+        rutaBaseEscaped := StrReplace(selectedPath, "'", "''") 
+        commandEscaped := StrReplace(fullCommand, '"', '`"')
+        psCommand := "pwsh.exe -NoExit -Command `"cd '" . rutaBaseEscaped . "'; Set-Clipboard -Value '" . commandEscaped . "'; Write-Host '✓ PowerShell iniciado' -ForegroundColor Cyan; Write-Host '✓ Comandos S3  - Ctrl+V' -ForegroundColor Green`""
+        Run(psCommand)
     }
 }
-MyGui.Show("w440 h580")
+MyGui.Show("w270 h590")
 ; Atajo teclado
 ;^+m:: {
  ;   MyGui.Show("w440 h580")

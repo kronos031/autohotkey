@@ -1,0 +1,400 @@
+# Comparador de Listas Hits vs KeysResponse (Java)
+
+## Código Java Completo
+
+```java
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class ListComparator {
+    
+    // Clase para resultados de comparación
+    public static class ComparisonResult {
+        public List<MatchGroup> matches = new ArrayList<>();
+        public List<HitGroup> onlyInHits = new ArrayList<>();
+        public List<KeyGroup> onlyInKeys = new ArrayList<>();
+        
+        public static class MatchGroup {
+            public String docType;
+            public String docNumber;
+            public List<HashMap<String, Object>> hitRecords;
+            public List<Key> keyRecords;
+            
+            public MatchGroup(String docType, String docNumber, 
+                            List<HashMap<String, Object>> hitRecords, 
+                            List<Key> keyRecords) {
+                this.docType = docType;
+                this.docNumber = docNumber;
+                this.hitRecords = hitRecords;
+                this.keyRecords = keyRecords;
+            }
+            
+            public String getDocKey() {
+                return docType + "-" + docNumber;
+            }
+        }
+        
+        public static class HitGroup {
+            public String docType;
+            public String docNumber;
+            public List<HashMap<String, Object>> records;
+            
+            public HitGroup(String docType, String docNumber, List<HashMap<String, Object>> records) {
+                this.docType = docType;
+                this.docNumber = docNumber;
+                this.records = records;
+            }
+            
+            public String getDocKey() {
+                return docType + "-" + docNumber;
+            }
+        }
+        
+        public static class KeyGroup {
+            public String docType;
+            public String docNumber;
+            public List<Key> records;
+            
+            public KeyGroup(String docType, String docNumber, List<Key> records) {
+                this.docType = docType;
+                this.docNumber = docNumber;
+                this.records = records;
+            }
+            
+            public String getDocKey() {
+                return docType + "-" + docNumber;
+            }
+        }
+    }
+    
+    /**
+     * Extrae tipo y número de documento de un Hit<HashMap>
+     */
+    private static String[] extractDocumentFromHit(HashMap<String, Object> hit) {
+        try {
+            HashMap<String, Object> custInf = (HashMap<String, Object>) hit.get("custInf");
+            if (custInf != null) {
+                HashMap<String, Object> custIdent = (HashMap<String, Object>) custInf.get("custIdent");
+                if (custIdent != null) {
+                    String type = (String) custIdent.get("custIdentType");
+                    String number = (String) custIdent.get("custIdentNum");
+                    return new String[]{type, number};
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Error extrayendo documento del hit: " + e.getMessage());
+        }
+        return null;
+    }
+    
+    /**
+     * Compara las listas de Hits y KeysResponse filtrando por tipo y número de documento
+     */
+    public static ComparisonResult compareLists(List<Hit<HashMap>> hits, KeysResponse keysResponse) {
+        ComparisonResult result = new ComparisonResult();
+        
+        // Extraer los HashMaps de los Hits
+        List<HashMap<String, Object>> hitMaps = hits.stream()
+                .map(Hit::getSource)
+                .collect(Collectors.toList());
+        
+        // Agrupar hits por tipo y número de documento
+        Map<String, List<HashMap<String, Object>>> hitsMap = new HashMap<>();
+        for (HashMap<String, Object> hit : hitMaps) {
+            String[] doc = extractDocumentFromHit(hit);
+            if (doc != null && doc[0] != null && doc[1] != null) {
+                String key = doc[0] + "-" + doc[1];
+                hitsMap.computeIfAbsent(key, k -> new ArrayList<>()).add(hit);
+            }
+        }
+        
+        // Agrupar keys por tipo y número de documento
+        Map<String, List<Key>> keysMap = new HashMap<>();
+        if (keysResponse != null && keysResponse.getKeys() != null) {
+            for (Key key : keysResponse.getKeys()) {
+                if (key.getIdentification() != null) {
+                    String type = key.getIdentification().getType();
+                    String number = key.getIdentification().getNumber();
+                    if (type != null && number != null) {
+                        String docKey = type + "-" + number;
+                        keysMap.computeIfAbsent(docKey, k -> new ArrayList<>()).add(key);
+                    }
+                }
+            }
+        }
+        
+        // Encontrar coincidencias y diferencias
+        Set<String> allDocKeys = new HashSet<>();
+        allDocKeys.addAll(hitsMap.keySet());
+        allDocKeys.addAll(keysMap.keySet());
+        
+        for (String docKey : allDocKeys) {
+            String[] parts = docKey.split("-", 2);
+            String docType = parts[0];
+            String docNumber = parts[1];
+            
+            boolean inHits = hitsMap.containsKey(docKey);
+            boolean inKeys = keysMap.containsKey(docKey);
+            
+            if (inHits && inKeys) {
+                // Coincidencia
+                result.matches.add(new ComparisonResult.MatchGroup(
+                        docType,
+                        docNumber,
+                        hitsMap.get(docKey),
+                        keysMap.get(docKey)
+                ));
+            } else if (inHits) {
+                // Solo en Hits
+                result.onlyInHits.add(new ComparisonResult.HitGroup(
+                        docType,
+                        docNumber,
+                        hitsMap.get(docKey)
+                ));
+            } else {
+                // Solo en Keys
+                result.onlyInKeys.add(new ComparisonResult.KeyGroup(
+                        docType,
+                        docNumber,
+                        keysMap.get(docKey)
+                ));
+            }
+        }
+        
+        return result;
+    }
+    
+    /**
+     * Obtiene información legible de un hit
+     */
+    private static String getHitInfo(HashMap<String, Object> hit) {
+        try {
+            HashMap<String, Object> custInf = (HashMap<String, Object>) hit.get("custInf");
+            String firstName = custInf != null ? (String) custInf.get("custFirstName") : "N/A";
+            String lastName = custInf != null ? (String) custInf.get("custFirstLastName") : "N/A";
+            String alias = (String) hit.get("signerAlias");
+            String status = (String) hit.get("statusKey");
+            
+            HashMap<String, Object> acctInfo = (HashMap<String, Object>) hit.get("acctInfo");
+            String acctId = acctInfo != null ? (String) acctInfo.get("acctId") : "N/A";
+            
+            return String.format("Nombre: %s %s, Alias: %s, Estado: %s, Cuenta: %s",
+                    firstName, lastName, alias, status, acctId);
+        } catch (Exception e) {
+            return "Error al extraer información";
+        }
+    }
+    
+    /**
+     * Obtiene información legible de una Key
+     */
+    private static String getKeyInfo(Key key) {
+        String name = key.getCustomer() != null ? key.getCustomer().getName() : "N/A";
+        String keyValue = key.getKey() != null ? key.getKey().getValue() : "N/A";
+        String keyType = key.getKey() != null ? key.getKey().getType() : "N/A";
+        String keyState = key.getKey() != null ? key.getKey().getKeyState() : "N/A";
+        String paymentNumber = key.getPaymentMethod() != null ? key.getPaymentMethod().getNumber() : "N/A";
+        
+        return String.format("Nombre: %s, Key: %s (%s), Estado: %s, Cuenta: %s",
+                name, keyValue, keyType, keyState, paymentNumber);
+    }
+    
+    /**
+     * Imprime los resultados de la comparación
+     */
+    public static void printResults(ComparisonResult result) {
+        System.out.println("================================================================================");
+        System.out.println("RESULTADOS DE LA COMPARACIÓN");
+        System.out.println("================================================================================");
+        System.out.println();
+        
+        // Coincidencias
+        System.out.println("? COINCIDENCIAS: " + result.matches.size());
+        System.out.println("--------------------------------------------------------------------------------");
+        for (ComparisonResult.MatchGroup match : result.matches) {
+            System.out.println("\nDocumento: " + match.getDocKey());
+            System.out.println("  En HITS (" + match.hitRecords.size() + " registros):");
+            for (HashMap<String, Object> hit : match.hitRecords) {
+                System.out.println("    • " + getHitInfo(hit));
+            }
+            System.out.println("  En KEYS (" + match.keyRecords.size() + " registros):");
+            for (Key key : match.keyRecords) {
+                System.out.println("    • " + getKeyInfo(key));
+            }
+        }
+        
+        // Solo en Hits
+        System.out.println("\n================================================================================");
+        System.out.println("? SOLO EN HITS: " + result.onlyInHits.size());
+        System.out.println("--------------------------------------------------------------------------------");
+        for (ComparisonResult.HitGroup hitGroup : result.onlyInHits) {
+            System.out.println("\nDocumento: " + hitGroup.getDocKey());
+            for (HashMap<String, Object> hit : hitGroup.records) {
+                System.out.println("  • " + getHitInfo(hit));
+            }
+        }
+        
+        // Solo en Keys
+        System.out.println("\n================================================================================");
+        System.out.println("? SOLO EN KEYS: " + result.onlyInKeys.size());
+        System.out.println("--------------------------------------------------------------------------------");
+        for (ComparisonResult.KeyGroup keyGroup : result.onlyInKeys) {
+            System.out.println("\nDocumento: " + keyGroup.getDocKey());
+            for (Key key : keyGroup.records) {
+                System.out.println("  • " + getKeyInfo(key));
+            }
+        }
+        
+        // Resumen
+        System.out.println("\n================================================================================");
+        System.out.println("RESUMEN");
+        System.out.println("--------------------------------------------------------------------------------");
+        System.out.println("Total Coincidencias: " + result.matches.size());
+        System.out.println("Total Solo en Hits: " + result.onlyInHits.size());
+        System.out.println("Total Solo en Keys: " + result.onlyInKeys.size());
+        System.out.println("Total Documentos Únicos: " + 
+            (result.matches.size() + result.onlyInHits.size() + result.onlyInKeys.size()));
+        System.out.println("================================================================================");
+    }
+    
+    // Ejemplo de uso
+    public static void main(String[] args) {
+        // Supongamos que tienes estos objetos ya cargados
+        List<Hit<HashMap>> hits = loadHitsFromElasticsearch();
+        KeysResponse keysResponse = loadKeysFromRebean();
+        
+        // Comparar listas
+        ComparisonResult result = compareLists(hits, keysResponse);
+        
+        // Imprimir resultados
+        printResults(result);
+    }
+    
+    // Métodos auxiliares (debes implementarlos según tu fuente de datos)
+    private static List<Hit<HashMap>> loadHitsFromElasticsearch() {
+        // Tu implementación aquí
+        return new ArrayList<>();
+    }
+    
+    private static KeysResponse loadKeysFromRebean() {
+        // Tu implementación aquí
+        return new KeysResponse();
+    }
+}
+```
+
+## Clases auxiliares requeridas
+
+Asegúrate de tener estas clases en tu proyecto (o ajústalas según tu implementación):
+
+```java
+// Clase Hit de Elasticsearch
+public class Hit<T> {
+    private T source;
+    
+    public T getSource() {
+        return source;
+    }
+    
+    public void setSource(T source) {
+        this.source = source;
+    }
+}
+
+// Clase KeysResponse
+public class KeysResponse {
+    private List<Key> keys;
+    
+    public List<Key> getKeys() {
+        return keys;
+    }
+    
+    public void setKeys(List<Key> keys) {
+        this.keys = keys;
+    }
+}
+
+// Clase Key
+public class Key {
+    private KeyData key;
+    private Identification identification;
+    private Customer customer;
+    private PaymentMethod paymentMethod;
+    
+    // Getters y setters
+    public KeyData getKey() { return key; }
+    public void setKey(KeyData key) { this.key = key; }
+    
+    public Identification getIdentification() { return identification; }
+    public void setIdentification(Identification identification) { this.identification = identification; }
+    
+    public Customer getCustomer() { return customer; }
+    public void setCustomer(Customer customer) { this.customer = customer; }
+    
+    public PaymentMethod getPaymentMethod() { return paymentMethod; }
+    public void setPaymentMethod(PaymentMethod paymentMethod) { this.paymentMethod = paymentMethod; }
+    
+    // Clases internas
+    public static class KeyData {
+        private String type;
+        private String value;
+        private String keyState;
+        
+        public String getType() { return type; }
+        public void setType(String type) { this.type = type; }
+        
+        public String getValue() { return value; }
+        public void setValue(String value) { this.value = value; }
+        
+        public String getKeyState() { return keyState; }
+        public void setKeyState(String keyState) { this.keyState = keyState; }
+    }
+    
+    public static class Identification {
+        private String type;
+        private String number;
+        
+        public String getType() { return type; }
+        public void setType(String type) { this.type = type; }
+        
+        public String getNumber() { return number; }
+        public void setNumber(String number) { this.number = number; }
+    }
+    
+    public static class Customer {
+        private String name;
+        
+        public String getName() { return name; }
+        public void setName(String name) { this.name = name; }
+    }
+    
+    public static class PaymentMethod {
+        private String number;
+        
+        public String getNumber() { return number; }
+        public void setNumber(String number) { this.number = number; }
+    }
+}
+```
+
+## Uso
+
+```java
+// En tu servicio o controlador
+ComparisonResult result = ListComparator.compareLists(hits, keysResponse);
+ListComparator.printResults(result);
+
+// O acceder a los resultados programáticamente
+System.out.println("Coincidencias: " + result.matches.size());
+System.out.println("Solo en Hits: " + result.onlyInHits.size());
+System.out.println("Solo en Keys: " + result.onlyInKeys.size());
+```
+
+## Características
+
+- ? Trabaja directamente con `List<Hit<HashMap>>` de Elasticsearch
+- ? Trabaja con `KeysResponse` de Rebean
+- ? Filtra por tipo de documento y número de documento
+- ? Agrupa múltiples registros del mismo documento
+- ? Muestra información legible de ambas fuentes
+- ? Maneja errores de parseo gracefully

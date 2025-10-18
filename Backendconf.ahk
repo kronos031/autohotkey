@@ -22,6 +22,13 @@ global valorActual := 1
 AppsKey::Send("{AppsKey}")
 ::qmr::Miguel Angel Robles
 ::qmc::miguelrobles@cbit-online.com
+::wq::X-MainDirectory:DYT
+ 
+::qw::
+{
+    Headers() 
+    return
+}
 ::gco::
 {
     GitCommit()
@@ -34,6 +41,7 @@ AppsKey::Send("{AppsKey}")
     return
 }
 ; Recargar el script con Shift + F1
+
 +F1::Reload
 
 F12::
@@ -148,7 +156,8 @@ MostrarMenu(*) {
 	
     MenuFlotante.Add(menuItem, ToggleHotkeysMenu)
 	MenuFlotante.Add()  ; Separador
-    MenuFlotante.Add("🔄 Cambiar a Multiclip", CambiarHotkey)  ; Nueva opción para cambiar el script
+    ;MenuFlotante.Add("🔄 Cambiar a Multiclip", CambiarHotkey)  ; Nueva opción para cambiar el script
+	MenuFlotante.Add("🔄 Tareas", AbrirTareas)  ; Nueva opción para cambiar el script
     MenuFlotante.Add()  ; Separador
 	MenuFlotante.Add("👤 Miguel Cbit", SubMenuUsuario)  ; 
 	MenuFlotante.Add("👤 Luis", SubMenuLuis)  ; 
@@ -166,9 +175,10 @@ MostrarMenu(*) {
 	MenuFlotante.Add()  ; Separador
 	MenuFlotante.Add("📧 OpLocal", Oplocal)
 	MenuFlotante.Add()  ; Separador
-	MenuFlotante.Add("⚙️ AWS Cred", Credaws)
-	MenuFlotante.Add("⚙️ Rutas AWS", (*) =>Run("C:\Users\" . A_UserName . "\Desktop\autohotkey\rutas_lamdas.ahk"))
- 
+	MenuFlotante.Add("⚙️ AWS Cred", Credaws) 
+	MenuFlotante.Add("⚙️ Rutas AWS", (*) =>AWS_Todo()) 
+
+	
 	 
 ; =======================
     ; Configuración del submenú "usuario"
@@ -272,6 +282,11 @@ MostrarToolTip(estado) {
 
 AbrirCompilaciones(*) {
   Run("D:\Compilaciones")
+}
+
+
+AbrirTareas(*) {
+  Run("C:\Users\" . A_UserName . "\Desktop\autohotkey\tareas.ahk")
 }
 ; =======================
 ; HOTKEY ESPECIAL PARA VPN
@@ -410,6 +425,12 @@ ActualizarScriptFile(variable, nuevoValor) {
     MostrarToolTip("Script actualizado")
 }
 
+
+AWS_Todo() {
+		Credaws()
+		Run("C:\Users\" . A_UserName . "\Desktop\autohotkey\rutas_lamdas.ahk")
+	}
+	
 ;=======================
 ;    ACTUALIZAR CREDENCIALES AWS 
 ; =======================
