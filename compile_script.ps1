@@ -31,7 +31,7 @@ function InicializarConfiguracionRutas {
     
     # Crear rutas dinámicamente
     $bancos = @("BAVV", "BBOG", "BOCC", "BPOP", "DALE")
-    $operaciones = @("CREATE", "MODIFY", "CANCEL", "INQUIRY","TIMEST","ACTTIME","OPEN")
+    $operaciones = @("CREATE", "MODIFY", "CANCEL", "INQUIRY","TIMEST","ACTTIME","OPEN","CANCEL_ID")
     
     # Limpiar hashtables
     $script:MAPEO_PROYECTOS.Clear()
@@ -51,7 +51,8 @@ function InicializarConfiguracionRutas {
                 "INQUIRY" { "inquiry" }
                 "OPEN" { "logs-opensearch" }
                 "TIMEST" { "save-time-line" }
-                "ACTTIME" { "activate-time-line" } 
+                "ACTTIME" { "activate-time-line" }
+                "CANCEL_ID" { "cancel-block-by-id" } 
             }
            
             $rutaCompleta = "$bancoPath\$SPI" + "SPI-BACK-lambda-java-$suffix$VPATH" + $banco.ToLower()
@@ -132,6 +133,7 @@ function InicializarConfiguracionRutas {
         $script:INQUIRY_LIST = $script:LISTAS_PROYECTOS["INQUIRY"]
         $script:MODIFY_LIST = $script:LISTAS_PROYECTOS["MODIFY"]
         $script:CANCEL_LIST = $script:LISTAS_PROYECTOS["CANCEL"]
+        $script:CANCEL_LIST_ID = $script:LISTAS_PROYECTOS["CANCEL_ID"]
         $script:LIBS_ARTEFACTOS = $script:MAPEO_PROYECTOS["libs-artefactos"]
     }
 }
@@ -763,6 +765,7 @@ function Manejar-SubMenu {
             '13' = @{ Nombre = "TIMEST"; Lista = $TIMEST_LIST }
             '14' = @{ Nombre = "OPEN"; Lista = $OPEN_LIST }
             '15' = @{ Nombre = "ACTTIME"; Lista = $ACT_LIST }
+            '16' = @{ Nombre = "CANCEL_ID"; Lista = $CANCEL_LIST_ID } 
         }
 
         if ($listaEntidades.ContainsKey($seleccionEntidad)) {

@@ -13,6 +13,19 @@ keytool -import -alias opensearch -keystore "%JAVA_HOME%/lib/security/cacerts" -
 Para enviar un archivo con data al open
 curl -k -u admin:EmiLandscape0# -X POST -H "Content-Type: application/json" --data-binary "@datapr.json" "https://localhost:9200/mi_indice/_doc"
 
+
+Cuando se llene el cluster o disco 
+$ curl -k -u 'admin:admin' -X PUT "https://localhost:9200/index_key/_settings" -H 'Content-Type: application/json' -d '{
+  "index.blocks.read_only_allow_delete": null
+}'
+
+
+curl -X PUT "https://localhost:9200/index_key/_settings" \
+  -H 'Content-Type: application/json' \
+  -u admin:password \
+  -d'{
+    "index.blocks.read_only_allow_delete": null
+  }'
  
 Subir un archivo a s3 
 aws s3 cp archivo.txt s3://nombre-bucket/ruta/

@@ -6,7 +6,7 @@ InstallKeybdHook
 ;       VARIABLES
 ; =======================
 global usuario := "miguelrobles@cbit-online.com"
-global contrasena := "Emily@2040"
+global contrasena := "Emily@2044"
 global usuariol := "prv_lherreno@ath.com.co"
 global usuariolcbit := "luisherreno@cbit-online.com"
 global contrasenal := "Periferia2054*"
@@ -22,7 +22,8 @@ global valorActual := 1
 AppsKey::Send("{AppsKey}")
 ::qmr::Miguel Angel Robles
 ::qmc::miguelrobles@cbit-online.com
-::wq::X-MainDirectory:DYT
+::wq::X-MainDirectory:
+;|a::Send("^!l")
  
 ::qw::
 {
@@ -63,7 +64,8 @@ $2::Send("^c")
 $3::Send("^v")
 
 ; Nuevo hotkey para segundo portapapeles
-$4::CopiarSegundoPortapapeles
+;$4::CopiarSegundoPortapapeles
+$4::Send("^d")
 $5::PegarSegundoPortapapeles
 Xbutton2::Run("C:\Users\" . A_UserName . "\Desktop\autohotkey\compishk.ahk")  ; Ejecuta el nuevo script
 
@@ -167,7 +169,7 @@ MostrarMenu(*) {
 	MenuFlotante.Add("🔒  SPI", SubMenuSpi)  ; 
 	MenuFlotante.Add()
 	;MenuFlotante.Add("🔒  Git", SubMenuGit)  ; 
-	;MenuFlotante.Add("🖱️ Double-Click",  ForzarDobleClick)
+	MenuFlotante.Add("🖱️ Double-Click",  ForzarDobleClick)
     MenuFlotante.Add("🖱️ Compilaciones", AbrirCompilaciones)
 	;MenuFlotante.Add("⏱️ Enter Automático", ToggleEnterTimer) 
 	MenuFlotante.Add("⏱️ Mouse Mov", ToggleMouseMovement) 
@@ -427,7 +429,7 @@ ActualizarScriptFile(variable, nuevoValor) {
 
 
 AWS_Todo() {
-		Credaws()
+	;	Credaws()
 		Run("C:\Users\" . A_UserName . "\Desktop\autohotkey\rutas_lamdas.ahk")
 	}
 	

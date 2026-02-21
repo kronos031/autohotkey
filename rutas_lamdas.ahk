@@ -3,6 +3,7 @@
 ; Variables globales para configuración
 global selectedEnv := "pt"
 global selectedPath := ""
+global deployMode := "ALL" ; "ALL" o "INDIVIDUAL"
 
 ; Crear GUI moderna y compacta
 MyGui := Gui("  -Caption +Border", "Menú de Opciones")
@@ -14,7 +15,7 @@ MyGui.Add("Text", "x0 y0 w440 h60 Background0x0F3460 Center 0x200")
 MyGui.Add("Text", "x80  y0 w440 h60 BackgroundTrans   0x200", "⚡ AWS").SetFont("s16 Bold c0xE94560")
 
 ; Panel de configuración
-MyGui.Add("Text", "x15 y70 w225 h100 Background0x16213E")
+MyGui.Add("Text", "x15 y70 w225 h160 Background0x16213E")
 
 ; Ambiente
 MyGui.Add("Text", "x30 y78 w120 h25 BackgroundTrans", "🌐 Ambiente:").SetFont("s10 Bold c0x4ECCA3")
@@ -28,20 +29,27 @@ edtPath := MyGui.Add("Edit", "x30 y145 w200 h25 Background0x0F3460 c0xEEEEEE", "
 btnBrowse := MyGui.Add("Button", "x150 y115 w80  h25 Background0xE94560 c0xFFFFFF", "...")
 btnBrowse.OnEvent("Click", (*) => BrowseFolder())
 
+; Modo de despliegue
+MyGui.Add("Text", "x30 y180 w120 h25 BackgroundTrans", "🎯 Modo:").SetFont("s10 Bold c0x4ECCA3")
+ddlMode := MyGui.Add("DropDownList", "x30 y205 w200 Background0x0F3460", ["Todos los bancos", "Banco individual"])
+ddlMode.Choose(1)
+ddlMode.OnEvent("Change", (*) => UpdateMode())
+
 ; Línea separadora
-MyGui.Add("Text", "x20 y185 w220 h1 Background0x4ECCA3")
+MyGui.Add("Text", "x20 y245 w220 h1 Background0x4ECCA3")
 
 ; Título de acciones
-MyGui.Add("Text", "x100 y195 w440 h30 BackgroundTrans  ", "ACCIONES").SetFont("s11 Bold c0x4ECCA3")
+MyGui.Add("Text", "x100 y255 w440 h30 BackgroundTrans  ", "ACCIONES").SetFont("s11 Bold c0x4ECCA3")
 
 ; Botones de acción compactos
-btnY := 230, btnH := 40
+btnY := 290, btnH := 40
 CreateButton("📋 CONSULTA", "CONSULTA", btnY)
 CreateButton("✏️ MODIFICAR", "MOD", btnY += btnH + 8)
 CreateButton("❌ CANCELAR", "CANCEL", btnY += btnH + 8)
 CreateButton("➕ CREAR", "CREATE", btnY += btnH + 8)
 CreateButton("➕ ACTTIME", "ACTTIME", btnY += btnH + 8)
 CreateButton("📅 TIMELINE", "TIMELINE", btnY += btnH + 8)
+CreateButton("📅 CANCEL_ID", "CANCEL_ID", btnY += btnH + 8)
 
 ; Separador antes del cierre
 MyGui.Add("Text", "x20 y" btnY+btnH+15 " w220 h1 Background0x4ECCA3")
@@ -72,6 +80,12 @@ UpdateEnvironment() {
     selectedEnv := ddlEnvironment.Text
 }
 
+; Actualizar modo de despliegue
+UpdateMode() {
+    global deployMode
+    deployMode := (ddlMode.Value = 1) ? "ALL" : "INDIVIDUAL"
+}
+
 ; Buscar carpeta
 BrowseFolder() {
     global selectedPath
@@ -100,13 +114,14 @@ GetConfig(option) {
     if (!InStr(selectedPath, "\", , -1)) selectedPath .= "\"
     config := Map()
     suffixes := Map(
-    "CONSULTA", ["010", "inquiry", ""],
-    "MOD", ["08", "val-mod", ""],
-    "CANCEL", ["09", "val-cancel", ""],
-    "CREATE", ["07", "val-create", ""], 
-	"ACTTIME", ["011", "activate-time-line", ""],
-    "TIMELINE", ["012", "save-time-line", ""]
-)
+        "CONSULTA", ["010", "inquiry", ""],
+        "MOD", ["08", "val-mod", ""],
+        "CANCEL", ["09", "val-cancel", ""],
+        "CREATE", ["07", "val-create", ""], 
+        "ACTTIME", ["011", "activate-time-line", ""],
+        "TIMELINE", ["012", "save-time-line", ""],
+		"CANCEL_ID", ["02", "cancel-block-by-id", ""]
+    )
     cfg := suffixes[option]
     config["lambda"] := cfg[1]
     config["service"] := cfg[2]
@@ -118,9 +133,39 @@ GetConfig(option) {
     return config
 }
 
+; Mostrar selector de banco
+SelectBank() {
+    bancos := ["BAVV", "BBOG", "BOCC", "BPOP", "DALE"]
+    selectedBank := ""
+    
+    bankGui := Gui("+AlwaysOnTop", "Seleccionar Banco")
+    bankGui.BackColor := "0x1A1A2E"
+    bankGui.SetFont("s10 c0xEEEEEE", "Segoe UI")
+    
+    bankGui.Add("Text", "x20 y10 w260 h30 Center Background0x0F3460", "Selecciona un banco:").SetFont("s11 Bold c0x4ECCA3")
+    
+    yPos := 50
+    for index, banco in bancos {
+        btn := bankGui.Add("Button", "x50 y" yPos " w200 h35 Background0x0F3460 c0xFFFFFF", banco)
+        btn.SetFont("s10 Bold")
+        ; Usar el índice para acceder al banco del array
+        btn.OnEvent("Click", SelectBankClick.Bind(index))
+        yPos += 45
+    }
+    
+    SelectBankClick(idx, *) {
+        selectedBank := bancos[idx]
+        bankGui.Destroy()
+    }
+    
+    bankGui.Show("w300 h" (yPos + 20))
+    WinWaitClose("ahk_id " bankGui.Hwnd)
+    return selectedBank
+}
+
 ; Ejecutar acciones
 ExecuteAction(option) {
-  global selectedPath
+    global selectedPath, deployMode
     selectedPath := edtPath.Value
     
     ; Validar que la ruta no esté vacía
@@ -135,10 +180,24 @@ ExecuteAction(option) {
         if (result = "No")
             return
     }
+    
     MyGui.Hide()
     cfg := GetConfig(option)
-    bancos := ["BAVV", "BBOG", "BOCC", "BPOP", "DALE"]
+    
+    ; Determinar bancos a procesar
+    bancos := []
+    if (deployMode = "INDIVIDUAL") {
+        selectedBank := SelectBank()
+        if (selectedBank = "") {
+            MyGui.Show()
+            return
+        }
+        bancos.Push(selectedBank)
+    } else {
+        bancos := ["BAVV", "BBOG", "BOCC", "BPOP", "DALE"]
+    }
 
+    ; Generar comandos S3
     s3Commands := ""
     for banco in bancos {
         s3Commands .= 'aws s3 cp "' cfg["ruta"] 'lambda-java-' cfg["service"] '-micro-' StrLower(banco) '-1.0-lambda.zip" '
@@ -146,6 +205,7 @@ ExecuteAction(option) {
         s3Commands .= (A_Index < bancos.Length ? '; ' : "`n`n")
     }
 
+    ; Generar comandos Lambda
     lambdaCommands := ""
     for banco in bancos {
         lambdaCommands .= 'aws lambda update-function-code '
@@ -155,13 +215,14 @@ ExecuteAction(option) {
         lambdaCommands .= (A_Index < bancos.Length ? '; ' : "")
     }
 
-   ; Preguntar si también quiere los comandos Lambda
+    ; Mensaje de confirmación
     mensaje := "═════════════════════════`n"
     mensaje .= "   CONFIG: " option "`n"
     mensaje .= "═════════════════════════`n`n"
     mensaje .= "⚡ Lambda: " cfg["lambda"] "`n"
     mensaje .= "🔧 Servicio: " cfg["service"] "`n"
     mensaje .= "🌐 Entorno: " cfg["environment"] "`n"
+    mensaje .= "🏦 Bancos: " (deployMode = "INDIVIDUAL" ? bancos[1] : "TODOS") "`n"
     mensaje .= "📂 Ruta: " cfg["ruta"] "`n`n" 
     mensaje .= "¿Copiar comandos de Actualizar Lambda?"
 
@@ -175,25 +236,22 @@ ExecuteAction(option) {
         try FileAppend(fullCommand, tempFile, "UTF-8") 
         rutaBaseEscaped := StrReplace(selectedPath, "'", "''") 
         commandEscaped := StrReplace(fullCommand, '"', '`"')
-        psCommand := "pwsh.exe -NoExit -Command `"cd '" . rutaBaseEscaped . "'; Set-Clipboard -Value '" . commandEscaped . "'; Write-Host '✓ PowerShell iniciado' -ForegroundColor Cyan; Write-Host '✓ Comandos S3 + UPDATE-FUNCTION  - Ctrl+V' -ForegroundColor Green`""
+        psCommand := "pwsh.exe -NoExit -Command `"cd '" . rutaBaseEscaped . "'; Set-Clipboard -Value '" . commandEscaped . "'; Write-Host '✓ PowerShell iniciado' -ForegroundColor Cyan; Write-Host '✓ Comandos S3 + UPDATE-FUNCTION - Ctrl+V' -ForegroundColor Green`""
         Run(psCommand)
     } else {
         fullCommand := s3Commands
-		A_Clipboard := fullCommand 
-		  tempFile := A_Temp . "\aws_deploy_" option ".ps1"
+        A_Clipboard := fullCommand 
+        tempFile := A_Temp . "\aws_deploy_" option ".ps1"
         try FileDelete(tempFile)
         try FileAppend(fullCommand, tempFile, "UTF-8") 
         rutaBaseEscaped := StrReplace(selectedPath, "'", "''") 
         commandEscaped := StrReplace(fullCommand, '"', '`"')
-        psCommand := "pwsh.exe -NoExit -Command `"cd '" . rutaBaseEscaped . "'; Set-Clipboard -Value '" . commandEscaped . "'; Write-Host '✓ PowerShell iniciado' -ForegroundColor Cyan; Write-Host '✓ Comandos S3  - Ctrl+V' -ForegroundColor Green`""
+        psCommand := "pwsh.exe -NoExit -Command `"cd '" . rutaBaseEscaped . "'; Set-Clipboard -Value '" . commandEscaped . "'; Write-Host '✓ PowerShell iniciado' -ForegroundColor Cyan; Write-Host '✓ Comandos S3 - Ctrl+V' -ForegroundColor Green`""
         Run(psCommand)
     }
 }
-MyGui.Show("w270 h590")
-; Atajo teclado
-;^+m:: {
- ;   MyGui.Show("w440 h580")
-;}
+
+MyGui.Show("w270 h750")
 
 ; Permitir mover ventana
 OnMessage(0x0201, WM_LBUTTONDOWN)
