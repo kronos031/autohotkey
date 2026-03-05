@@ -1,0 +1,274 @@
+{
+	"info": {
+		"_postman_id": "a0e88d8f-8cf8-417d-aef1-39d0db2552d5",
+		"name": "Mocks",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39938822"
+	},
+	"item": [
+		{
+			"name": "person",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"RequestDateTime\": \"2024-07-23T22:11:35.652\",\n  \"keyStatus\": \"SUSP\",\n  \"DocumentType\": \"CC\",\n  \"DocumentNumber\": \"1020123455\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/person",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"person"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"RequestDateTime\": \"2024-07-23T22:11:35.652\",\n  \"keyStatus\": \"SUSP\",\n  \"DocumentType\": \"CC\",\n  \"DocumentNumber\": \"1020123455\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/person",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"person"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"MessageInformation\": {\n    \"MsgCode\": \"U804\",\n    \"MsgDescription\": \"LLave no existe o esta inactiva\"\n  }\n}"
+				},
+				{
+					"name": "400",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"RequestDateTime\": \"2024-07-23T22:11:35.652\",\n  \"keyStatus\": \"SUSP\",\n  \"DocumentType\": \"CC\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/person/bad",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"person",
+								"bad"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"MessageInformation\": {\n        \"MsgCode\": \"NT40\",\n        \"MsgDescription\": \"Bad Request\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "llave",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"IssuingEntity\": {\r\n        \"NIT\": \"860035827\",\r\n        \"FIID\": \"0052\",\r\n        \"NameEntity\": \"AV Villas2\"\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/llave",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"llave"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/llavelist",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"llavelist"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "\r\n    [\r\n        {\r\n            \"person\": {\r\n                \"first_name\": \"PEPITO\",\r\n                \"second_name\": \"PEPE\",\r\n                \"first_surname\": \"MARTINEZ\",\r\n                \"second_surname\": \"RAMIREZ\",\r\n                \"type_person\": \"N\",\r\n                \"document_type\": \"CC\",\r\n                \"document_number\": \"1013676675\"\r\n            },\r\n            \"key\": {\r\n                \"key_type\": \"M\",\r\n                \"value_key\": \"3003473218\"\r\n            },\r\n            \"payment_method\": {\r\n                \"type_payment_acc\": \"CAHO\",\r\n                \"account_number\": \"500801525\",\r\n                \"receptor\": \"GOU\",\r\n                \"account_opening_date\": \"2025-05-29\"\r\n            },\r\n            \"cd_state_key\": \"ACTV\"\r\n        },\r\n        {\r\n            \"person\": {\r\n                \"first_name\": \"PEPITO\",\r\n                \"second_name\": \"PEPE\",\r\n                \"first_surname\": \"MARTINEZ\",\r\n                \"second_surname\": \"RAMIREZ\",\r\n                \"type_person\": \"N\",\r\n                \"document_type\": \"CC\",\r\n                \"document_number\": \"1013676675\"\r\n            },\r\n            \"key\": {\r\n                \"key_type\": \"M\",\r\n                \"value_key\": \"3003489518\"\r\n            },\r\n            \"payment_method\": {\r\n                \"type_payment_acc\": \"CAHO\",\r\n                \"account_number\": \"500801525\",\r\n                \"receptor\": \"GOU\",\r\n                \"account_opening_date\": \"2025-05-29\"\r\n            },\r\n            \"cd_state_key\": \"ACTV\"\r\n        },\r\n        {\r\n            \"person\": {\r\n                \"first_name\": \"PEPITO\",\r\n                \"second_name\": \"PEPE\",\r\n                \"first_surname\": \"MARTINEZ\",\r\n                \"second_surname\": \"RAMIREZ\",\r\n                \"type_person\": \"N\",\r\n                \"document_type\": \"CC\",\r\n                \"document_number\": \"1013676675\"\r\n            },\r\n            \"key\": {\r\n                \"key_type\": \"M\",\r\n                \"value_key\": \"3153473518\"\r\n            },\r\n            \"payment_method\": {\r\n                \"type_payment_acc\": \"CAHO\",\r\n                \"account_number\": \"500801525\",\r\n                \"receptor\": \"GOU\",\r\n                \"account_opening_date\": \"2025-05-29\"\r\n            },\r\n            \"cd_state_key\": \"ACTV\"\r\n        },\r\n        {\r\n            \"person\": {\r\n                \"first_name\": \"Prueba\",\r\n                \"second_name\": \"Fernando\",\r\n                \"first_surname\": \"Diego\",\r\n                \"second_surname\": \"Martinez\",\r\n                \"type_person\": \"N\",\r\n                \"document_type\": \"CC\",\r\n                \"document_number\": \"1013676675\"\r\n            },\r\n            \"key\": {\r\n                \"key_type\": \"NRIC\",\r\n                \"value_key\": \"Diego2025\"\r\n            },\r\n            \"payment_method\": {\r\n                \"type_payment_acc\": \"CAHO\",\r\n                \"account_number\": \"312316561\",\r\n                \"receptor\": \"GOU\"\r\n            },\r\n            \"cd_state_key\": \"ACTV\"\r\n        },\r\n        {\r\n            \"person\": {\r\n                \"first_name\": \"PEPITO\",\r\n                \"second_name\": \"PEPE\",\r\n                \"first_surname\": \"MARTINEZ\",\r\n                \"second_surname\": \"RAMIREZ\",\r\n                \"type_person\": \"N\",\r\n                \"document_type\": \"CC\",\r\n                \"document_number\": \"1013676675\"\r\n            },\r\n            \"key\": {\r\n                \"key_type\": \"M\",\r\n                \"value_key\": \"3003231518\"\r\n            },\r\n            \"payment_method\": {\r\n                \"type_payment_acc\": \"CAHO\",\r\n                \"account_number\": \"500801525\",\r\n                \"receptor\": \"GOU\",\r\n                \"account_opening_date\": \"2025-05-29\"\r\n            },\r\n            \"cd_state_key\": \"ACTV\"\r\n        },\r\n        {\r\n            \"person\": {\r\n                \"first_name\": \"Andr\",\r\n                \"second_name\": \"Fele\",\r\n                \"first_surname\": \"Mera\",\r\n                \"second_surname\": \"Rodri\",\r\n                \"type_person\": \"N\",\r\n                \"document_type\": \"CC\",\r\n                \"document_number\": \"1013676675\"\r\n            },\r\n            \"key\": {\r\n                \"key_type\": \"M\",\r\n                \"value_key\": \"3164148759\"\r\n            },\r\n            \"payment_method\": {\r\n                \"type_payment_acc\": \"CAHO\",\r\n                \"account_number\": \"312312317472\",\r\n                \"receptor\": \"GOU\",\r\n                \"account_opening_date\": \"2025-09-22\"\r\n            },\r\n            \"cd_state_key\": \"ICTV\"\r\n        },\r\n        {\r\n            \"person\": {\r\n                \"first_name\": \"PEPITO\",\r\n                \"second_name\": \"PEPE\",\r\n                \"first_surname\": \"MARTINEZ\",\r\n                \"second_surname\": \"RAMIREZ\",\r\n                \"type_person\": \"N\",\r\n                \"document_type\": \"CC\",\r\n                \"document_number\": \"1013676675\"\r\n            },\r\n            \"key\": {\r\n                \"key_type\": \"M\",\r\n                \"value_key\": \"3003474788\"\r\n            },\r\n            \"payment_method\": {\r\n                \"type_payment_acc\": \"CAHO\",\r\n                \"account_number\": \"500801525\",\r\n                \"receptor\": \"GOU\",\r\n                \"account_opening_date\": \"2025-05-29\"\r\n            },\r\n            \"cd_state_key\": \"ACTV\"\r\n        },\r\n        {\r\n            \"person\": {\r\n                \"first_name\": \"PEPITO\",\r\n                \"second_name\": \"PEPE\",\r\n                \"first_surname\": \"MARTINEZ\",\r\n                \"second_surname\": \"RAMIREZ\",\r\n                \"type_person\": \"N\",\r\n                \"document_type\": \"CC\",\r\n                \"document_number\": \"1013676675\"\r\n            },\r\n            \"key\": {\r\n                \"key_type\": \"M\",\r\n                \"value_key\": \"3002543518\"\r\n            },\r\n            \"payment_method\": {\r\n                \"type_payment_acc\": \"CAHO\",\r\n                \"account_number\": \"500801525\",\r\n                \"receptor\": \"GOU\",\r\n                \"account_opening_date\": \"2025-05-29\"\r\n            },\r\n            \"cd_state_key\": \"ACTV\"\r\n        },\r\n        {\r\n            \"person\": {\r\n                \"first_name\": \"PEPITO\",\r\n                \"second_name\": \"PEPE\",\r\n                \"first_surname\": \"MARTINEZ\",\r\n                \"second_surname\": \"RAMIREZ\",\r\n                \"type_person\": \"N\",\r\n                \"document_type\": \"CC\",\r\n                \"document_number\": \"1013676675\"\r\n            },\r\n            \"key\": {\r\n                \"key_type\": \"M\",\r\n                \"value_key\": \"3003478418\"\r\n            },\r\n            \"payment_method\": {\r\n                \"type_payment_acc\": \"CAHO\",\r\n                \"account_number\": \"500801525\",\r\n                \"receptor\": \"GOU\"\r\n            },\r\n            \"cd_state_key\": \"ACTV\"\r\n        },\r\n        {\r\n            \"person\": {\r\n                \"first_name\": \"PEPITO\",\r\n                \"second_name\": \"PEPE\",\r\n                \"first_surname\": \"MARTINEZ\",\r\n                \"second_surname\": \"RAMIREZ\",\r\n                \"type_person\": \"N\",\r\n                \"document_type\": \"CC\",\r\n                \"document_number\": \"1013676675\"\r\n            },\r\n            \"key\": {\r\n                \"key_type\": \"O\",\r\n                \"value_key\": \"@DIEGO2005\"\r\n            },\r\n            \"payment_method\": {\r\n                \"type_payment_acc\": \"CAHO\",\r\n                \"account_number\": \"500801525\",\r\n                \"receptor\": \"GOU\"\r\n            },\r\n            \"cd_state_key\": \"ACTV\"\r\n        },\r\n        {\r\n            \"person\": {\r\n                \"first_name\": \"PEPITO\",\r\n                \"second_name\": \"PEPE\",\r\n                \"first_surname\": \"MARTINEZ\",\r\n                \"second_surname\": \"RAMIREZ\",\r\n                \"type_person\": \"N\",\r\n                \"document_type\": \"CC\",\r\n                \"document_number\": \"1013676675\"\r\n            },\r\n            \"key\": {\r\n                \"key_type\": \"E\",\r\n                \"value_key\": \"DIEGO2005@GMAIL.COM\"\r\n            },\r\n            \"payment_method\": {\r\n                \"type_payment_acc\": \"CAHO\",\r\n                \"account_number\": \"500801525\",\r\n                \"receptor\": \"GOU\"\r\n            },\r\n            \"cd_state_key\": \"ACTV\"\r\n        }\r\n    ]\r\n"
+				},
+				{
+					"name": "llave",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"IssuingEntity\": {\r\n        \"NIT\": \"860035827\",\r\n        \"FIID\": \"0052\",\r\n        \"NameEntity\": \"AV Villas2\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/llavecrn",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"llavecrn"
+							]
+						}
+					},
+					"code": 700,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "{\r\n    \"Key\": {\r\n        \"Type\": \"ALIAS\",\r\n        \"Value\": \"@bbhof145\",\r\n        \"CreatedDate\": \"2025-01-28T05:39:25.214\",\r\n        \"UpdatedDate\": \"2025-08-21T03:48:06.754\",\r\n        \"KeyState\": \"ACTIVA\",\r\n        \"InstructedAgent\": \"ENT\",\r\n        \"DICE\": true\r\n    },\r\n    \"Identification\": {\r\n        \"Type\": \"CC\",\r\n        \"Number\": \"1121835145\"\r\n    },\r\n    \"Customer\": {\r\n        \"Type\": \"PERSON\",\r\n        \"SubType\": \"PN\",\r\n        \"Name\": \"HASBLEYDY ASTRID ORJUELA FUQUENE\"\r\n    },\r\n    \"IssuingEntity\": {\r\n        \"NIT\": 860002964,\r\n        \"FIID\": \"0001\",\r\n        \"NameEntity\": \"Banco de Bogot?\"\r\n    },\r\n    \"PaymentMethod\": {\r\n        \"Type\": \"CAHO\",\r\n        \"Number\": \"993162536\"\r\n    },\r\n    \"AdditionalData\": {\r\n        \"TimeStamps\": {\r\n            \"Envelope\": {\r\n                \"C120\": \"2025-11-21T21:00:47.628\",\r\n                \"C210\": \"2025-11-22T02:00:48.223\",\r\n                \"C215\": \"2025-11-21T21:00:48.231\",\r\n                \"C240\": \"2025-11-21T21:00:48.236\"\r\n            }\r\n        }\r\n    }\r\n}"
+				},
+				{
+					"name": "llave",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"IssuingEntity\": {\r\n        \"NIT\": \"860035827\",\r\n        \"FIID\": \"0052\",\r\n        \"NameEntity\": \"AV Villas2\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/llave",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"llave"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"Key\": {\n        \"Type\": \"USERIDENTIFICATION\",\n        \"Value\": \"9160928\",\n        \"CreatedDate\": \"2025-08-19T13:40:54.580\",\n        \"KeyState\": \"ACTIVA\",\n        \"InstructedAgent\": \"ENT\",\n        \"DICE\": true\n    },\n    \"Identification\": {\n        \"Type\": \"CC\",\n        \"Number\": \"9160928\"\n    },\n    \"Customer\": {\n        \"Type\": \"PERSON\",\n        \"SubType\": \"PN\",\n        \"Name\": \"FERNANDO DEL CRISTO MEJIA MOJENES\"\n    },\n    \"IssuingEntity\": {\n        \"NIT\": 345544001,\n        \"FIID\": \"0977\",\n        \"NameEntity\": \"Nequi\"\n    },\n    \"PaymentMethod\": {\n        \"Type\": \"DBMO\",\n        \"Number\": \"87081380420\"\n    },\n    \"AdditionalData\": {\n        \"TimeStamps\": {\n            \"Envelope\": {\n                \"C110\": \"2025-12-03T06:01:51.316\",\n                \"C120\": \"2025-12-03T11:01:51.523\",\n                \"C210\": \"2025-12-03T16:01:52.010\",\n                \"C215\": \"2025-12-03T11:01:52.021\",\n                \"C240\": \"2025-12-03T11:01:52.027\"\n            }\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": []
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://fb55ab2f-c6da-47c8-bf0c-5ab81a5479a8.mock.pstmn.io"
+		}
+	]
+}

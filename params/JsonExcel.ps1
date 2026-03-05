@@ -52,36 +52,48 @@ try {
     $jsonData = $jsonContent | ConvertFrom-Json
     Write-Host "JSON procesado correctamente. Registros encontrados: $($jsonData.Count)" -ForegroundColor Green
 
-    # Convertir a tabla de PowerShell con manejo de propiedades dinámicas
-    $table = @()
-    
-    # Obtener todas las propiedades únicas del JSON
-    $allProperties = @()
+    # Definir orden fijo de columnas (Description incluida)
+    $fixedColumns = @("Name", "Type", "Value", "Description", "LastModifiedDate")
+
+    # Obtener propiedades adicionales que no estén en el orden fijo (por si hubiera extras)
+    $extraColumns = @()
     foreach ($item in $jsonData) {
-        $allProperties += $item.PSObject.Properties.Name
+        $extraColumns += $item.PSObject.Properties.Name
     }
-    $allProperties = $allProperties | Sort-Object | Get-Unique
-    
-    Write-Host "Propiedades encontradas: $($allProperties -join ', ')" -ForegroundColor Yellow
-    
+    $extraColumns = $extraColumns | Sort-Object | Get-Unique | Where-Object { $fixedColumns -notcontains $_ }
+
+    # Columnas finales: primero las fijas, luego las extra
+    $allProperties = $fixedColumns + $extraColumns
+
+    Write-Host "Columnas a exportar: $($allProperties -join ', ')" -ForegroundColor Yellow
+
+    # Construir tabla forzando todas las columnas y reemplazando $null por ""
+    $table = @()
     foreach ($item in $jsonData) {
-        $row = [PSCustomObject]@{}
-        
-        # Agregar cada propiedad al objeto
+        $row = [ordered]@{}
+
         foreach ($prop in $allProperties) {
             if ($item.PSObject.Properties.Name -contains $prop) {
-                $row | Add-Member -NotePropertyName $prop -NotePropertyValue $item.$prop
+                # Si el valor es null o vacío, forzar string vacío para que Excel lo muestre
+                $val = $item.$prop
+                $row[$prop] = if ($null -eq $val) { "" } else { $val }
             } else {
-                $row | Add-Member -NotePropertyName $prop -NotePropertyValue $null
+                $row[$prop] = ""
             }
         }
-        
-        $table += $row
+
+        $table += [PSCustomObject]$row
     }
 
     # Exportar a Excel con formato
     Write-Host "Exportando a Excel: $ExcelFilePath" -ForegroundColor Cyan
-    $table | Export-Excel -Path $ExcelFilePath -AutoSize -AutoFilter -BoldTopRow -FreezeTopRow -TableStyle Medium2
+    $table | Export-Excel -Path $ExcelFilePath `
+                          -AutoSize `
+                          -AutoFilter `
+                          -BoldTopRow `
+                          -FreezeTopRow `
+                          -TableStyle Medium2 `
+                          -WorksheetName "SSM Parameters"
 
     Write-Host "¡Conversión completada exitosamente!" -ForegroundColor Green
     Write-Host "Archivo Excel creado: $ExcelFilePath" -ForegroundColor Green
@@ -91,9 +103,15 @@ try {
     Write-Host "- Archivo origen: $JsonFilePath" -ForegroundColor White
     Write-Host "- Archivo destino: $ExcelFilePath" -ForegroundColor White
     Write-Host "- Registros procesados: $($table.Count)" -ForegroundColor White
-    Write-Host "- Columnas: $($allProperties.Count)" -ForegroundColor White
+    Write-Host "- Columnas: $($allProperties.Count) → $($allProperties -join ', ')" -ForegroundColor White
     Write-Host "- Ubicación completa: $(Resolve-Path $ExcelFilePath)" -ForegroundColor White
 
+    # Estadísticas de descripción
+    $sinDesc = ($table | Where-Object { [string]::IsNullOrWhiteSpace($_.Description) }).Count
+    $conDesc = $table.Count - $sinDesc
+    Write-Host "`n📊 Descripción:" -ForegroundColor Blue
+    Write-Host "   Con descripción: $conDesc" -ForegroundColor White
+    Write-Host "   Sin descripción: $sinDesc" -ForegroundColor White
 }
 catch {
     Write-Error "Error durante la conversión: $_"

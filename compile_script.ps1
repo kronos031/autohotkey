@@ -77,7 +77,7 @@ function InicializarConfiguracionRutas {
         "OPEN_BOCC"  = "$basePath\BOCC\$SPI" + "BACK-libs-java-logs-opensearch-bocc"
         "OPEN_BPOP"  = "$basePath\BPOP\$SPI" + "BACK-libs-java-logs-opensearch-bpop"
         "OPEN_DALE"  = "$basePath\DALE\$SPI" + "BACK-libs-java-logs-opensearch-dale"
-        "ARTEFACTOS" = "C:\Users\$CURRENT_USER\Desktop\SISTEMA-PAGOS-INMEDIATOS-BACK-ArtefactosDespliegues"
+        "ARTEFACTOS" = "C:\Users\$CURRENT_USER\Desktop\SPI\Artefactos-Despliegues"
     }
     
     # TRANSV

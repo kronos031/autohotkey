@@ -13,19 +13,44 @@ if ($LASTEXITCODE -ne 0) {
     exit 1
 }
 
-# Obtener lista de parámetros
+# Obtener TODOS los parámetros con paginación (describe-parameters tiene límite de 50)
 Write-Host "📋 Obteniendo lista de parámetros..." -ForegroundColor Blue
-$paramNames = aws ssm describe-parameters --query 'Parameters[].Name' --output text
-#FILTRAR POR PATH
-#aws ssm describe-parameters --parameter-filters "Key=Name,Option=BeginsWith,Values=/mi/path/" --query 'Parameters[].Name' --output text
 
-if ([string]::IsNullOrWhiteSpace($paramNames)) {
+$allDescribed = @()
+$nextToken = $null
+
+do {
+    if ($nextToken) {
+        $page = aws ssm describe-parameters --output json --next-token $nextToken | ConvertFrom-Json
+    } else {
+        $page = aws ssm describe-parameters --output json | ConvertFrom-Json
+    }
+
+    if ($null -eq $page) {
+        Write-Host "❌ Error al llamar describe-parameters" -ForegroundColor Red
+        exit 1
+    }
+
+    $allDescribed += $page.Parameters
+    $nextToken = $page.NextToken
+
+} while ($nextToken)
+
+#FILTRAR POR PATH (descomentar para usar)
+# $allDescribed = $allDescribed | Where-Object { $_.Name -like "/mi/path/*" }
+
+if ($allDescribed.Count -eq 0) {
     Write-Host "❌ No se encontraron parámetros" -ForegroundColor Red
     exit 1
 }
 
-# Convertir a array
-$nameArray = $paramNames -split '\s+'
+# Crear diccionario Name -> Description para lookup rápido
+$descriptionMap = @{}
+foreach ($p in $allDescribed) {
+    $descriptionMap[$p.Name] = if ($p.Description) { $p.Description } else { "" }
+}
+
+$nameArray = $allDescribed | Select-Object -ExpandProperty Name
 $total = $nameArray.Count
 
 Write-Host "📊 Encontrados: $total parámetros" -ForegroundColor Green
@@ -34,35 +59,45 @@ Write-Host "💾 Guardando en: $OutputFile" -ForegroundColor Yellow
 # Crear array para almacenar todos los parámetros
 $allParameters = @()
 
-# Procesar en lotes de 10
+# Procesar en lotes de 10 (límite de get-parameters)
 $batchSize = 10
 for ($i = 0; $i -lt $total; $i += $batchSize) {
     $batch = $nameArray[$i..([Math]::Min($i + $batchSize - 1, $total - 1))]
-    
-    Write-Progress -Activity "Exportando parámetros" -Status "Procesando $($i + 1) - $($i + $batch.Count) de $total" -PercentComplete (($i / $total) * 100)
-    
-    # Crear comando con nombres entre comillas
-    $quotedNames = $batch | ForEach-Object { "`"$_`"" }
-    $command = "aws ssm get-parameters --names $($quotedNames -join ' ') --with-decryption --output json"
-    
-    # Ejecutar y convertir resultado
+
+    Write-Progress -Activity "Exportando parámetros" `
+                   -Status "Procesando $($i + 1) - $($i + $batch.Count) de $total" `
+                   -PercentComplete (($i / $total) * 100)
+
     try {
-        $result = Invoke-Expression $command | ConvertFrom-Json
-        
-        # Filtrar campos no deseados (ARN y DataType)
+        # Usar array directo en lugar de Invoke-Expression (más seguro)
+        $result = aws ssm get-parameters --names $batch --with-decryption --output json | ConvertFrom-Json
+
+        if ($LASTEXITCODE -ne 0 -or $null -eq $result) {
+            Write-Host "⚠️  AWS CLI error en lote posición $i" -ForegroundColor Yellow
+            continue
+        }
+
+        # Advertir si algún parámetro no fue encontrado
+        if ($result.InvalidParameters -and $result.InvalidParameters.Count -gt 0) {
+            Write-Host "⚠️  Parámetros no encontrados: $($result.InvalidParameters -join ', ')" -ForegroundColor Yellow
+        }
+
+        # Filtrar campos no deseados (ARN y DataType) y agregar Description
         $filteredParams = $result.Parameters | ForEach-Object {
             [PSCustomObject]@{
-                Name = $_.Name
-                Type = $_.Type
-                Value = $_.Value 
-                LastModifiedDate = $_.LastModifiedDate 
+                Name             = $_.Name
+                Type             = $_.Type
+                Value            = $_.Value
+                Description      = $descriptionMap[$_.Name]
+                LastModifiedDate = $_.LastModifiedDate
             }
         }
-        
+
         $allParameters += $filteredParams
     }
     catch {
-        Write-Host "⚠️  Error procesando lote en posición $i" -ForegroundColor Yellow
+        Write-Host "⚠️  Error en lote posición $i : $($_.Exception.Message)" -ForegroundColor Yellow
+        Write-Host "   Nombres del lote: $($batch -join ', ')" -ForegroundColor Gray
     }
 }
 
@@ -85,5 +120,5 @@ foreach ($stat in $stats) {
     Write-Host "   $($stat.Name): $($stat.Count)" -ForegroundColor White
 }
 
-Write-Host ""  
+Write-Host ""
 Write-Host "✅ Archivo guardado: $(Resolve-Path $OutputFile)" -ForegroundColor Green

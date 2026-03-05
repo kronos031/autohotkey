@@ -201,7 +201,7 @@ ExecuteAction(option) {
     s3Commands := ""
     for banco in bancos {
         s3Commands .= 'aws s3 cp "' cfg["ruta"] 'lambda-java-' cfg["service"] '-micro-' StrLower(banco) '-1.0-lambda.zip" '
-        s3Commands .= 's3://awue1athspi-' cfg["environment"] '-s3-llaves-01/lambdas/' banco '/v2/'
+        s3Commands .= 's3://awue1athspi-' cfg["environment"] '-s3-llaves-01/lambdas/' banco '/V3/'
         s3Commands .= (A_Index < bancos.Length ? '; ' : "`n`n")
     }
 
@@ -211,7 +211,7 @@ ExecuteAction(option) {
         lambdaCommands .= 'aws lambda update-function-code '
         lambdaCommands .= '--function-name AWUE1ATHSPI-' cfg["environmentMay"] '-LAMBDA-' banco '-' cfg["lambda"] ' '
         lambdaCommands .= '--s3-bucket awue1athspi-' cfg["environment"] '-s3-llaves-01 '
-        lambdaCommands .= '--s3-key lambdas/' banco '/v2/lambda-java-' cfg["service"] '-micro-' StrLower(banco) '-1.0-lambda.zip'
+        lambdaCommands .= '--s3-key lambdas/' banco '/V3/lambda-java-' cfg["service"] '-micro-' StrLower(banco) '-1.0-lambda.zip'
         lambdaCommands .= (A_Index < bancos.Length ? '; ' : "")
     }
 

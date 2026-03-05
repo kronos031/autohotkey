@@ -93,3 +93,16 @@ aws dynamodb get-item `
 --output json `
 --query "Item" | jq 'to_entries | map({(.key): (.value | to_entries[0].value)}) | add'
   
+  
+  //"inquiryListKeys": "https://mock.apidog.com/m2/1194706-1189592-1085884/28490133",
+  "updateState": "https://mock.apidog.com/m2/1194706-1189592-1085884/28490138"
+  
+  X-RqUID:32123132432
+X-Channel:SPO
+X-CompanyId:0052
+X-GovIssueIdentType:NIT
+X-IdentSerialNum:103698745
+X-IPAddr:10.132.7.241
+X-ClientDt:2024-08-27T15:58:00.792Z
+X-CustIdentType:CC
+X-CustIdentNum:1098600300
